@@ -1,7 +1,13 @@
 <div class="portlet box blue">
     <div class="portlet-title">
         <div class="caption">
-            <i class="fa fa-cogs"></i>应用列表
+            <i class="fa fa-cogs"></i>项目构建
+        </div>
+        <div class="tools">
+            <a class="glyphicon glyphicon-plus" href="javascript:;">
+            </a>
+            <button type="button" class="btn red-haze btn-sm" ng-click="Create();">新建项目
+            </button>
         </div>
     </div>
 
@@ -9,7 +15,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <label>Filter:
-                    <input type="search" class="form-control input-large input-inline" placeholder="AppName" ng-model='searchKey'>
+                    <input type="search" class="form-control input-large input-inline" placeholder="ProjectsName/IP" ng-model='searchKey'>
                 </label>
                 <a href="javascript:void(0);" ng-click="Search(searchKey)" class="btn btn-sm btn-primary">搜索</a>
                 <a href="javascript:void(0);" ng-click="Search('')" class="btn btn-sm btn-primary">重置</a>
@@ -18,59 +24,32 @@
         <table class="table table-bordered">
             <tbody>
             <tr>
-                <th>应用ID</th>
-                <th>应用名称</th>
-                <th>使用镜像</th>
-                <th>域名</th>
-                <th>运行环境</th>
-                <th>运行状态</th>
-                <th>节点IP</th>
-                <th>节点端口</th>
-                <th>Replicas</th>
+                <th>项目ID</th>
+                <th>项目域名</th>
+                <th>项目端口</th>
+                <th>健康检查</th>
+                <th>创建人</th>
                 <th>创建时间</th>
                 <th>操作</th>
             </tr>
 
             <tr ng-repeat="o in rows">
-                <td>{{ o.AppId }}</td>
-                <td>{{ o.AppName }}</td>
-                <td>{{ o.ImageName }}</td>
-                <td>{{ o.NameSpace }}</td>
-                <td>{{ o.RunEnvironment }}</td>
-                <td class="statusClass{{ o.Status }}">{{ o.StatusNum }}</td>
-                <td>{{ o.NodeIp }}</td>
-                <td>{{ o.NodePort }}</td>
-                <td>
-                    <input type="number" onkeyup="value=value.replace(/\D/g,'')" min="1" max="10" ng-model="o.Replicas" name="rc">
-                </td>
+                <td>{{ o.Id }}</td>
+                <td>{{ o.DomainName }}</td>
+                <td>{{ o.Port }}</td>
+                <td>{{ o.HealthExam }}</td>
+                <td>{{ o.Publisher }}</td>
                 <td>{{ o.CreateTime }}</td>
                 <td>
                     <div class="btn-group">
-                       <button type="button" class="btn btn-primary btn-sm" ng-click="detail($index)">查看</button>
-                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0);" ng-click="Start($index)" >启动</a></li>
-                            <li><a href="javascript:void(0);" ng-click="Stop($index)">关闭</a></li>
-                            <li><a href="javascript:void(0);" ng-click="updateimage($index)">升级镜像</a></li>
-                            <!--<li><a href="javascript:void(0);" ng-click="appdetail($index)">查看应用信息</a></li>-->
-                            <li><a href="javascript:;" ng-click="Delete($index)">删除</a></li>
-                        </ul>
+                       <button type="button" class="btn btn-primary btn-sm" ng-click="Delete($index)">删除</button>
                     </div>
                     <div class="btn-group">
-                        <a href="http://{{ o.AppName }}.d.iprun.com" target="_blank">
-                       <button type="button" class="btn btn-primary btn-sm">web访问</button></a>
-                    </div>
-                    <div class="btn-group">
-                        <a href="javascript:;" ng-click="sendReq(o.AppId, o.Replicas)">
-                       <button type="button" class="btn btn-primary btn-sm">修改REPLICAS</button></a>
+                        <a href="http://{{o.DomainName}}.openkf.cn/{{o.HealthExam}}" target="_blank">
+                       <button type="button" class="btn btn-primary btn-sm">测试访问</button></a>
                     </div>
                 </td>
             </tr>
-
             </tbody>
         </table>
         <paging
@@ -91,125 +70,35 @@
     </div>
 </div>
 
-<script type="text/ng-template" id="detail.html">
+<script type="text/ng-template" id="add.html">
     <div class="modal-header">
         <div class="caption">
             <h4>{{ title.title }}</h4>
         </div>
     </div>
     <div class="modal-body">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" name="createForm">
             <div class="form-body">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-3 control-label">应用名称</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{item.AppName}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">使用镜像</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{item.ImageName}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">运行环境</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{item.RunEnvironment}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">运行状态</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{item.Status}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">端口</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{item.NodePort}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">集群IP</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{item.ClusterIp}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">节点IP</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{item.NodeIp}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Replicas</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{item.Replicas}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">创建用户</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{item.CreateUser}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">创建时间</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{item.CreateTime}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</script>
-
-<script type="text/ng-template" id="updateimage.html">
-    <div class="modal-header">
-        <div class="caption">
-            <h4>{{ title.title }}</h4>
-        </div>
-    </div>
-    <div class="modal-body">
-        <form class="form-horizontal" role="form">
-            <div class="form-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">应用名称</label>
+                            <label class="col-md-4 control-label">项目名称
+                            <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
-                                <p class="form-control-static" data-ng-bind-html="item.AppName">{{item.AppName}}</p>
+                                <input type="text"
+                                       ng-pattern="/^[A-Za-z0-9]+$/"
+                                       ng-maxlength=30
+                                       name="projectname"
+                                       ensure-unique="projectname"
+                                       class="form-control input-inline input-big" required placeholder="项目名称不要重复"
+                                       ng-model="item.ProjectName">
+                            </div>
+
+                            <div class="col-sm-offset-4 col-md-10" ng-show="createForm.projectname.$invalid && createForm.projectname.$dirty">
+                                <span ng-show="createForm.projectname.$error.pattern" style="color:red">必须由数字和字母组成</span>
+                                <span ng-show="createForm.projectname.$error.required" style="color:red">此处不能为空</span>
+                                <span ng-show="createForm.projectname.$error.maxlength" style="color:red">不能多于30个字符</span>
+                                <span ng-show="createForm.projectname.$error.unique" style="color:red">项目名称已存在</span>
                             </div>
                         </div>
                     </div>
@@ -218,12 +107,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-4 control-label">选择父镜像</label>
+                            <label class="col-md-4 control-label">域名前缀
+                            <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
-                                <select class="form-control input-inline input-large"
-                                        ng-model="selected" ng-options="s.name for s in title.imageList">
-                                        <option value="">--请选择--</option>
-                                </select>
+                                <input type="text"
+                                       class="form-control input-inline input-big" required placeholder="域名前缀"
+                                       ng-model="item.DomainName">
                                 <span class="help-inline"></span>
                             </div>
                         </div>
@@ -233,68 +122,38 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-4 control-label">选择子镜像</label>
+                            <label class="col-md-4 control-label">端口
+                            <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
-                                <select class="form-control input-inline input-large"
-                                        ng-model="item.ImageName" ng-options="sh.name for sh in selected.child">
-                                <option value="">--请选择--</option>
-                                </select>
+                                <input type="number"
+                                       class="form-control input-inline input-big" required placeholder="端口"
+                                       ng-model="item.Port">
                                 <span class="help-inline"></span>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">健康检查页面
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="text"
+                                       class="form-control input-inline input-big" required placeholder="dnotdelet/mom.html"
+                                       ng-model="item.HealthExam">
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="Updateapp()">OK</button>
+        <button class="btn btn-primary" ng-click="Save()" ng-disabled="!createForm.$valid">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
-    </div>
-</script>
-
-<script type="text/ng-template" id="appdetail.html">
-    <div class="modal-header">
-        <div class="caption">
-            <h4>{{ title.title }}</h4>
-        </div>
-    </div>
-    <div class="modal-body">
-        <form class="form-horizontal" role="form">
-            <div class="form-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">NameServer信息</label>
-                            <div class="col-md-8">
-                                <p class="form-control-static" data-ng-bind-html="item.NsInfo">{{item.NsInfo}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Replication信息</label>
-                            <div class="col-md-8">
-                                <p class="form-control-static" data-ng-bind-html="item.RcInfo">{{item.RcInfo}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Service信息</label>
-                            <div class="col-md-8">
-                                <p class="form-control-static" data-ng-bind-html="item.SeInfo">{{item.SeInfo}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
     </div>
 </script>
 
@@ -310,7 +169,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                           确定要删除{{ item.AppName }}应用？
+                           确定要删除{{ item.DomainName }}项目？
                         </div>
                     </div>
                 </div>
@@ -318,57 +177,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="appdel()">OK</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
-    </div>
-</script>
-
-<script type="text/ng-template" id="start.html">
-    <div class="modal-header">
-        <div class="caption">
-            <h4>{{ title.title }}</h4>
-        </div>
-    </div>
-    <div class="modal-body">
-        <form class="form-horizontal" role="form">
-            <div class="form-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                           确定要启动{{ item.AppName }}应用？
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="Start()">OK</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
-    </div>
-</script>
-
-<script type="text/ng-template" id="stop.html">
-    <div class="modal-header">
-        <div class="caption">
-            <h4>{{ title.title }}</h4>
-        </div>
-    </div>
-    <div class="modal-body">
-        <form class="form-horizontal" role="form">
-            <div class="form-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                           确定要停止{{ item.AppName }}项目？
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="Stop()">OK</button>
+        <button class="btn btn-primary" ng-click="projectdel()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
     </div>
 </script>

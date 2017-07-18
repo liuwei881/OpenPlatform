@@ -16,7 +16,7 @@ define(['angular'], function (angular) {
                 'Karma'
             ];
             $scope.$on('$includeContentLoaded', function () {
-                Layout.initSidebar();
+                //Layout.initSidebar();
             });
         });
 });

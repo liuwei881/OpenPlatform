@@ -17,7 +17,6 @@ define(['angular'], function (angular) {
             ];
             $scope.$on('$includeContentLoaded', function () {
                 Layout.initHeader();
-                $scope.initPage();
             });
 
             $scope.Logout = function() {

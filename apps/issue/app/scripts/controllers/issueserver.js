@@ -8,7 +8,7 @@ define(['angular'], function (angular) {
    * # ImageServerCtrl
    * Controller of the issueApp
    */
-  angular.module('issueApp.controllers.IssueServerCtrl', [])
+  angular.module('issueApp.controllers.IssueServerCtrl', ['ui.bootstrap'])
     .controller('IssueServerCtrl', function ($scope, $state, $uibModal,Async,Sync) {
       this.awesomeThings = [
         'HTML5 Boilerplate',
