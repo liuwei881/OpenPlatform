@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
     /**
      * @ngdoc service
-     * @name kubernetesApp.httpInterceptor
+     * @name issueApp.httpInterceptor
      * @description
      * # httpInterceptor
-     * Factory in the kubernetesApp.
+     * Factory in the issueApp.
      */
-    angular.module('kubernetesApp.services.HttpInterceptor', [])
+    angular.module('issueApp.services.HttpInterceptor', [])
         .factory('httpInterceptor', function ($q, $rootScope, $cookies) {
             // Service logic
             // ...

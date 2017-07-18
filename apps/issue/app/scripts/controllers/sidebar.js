@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
     /**
      * @ngdoc function
-     * @name kubernetesApp.controller:SidebarCtrl
+     * @name issueApp.controller:SidebarCtrl
      * @description
      * # SidebarCtrl
-     * Controller of the kubernetesApp
+     * Controller of the issueApp
      */
-    angular.module('kubernetesApp.controllers.SidebarCtrl', [])
+    angular.module('issueApp.controllers.SidebarCtrl', [])
         .controller('SidebarCtrl', function ($scope) {
             $scope.awesomeThings = [
                 'HTML5 Boilerplate',

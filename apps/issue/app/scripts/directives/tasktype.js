@@ -3,11 +3,11 @@ define(['angular'], function (angular) {
 
   /**
    * @ngdoc directive
-   * @name kubernetesApp.directive:taskType
+   * @name issueApp.directive:taskType
    * @description
    * # taskType
    */
-  angular.module('kubernetesApp.directives.TaskType', [])
+  angular.module('issueApp.directives.TaskType', [])
     .directive('taskType', function () {
       return {
         restrict: 'E',

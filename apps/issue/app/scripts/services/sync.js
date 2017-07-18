@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
   /**
    * @ngdoc service
-   * @name kubernetesApp.TaskService
+   * @name issueApp.TaskService
    * @description
    * # TaskService
-   * Service in the kubernetesApp.
+   * Service in the issueApp.
    */
-  angular.module('kubernetesApp.services.Sync', [])
+  angular.module('issueApp.services.Sync', [])
 	.service('Sync', function ($http) {
         function fetch(url) {
             var request;

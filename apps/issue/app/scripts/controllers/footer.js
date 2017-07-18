@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
     /**
      * @ngdoc function
-     * @name kubernetesApp.controller:FooterCtrl
+     * @name issueApp.controller:FooterCtrl
      * @description
      * # FooterCtrl
-     * Controller of the kubernetesApp
+     * Controller of the issueApp
      */
-    angular.module('kubernetesApp.controllers.FooterCtrl', [])
+    angular.module('issueApp.controllers.FooterCtrl', [])
         .controller('FooterCtrl', function ($scope) {
             $scope.awesomeThings = [
                 'HTML5 Boilerplate',

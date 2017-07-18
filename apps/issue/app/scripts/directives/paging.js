@@ -3,11 +3,11 @@ define(['angular'], function (angular) {
 
     /**
      * @ngdoc directive
-     * @name kubernetesApp.directive:paging
+     * @name issueApp.directive:paging
      * @description
      * # paging
      */
-    angular.module('kubernetesApp.directives.Paging', [])
+    angular.module('issueApp.directives.Paging', [])
         .directive('paging', function () {
             /**
              * Assign default scope values from settings

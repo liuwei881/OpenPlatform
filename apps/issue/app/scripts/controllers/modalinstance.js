@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
     /**
      * @ngdoc function
-     * @name kubernetesApp.controller:ModalInstanceCtrlCtrl
+     * @name issueApp.controller:ModalInstanceCtrlCtrl
      * @description
      * # ModalInstanceCtrlCtrl
-     * Controller of the kubernetesApp
+     * Controller of the issueApp
      */
-    angular.module('kubernetesApp.controllers.ModalInstanceCtrl', [])
+    angular.module('issueApp.controllers.ModalInstanceCtrl', [])
         .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, item, title) {
             this.awesomeThings = [
                 'HTML5 Boilerplate',
