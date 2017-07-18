@@ -61,7 +61,7 @@ class PortalModel(Basebase):
     pass
 
 
-class NgIssueModel(Basebase):
+class IssueModel(Basebase):
     pass
 # return session.query(cls).filter(cls.pk.in_(list)).all()
 
@@ -82,8 +82,8 @@ class RoutingSession(Session):
         #     return engines['vmware']
         elif mapper and issubclass(mapper.class_, PortalModel):
             return engines['portal']
-        elif mapper and issubclass(mapper.class_, NgIssueModel):
-            return engines['ngissue']
+        elif mapper and issubclass(mapper.class_, IssueModel):
+            return engines['issue']
         # elif mapper and issubclass(mapper.class_, Basebase):
         #     return engines['base']
         else:
