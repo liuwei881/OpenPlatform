@@ -1,0 +1,5 @@
+engines:
+  {'vmware':"mysql+pymysql://root:123456@127.0.0.1/virmath?charset=utf8",
+   'base':"mysql+pymysql://root:123456@127.0.0.1/virmath?charset=utf8",
+   'portal':"mysql+pymysql://root:123456@127.0.0.1/portal?charset=utf8",
+   'ngissue':"mysql+pymysql://root:123456@127.0.0.1/ngissue?charset=utf8"}

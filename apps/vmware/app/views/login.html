@@ -1,0 +1,22 @@
+<div class="menu-toggler sidebar-toggler">
+</div>
+<div class="logo">
+</div>
+<div class="content">
+    <!-- BEGIN LOGIN FORM -->
+    <div class="login-form" ng-keyup="$event.keyCode == 13 && Login()"action="#" method="post">
+        <div class="alert {{alert.type}}">
+                        {{alert.message}} </span>
+        </div>
+        <div class="signin">
+        <div class="signin-head"><img src="images/logo_open.jpg" alt="" class=""></div>
+        <form class="form-signin" action="" role="form" method="">
+                <input type="text" class="form-control" placeholder="用户名" ng-model="username" name="username" required autofocus />
+                <input type="password" class="form-control" placeholder="密码" name="password" ng-model="password" required />
+                <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="Login()">登录</button>
+        </form>
+</div>
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+</div>
+    </div>

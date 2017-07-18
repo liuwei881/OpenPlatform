@@ -1,0 +1,380 @@
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-cogs"></i>虚拟机列表
+        </div>
+        <div class="tools">
+            <a class="glyphicon glyphicon-plus" href="javascript:;">
+            </a>
+            <button type="button" class="btn red-haze btn-sm" ng-click="Create();">新建虚拟机
+            </button>
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <label>Filter:
+                    <input type="search" class="form-control input-large input-inline" placeholder="HostName/Ip/MainHost" ng-model='searchKey'>
+                </label>
+                <a href="javascript:void(0);" ng-click="Search(searchKey)" class="btn btn-sm btn-primary">搜索</a>
+                <a href="javascript:void(0);" ng-click="Search('')" class="btn btn-sm btn-primary">重置</a>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>虚拟机名</th>
+                <th>计算机名</th>
+                <th>CPU(核)</th>
+                <th>内存(MB)</th>
+                <th>ip地址</th>
+                <th>数据中心</th>
+                <th>集群名称</th>
+                <th>存储名称</th>
+                <th>资源池</th>
+                <th>网络</th>
+                <th>使用人</th>
+                <th>状态</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+
+            <tr ng-repeat="o in rows">
+                <td>{{ o.VmwareName }}</td>
+                <td>{{ o.HostName }}</td>
+                <td>{{ o.VmCpu }}</td>
+                <td>{{ o.VmMem }}</td>
+                <td>{{ o.Ip }}</td>
+                <td>{{ o.DataCenter }}</td>
+                <td>{{ o.Cluster }}</td>
+                <td>{{ o.DataStore }}</td>
+                <td>{{ o.ResourcePool }}</td>
+                <td>{{ o.NetworkName }}</td>
+                <td>{{ o.Person }}</td>
+                <td class="statusClass{{ o.StatusNum }}">{{ o.HostStatus }}</td>
+                <td>{{ o.CreateTime }}</td>
+                <td>
+                    <div class="btn-group">
+                        <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm" data-close-others="true" data-toggle="dropdown" ng-click="detail($index)">
+                            <span class="hidden-sm hidden-xs">操作</span>
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:;" ng-click="Stop($index)" ng-show="o.StatusNum==2">关机</a></li>
+                            <li><a href="javascript:;" ng-click="Restart($index)">重启</a></li>
+                            <li><a href="javascript:;" ng-click="Delete($index)">删除</a></li>
+                            <li><a href="javascript:;" ng-click="MigrateVm($index)">迁移虚拟机</a></li>
+                        </ul>
+                    </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <paging
+                class="small"
+                page="currentPage"
+                page-size="pageSize"
+                total="total"
+                adjacent="{{adjacent}}"
+                dots="{{dots}}"
+                scroll-top="{{scrollTop}}"
+                hide-if-empty="{{hideIfEmpty}}"
+                ul-class="{{ulClass}}"
+                active-class="{{activeClass}}"
+                disabled-class="{{disabledClass}}"
+                show-prev-next="{{showPrevNext}}"
+                paging-action="pageAction( page )">
+        </paging>
+    </div>
+</div>
+
+<script type="text/ng-template" id="add.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form" name="createForm">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">选择主机CPU</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big" ng-model="item.VmCpu" required>
+                                    <option value="2">2_Core</option>
+                                    <option value="4">4_Core</option>
+                                    <option value="6">6_Core</option>
+                                    <option value="8">8_Core</option>
+                                    <option value="10">10_Core</option>
+                                    <option value="12">12_Core</option>
+                                    <option value="14">14_Core</option>
+                                    <option value="16">16_Core</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">选择主机内存</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big" ng-model="item.VmMem" required>
+                                    <option value="2">2G</option>
+                                    <option value="4">4G</option>
+                                    <option value="6">6G</option>
+                                    <option value="8">8G</option>
+                                    <option value="10">10G</option>
+                                    <option value="12">12G</option>
+                                    <option value="14">14G</option>
+                                    <option value="16">16G</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">选择操作系统</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big"
+                                        ng-model="selected" ng-options="s.name for s in title.imageList" required>
+                                        <option value="">--选择操作系统--</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">选择模版</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big"
+                                        ng-model="item.TemplateName" ng-options="sh.name for sh in selected.child" required>
+                                <option value="">--选择模版--</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">选择数据中心</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big" ng-model="item.DataCenter" required>
+                                    <option value="ceshi">ceshi</option>
+                                    <option value="MD-CS">MD-CS</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">选择集群</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big" ng-model="item.Cluster" required>
+                                    <option value="cluster1">cluster1</option>
+                                    <option value="cs">cs</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">选择资源池</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big" ng-model="item.ResourcePool">
+                                    <option value="test1">test1</option>
+                                    <option value="test2">test2</option>
+                                    <option value="autovm">autovm</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">加入网络</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big" ng-model="item.NetworkName">
+                                    <option value="mdnet140">mdnet140</option>
+                                    <option value="mdnet141">mdnet141</option>
+                                    <option value="mdnet142">mdnet142</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">创建台数</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big" ng-model="item.Number">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">使用人</label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big" ng-model="item.Person">
+                                    <option value="zhangsan">zhangsan</option>
+                                    <option value="lisi">lisi</option>
+                                    <option value="wangwu">wangwu</option>
+                                    <option value="wangerma">wangerma</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="Save()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="stop.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                           确定要关闭<font color="#FF0000">{{ item.VmwareName }}</font>虚拟机？
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="Stop()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>
+
+
+
+<script type="text/ng-template" id="restart.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                           确定要重启<font color="#FF0000">{{ item.VmwareName }}</font>虚拟机？
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="Restart()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="delete.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                           确定要删除 <font color="#FF0000">{{ item.VmwareName }}</font> 虚拟机?
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="Delete()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="migratevm.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                           确定要迁移虚拟机<font color="#FF0000">{{ item.VmwareName }}</font>到其它存储(存储自动选取最大容量的)?
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="MigrateVm()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>
+

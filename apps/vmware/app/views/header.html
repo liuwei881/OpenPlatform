@@ -1,0 +1,51 @@
+<!-- BEGIN HEADER INNER -->
+<div class="page-header-inner">
+    <!-- BEGIN LOGO -->
+    <div class="page-logo">
+        <a href="/">
+            <img src="images/logo_open.jpg" alt="logo" class="logo-default"/>
+        </a>
+
+        <div class="menu-toggler sidebar-toggler">
+            <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+        </div>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+       data-target=".navbar-collapse">
+    </a>
+    <div class="top-menu">
+		<ul class="nav navbar-nav pull-right">
+			<li class="dropdown dropdown-user">
+				<a class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
+				<span class="username username-hide-on-mobile">
+				{{username}} </span>
+				<i class="fa fa-angle-down"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-menu-default">
+						<li>
+							<a href="javascript:;" ng-click="edit($index);">
+								<i class="icon-user"></i> 修改密码 </a></li>
+						<li>
+							<a href="javascript:;" ng-click="person($index);">
+							<i class="icon-lock"></i> 修改个人资料 </a>
+						</li>
+						<li class="divider">
+						</li>
+						<li>
+							<a href="javascript:;" ng-click="Logout();">
+							<i class="icon-key"></i> 登出 </a>
+						</li>
+				</ul>
+			</li>
+			<li class="dropdown dropdown-quick-sidebar-toggler">
+				<a href="javascript:;" ng-click="Logout();" class="dropdown-toggle">
+				<i class="icon-logout"></i>
+				</a>
+			</li>
+			<!-- END QUICK SIDEBAR TOGGLER -->
+		</ul>
+	</div>
+</div>
+<!-- END HEADER INNER -->
