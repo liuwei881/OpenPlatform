@@ -45,7 +45,7 @@
                        <button type="button" class="btn btn-primary btn-sm" ng-click="Delete($index)">删除</button>
                     </div>
                     <div class="btn-group">
-                        <a href="http://{{o.DomainName}}.openkf.cn/{{o.HealthExam}}" target="_blank">
+                        <a href="http://{{o.DomainName}}{{o.HealthExam}}" target="_blank">
                        <button type="button" class="btn btn-primary btn-sm">测试访问</button></a>
                     </div>
                 </td>
@@ -82,36 +82,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-4 control-label">项目名称
-                            <span class="redClassFont">*</span></label>
-                            <div class="col-md-4">
-                                <input type="text"
-                                       ng-pattern="/^[A-Za-z0-9]+$/"
-                                       ng-maxlength=30
-                                       name="projectname"
-                                       ensure-unique="projectname"
-                                       class="form-control input-inline input-big" required placeholder="项目名称不要重复"
-                                       ng-model="item.ProjectName">
-                            </div>
-
-                            <div class="col-sm-offset-4 col-md-10" ng-show="createForm.projectname.$invalid && createForm.projectname.$dirty">
-                                <span ng-show="createForm.projectname.$error.pattern" style="color:red">必须由数字和字母组成</span>
-                                <span ng-show="createForm.projectname.$error.required" style="color:red">此处不能为空</span>
-                                <span ng-show="createForm.projectname.$error.maxlength" style="color:red">不能多于30个字符</span>
-                                <span ng-show="createForm.projectname.$error.unique" style="color:red">项目名称已存在</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
                             <label class="col-md-4 control-label">域名前缀
                             <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
                                 <input type="text"
-                                       class="form-control input-inline input-big" required placeholder="域名前缀"
+                                       class="form-control input-inline input-big" required placeholder="d0030openedu"
                                        ng-model="item.DomainName">
                                 <span class="help-inline"></span>
                             </div>
@@ -126,7 +101,7 @@
                             <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
                                 <input type="number"
-                                       class="form-control input-inline input-big" required placeholder="端口"
+                                       class="form-control input-inline input-big" required placeholder="port"
                                        ng-model="item.Port">
                                 <span class="help-inline"></span>
                             </div>
@@ -141,7 +116,7 @@
                             <span class="redClassFont">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text"
-                                       class="form-control input-inline input-big" required placeholder="dnotdelet/mom.html"
+                                       class="form-control input-inline input-big" required placeholder="/dnotdelet/mom.html"
                                        ng-model="item.HealthExam">
                                 <span class="help-inline"></span>
                             </div>

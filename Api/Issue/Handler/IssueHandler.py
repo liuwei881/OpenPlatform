@@ -6,7 +6,7 @@ from tornado import web,gen
 from Issue.Entity.IssueModel import IssueServer
 import json
 from sqlalchemy import desc,or_,and_,engine
-
+from Issue import tasks
 
 @urlmap(r'/issue\/?([0-9]*)')
 class NgHandler(BaseHandler):
@@ -33,12 +33,14 @@ class NgHandler(BaseHandler):
         """创建nginx及consul"""
         data = json.loads(self.request.body.decode("utf-8"))
         objTask = IssueServer()
-        objTask.DomainName = data['params'].get('DomainName', None) + "openkf.cn"
+        domainname = data['params'].get('DomainName', None)
+        objTask.DomainName = domainname + ".openkf.cn"
         objTask.HealthExam = data['params'].get('HealthExam', None)
         objTask.Port = int(data['params'].get('Port', None))
         objTask.Publisher = self.get_cookie("username")
         self.db.add(objTask)
         self.db.commit()
+        tasks.nginx_issue.delay(domainname, objTask.Port, objTask.HealthExam)
         self.Result['rows'] = 1
         self.Result['info'] = u'创建成功'
         self.finish(self.Result)
