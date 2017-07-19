@@ -44,7 +44,7 @@ define(['angular'], function (angular) {
                         return {};
                     },
                     title: function () {
-                        return {'title':'新建'};
+                        return {'title':'新建项目'};
                     }
                 }
             });
@@ -57,44 +57,10 @@ define(['angular'], function (angular) {
             };
         };
 
-        $scope.detail = function (i) {
-            $uibModal.open({
-                animation: true,
-                templateUrl: 'detail.html',
-                controller: 'ModalInstanceCtrl',
-                size: 'lg',
-                resolve: {
-                    item: function () {
-                        return $scope.rows[i];
-                    },
-                    title: function () {
-                        return '查看';
-                    }
-                }
-            });
-        };
-
-        $scope.appdetail = function (i) {
-            $uibModal.open({
-                animation: true,
-                templateUrl: 'appdetail.html',
-                controller: 'ModalInstanceCtrl',
-                size: 'lg',
-                resolve: {
-                    item: function () {
-                        return $scope.rows[i];
-                    },
-                    title: function () {
-                        return '查看应用信息';
-                    }
-                }
-            });
-        };
-
-        $scope.edit = function (i) {
+        $scope.Delete = function (i) {
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'edit.html',
+                templateUrl: 'delete.html',
                 controller: 'ModalInstanceCtrl',
                 size: 'lg',
                 resolve: {
@@ -102,12 +68,12 @@ define(['angular'], function (angular) {
                         return $scope.rows[i];
                     },
                     title: function () {
-                        return {'title':'编辑'};
+                        return {'title':'删除项目'};
                     }
                 }
             });
-           modalInstance.save = function (item) {
-                Async.save('/api/v2/issue/',item).
+           modalInstance.Delete = function (item) {
+                Async.Delete('/api/v2/issue/',item).
                     success(function (data) {
                     console.log(item);
                         modalInstance.close();
@@ -115,6 +81,7 @@ define(['angular'], function (angular) {
                     });
             };
         };
+
 
         $scope.Search = function (searchKey) {
             $scope.initPage(searchKey);

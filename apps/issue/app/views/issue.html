@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <label>Filter:
-                    <input type="search" class="form-control input-large input-inline" placeholder="ProjectsName/IP" ng-model='searchKey'>
+                    <input type="search" class="form-control input-large input-inline" placeholder="域名或端口" ng-model='searchKey'>
                 </label>
                 <a href="javascript:void(0);" ng-click="Search(searchKey)" class="btn btn-sm btn-primary">搜索</a>
                 <a href="javascript:void(0);" ng-click="Search('')" class="btn btn-sm btn-primary">重置</a>
@@ -177,7 +177,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="projectdel()">OK</button>
+        <button class="btn btn-primary" ng-click="Delete()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
     </div>
 </script>
