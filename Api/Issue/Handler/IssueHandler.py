@@ -48,14 +48,10 @@ class NgHandler(BaseHandler):
     @web.asynchronous
     def delete(self, ident):
         """删除nginx及consul"""
-        # vm = self.db.query(VmwareList).filter(VmwareList.VmwareId==ident).first()
-        # ip = vm.Ip
-        # ip_recycle = lambda x: sum([256 ** j * int(i) for j, i in enumerate(x.split('.')[::-1])])       # ip地址回收
-        # pro = IpPool(Ip=ip_recycle(ip))
-        # self.db.add(pro)
-        # tasks.del_vm.delay('10.96.140.157', 'autovm', '1qaz!QAZ', 443, ip)
-        # self.db.query(VmwareList).filter(VmwareList.VmwareId == ident).delete()
-        # self.db.commit()
-        # self.Result['info'] = u'删除虚拟机成功'
-        # self.finish(self.Result)
-        pass
+        pro = self.db.query(IssueServer).filter(IssueServer.Id==ident).first()
+        domainname = pro.DomainName.split(".")[0]
+        tasks.issue_del.delay(domainname)
+        self.db.query(IssueServer).filter(IssueServer.Id==ident).delete()
+        self.db.commit()
+        self.Result['info'] = u'删除虚拟机成功'
+        self.finish(self.Result)
