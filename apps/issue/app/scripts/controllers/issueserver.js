@@ -26,6 +26,7 @@ define(['angular'], function (angular) {
                     $scope.searchKey = searchKey;
                     $scope.total = data.total;
                     $scope.rows  = data.rows;
+                    $scope.username = data.username;
                 });
         };
 
