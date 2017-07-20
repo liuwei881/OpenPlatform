@@ -1,17 +1,9 @@
-kvm平台 tornado angularjs版 实现了:
-项目资源统计报表,
-资产管理, 虚拟机管理,
-ceph云硬盘管理,
-项目管理,
-图形趋势图(数据库趋势图和kvm镜像趋势图)
-配置angularjs环境
-yum install -y npm
-npm install
-npm install grunt grunt-cli
-npm install -g bower yo generator-karma-require generator-angular-require
-yum install -y ruby rubygems
-gem install compass
-npm install --save-dev grunt-wiredep
-bower install jquery --save --allow-root
-grunt serve
+# 奥鹏虚拟机平台
 
+#功能介绍
+
+
+1、在新建虚拟机的时候，可以自动命名虚拟机，自动分配ip，避免人工干预(人工只需选择 虚拟机的CPU，内存，数据中心等).
+2、支持在web平台上进行 重启，关机，删除等操作.
+3、在删除虚拟机的时候，可以自动回收ip.
+4、可以批量创建虚拟机，节省创建时间.

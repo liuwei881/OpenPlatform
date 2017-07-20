@@ -1,6 +1,6 @@
 # 项目简介
 
-中细软运维项目平台
+奥鹏运维项目平台
 
 ## 项目结构
 
@@ -13,6 +13,9 @@
     * tasks.py: 如果需要的话这个文件写celery任务代码
     * Handler: 该目录下存放对应的Url处理
     * Entity: 该目录下存放对应的数据表映射类
+
+## 此代码包含自动创建vmware虚拟机和nginx自动发布及入口portal
+
 
 项目名称以首字母大写命名，相应文件夹也以这个方式命名
 
@@ -29,7 +32,7 @@
 
 每个项目文件夹下都要包含　`README.MD` 文件　用来记录相应功能描述及开发文档以方便后期整理
 
-### mercurial分支
+### 分支
 
 每项目必需有自己的分支，且分支都从 `common` 分支签出，确保不与其它分支（项目）有任何关系
 
@@ -38,3 +41,23 @@
 功能完成后需要把相应分支合并到 `master` 分支,并做好　`tag`
 
 分支名称以项目名称的小写全称命名；例 Right 对应到 right　分支
+
+# 简单安装方法
+
+npm install
+yum install -y npm
+npm install
+npm install grunt grunt-cli
+npm install -g grunt-cli
+npm install -g bower yo generator-karma-require generator-angular-require
+yum install -y ruby rubygems
+gem install compass
+npm install --save-dev grunt-wiredep
+npm install grunt-contrib-imagemin
+npm install grunt-bower-requirejs --save-dev
+bower install jquery --save --allow-root
+bower install highcharts --allow-root
+
+grunt serve
+
+grunt build
