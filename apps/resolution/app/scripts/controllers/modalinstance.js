@@ -25,6 +25,10 @@ define(['angular'], function (angular) {
                 $uibModalInstance.Delete($scope.item);
             };
 
+            $scope.Edit = function () {
+                $uibModalInstance.Edit($scope.item);
+            };
+
             $scope.cancel = function () {
                 $uibModalInstance.dismiss('cancel');
             };

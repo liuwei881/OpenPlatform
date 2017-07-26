@@ -49,7 +49,7 @@ define(['angular', 'controllers/main', 'controllers/about', 'directives/paging',
                     url: 'resolution',
                     templateUrl: 'views/resolution.html',
                     controller: 'resolutionServerCtrl',
-                    nav: '发布列表',
+                    nav: '解析列表',
                     needRequest: true
                 })
                 .state('login',{

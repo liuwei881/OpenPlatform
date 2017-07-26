@@ -45,7 +45,7 @@ define(['angular'], function (angular) {
                         return {};
                     },
                     title: function () {
-                        return {'title':'新建项目'};
+                        return {'title':'新建解析'};
                     }
                 }
             });
@@ -69,12 +69,37 @@ define(['angular'], function (angular) {
                         return $scope.rows[i];
                     },
                     title: function () {
-                        return {'title':'删除项目'};
+                        return {'title':'删除解析'};
                     }
                 }
             });
            modalInstance.Delete = function (item) {
                 Async.Delete('/api/v2/resolution/',item).
+                    success(function (data) {
+                    console.log(item);
+                        modalInstance.close();
+                        $scope.initPage();
+                    });
+            };
+        };
+
+        $scope.Edit = function (i) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'edit.html',
+                controller: 'ModalInstanceCtrl',
+                size: 'lg',
+                resolve: {
+                    item: function () {
+                        return $scope.rows[i];
+                    },
+                    title: function () {
+                        return {'title':'修改解析'};
+                    }
+                }
+            });
+           modalInstance.Edit = function (item) {
+                Async.Edit('/api/v2/resolution/',item).
                     success(function (data) {
                     console.log(item);
                         modalInstance.close();

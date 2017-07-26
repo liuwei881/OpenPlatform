@@ -26,13 +26,18 @@ define(['angular'], function (angular) {
         }
 
         function Delete(url, params){
-            return $http.delete(url + params.Id)
+            return $http.delete(url + params.Id);
+        }
+
+        function Edit(url, params) {
+            return $http.put(url + params.Id, {params: params})
         }
 
         return {
             get : get,
             save : save,
-            Delete : Delete
+            Delete : Delete,
+            Edit : Edit,
         }
 	});
 });

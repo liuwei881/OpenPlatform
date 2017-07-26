@@ -33,6 +33,10 @@ class NgHandler(BaseHandler):
         pass
 
     @web.asynchronous
+    def put(self, ident):
+        pass
+
+    @web.asynchronous
     def delete(self, ident):
         """删除nginx及consul"""
         # pro = self.db.query(IssueServer).filter(IssueServer.Id==ident).first()

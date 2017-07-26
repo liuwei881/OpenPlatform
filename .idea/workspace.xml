@@ -2,32 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c0ef2b5-df39-428a-a62c-d0c7269682ba" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/issueserver.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/resolutionserver.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/resolution/app/views/issue.html" afterPath="$PROJECT_DIR$/apps/resolution/app/views/resolution.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/Extension.py" afterPath="$PROJECT_DIR$/Api/lib/Extension.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/LoginHandler.py" afterPath="$PROJECT_DIR$/Api/lib/LoginHandler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/Route.py" afterPath="$PROJECT_DIR$/Api/lib/Route.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/config.yaml" afterPath="$PROJECT_DIR$/Api/lib/config.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/init_db.py" afterPath="$PROJECT_DIR$/Api/lib/init_db.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/urlmap.py" afterPath="$PROJECT_DIR$/Api/lib/urlmap.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/index.html" afterPath="$PROJECT_DIR$/apps/resolution/app/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/Resolution/Entity/ResolutionModel.py" afterPath="$PROJECT_DIR$/Api/Resolution/Entity/ResolutionModel.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/Resolution/Handler/ResolutionHandler.py" afterPath="$PROJECT_DIR$/Api/Resolution/Handler/ResolutionHandler.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/app.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/about.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/about.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/dashboard.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/dashboard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/footer.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/footer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/header.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/header.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/login.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/main.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/pagehead.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/pagehead.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/sidebar.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/sidebar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/directives/paging.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/directives/paging.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/directives/tasktype.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/directives/tasktype.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/resolutionserver.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/resolutionserver.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/services/httpinterceptor.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/services/httpinterceptor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/services/sync.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/services/sync.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/views/sidebar.html" afterPath="$PROJECT_DIR$/apps/resolution/app/views/sidebar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/views/resolution.html" afterPath="$PROJECT_DIR$/apps/resolution/app/views/resolution.html" />
     </list>
     <ignored path="zPlatform.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,65 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginHandler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Api/lib/LoginHandler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
-              <folding>
-                <element signature="e#71#100#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RedisCache.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Api/lib/RedisCache.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Route.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Api/lib/Route.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding>
-                <element signature="e#71#84#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Api/lib/tools.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urlmap.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Api/lib/urlmap.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResolutionModel.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ResolutionModel.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Api/Resolution/Entity/ResolutionModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="6" />
+            <state relative-caret-position="323">
+              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="e#14#76#0" expanded="true" />
               </folding>
@@ -116,8 +43,8 @@
       <file leaf-file-name="ResolutionHandler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Api/Resolution/Handler/ResolutionHandler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+            <state relative-caret-position="544">
+              <caret line="32" column="12" lean-forward="true" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
               <folding>
                 <element signature="e#15#44#0" expanded="true" />
               </folding>
@@ -125,18 +52,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="resolution.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/resolution.html">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+            <state relative-caret-position="1037">
+              <caret line="61" column="41" lean-forward="true" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Api/Resolution/__init__.py">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -145,11 +72,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Api/Resolution/Handler/__init__.py">
+      <file leaf-file-name="modalinstance.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+            <state relative-caret-position="561">
+              <caret line="33" column="14" lean-forward="true" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resolutionserver.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/resolutionserver.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1462">
+              <caret line="86" column="31" lean-forward="true" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="async.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="async.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/vmware/app/scripts/services/async.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="498">
+              <caret line="44" column="62" lean-forward="true" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sync.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/services/sync.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resolution.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/resolution.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="47" column="43" lean-forward="false" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -188,7 +165,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/apps/issue/app/scripts/directives/tasktype.js" />
         <option value="$PROJECT_DIR$/apps/issue/app/scripts/controllers/about.js" />
         <option value="$PROJECT_DIR$/apps/issue/app/scripts/controllers/dashboard.js" />
         <option value="$PROJECT_DIR$/apps/issue/app/scripts/controllers/footer.js" />
@@ -212,8 +188,6 @@
         <option value="$PROJECT_DIR$/apps/resolution/bower.json" />
         <option value="$PROJECT_DIR$/apps/resolution/package.json" />
         <option value="$PROJECT_DIR$/apps/resolution/app/index.html" />
-        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/app.js" />
-        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js" />
         <option value="$PROJECT_DIR$/apps/resolution/app/scripts/services/httpinterceptor.js" />
         <option value="$PROJECT_DIR$/apps/resolution/app/scripts/services/sync.js" />
         <option value="$PROJECT_DIR$/apps/resolution/app/scripts/directives/paging.js" />
@@ -225,7 +199,6 @@
         <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/issueserver.js" />
         <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/login.js" />
         <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/main.js" />
-        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js" />
         <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/pagehead.js" />
         <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/sidebar.js" />
         <option value="$PROJECT_DIR$/apps/resolution/app/views/sidebar.html" />
@@ -236,8 +209,12 @@
         <option value="$PROJECT_DIR$/Api/lib/init_db.py" />
         <option value="$PROJECT_DIR$/Api/lib/LoginHandler.py" />
         <option value="$PROJECT_DIR$/Api/lib/urlmap.py" />
-        <option value="$PROJECT_DIR$/Api/Resolution/Entity/ResolutionModel.py" />
         <option value="$PROJECT_DIR$/Api/Resolution/Handler/ResolutionHandler.py" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/app.js" />
+        <option value="$PROJECT_DIR$/Api/Resolution/Entity/ResolutionModel.py" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/resolutionserver.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js" />
         <option value="$PROJECT_DIR$/apps/resolution/app/views/resolution.html" />
       </list>
     </option>
@@ -370,6 +347,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenPlatform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenPlatform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resolution" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -712,38 +715,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/footer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/header.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/resolutionserver.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1306">
-          <caret line="91" column="41" lean-forward="false" selection-start-line="91" selection-start-column="41" selection-end-line="91" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -753,14 +724,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
@@ -780,14 +743,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -840,34 +795,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/services/httpinterceptor.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/services/sync.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1092,16 +1023,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Api/Resolution/Entity/ResolutionModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="6" />
-          <folding>
-            <element signature="e#14#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Api/Resolution/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1126,21 +1047,103 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/apps/vmware/app/views/vm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-318">
+          <caret line="118" column="34" lean-forward="true" selection-start-line="106" selection-start-column="28" selection-end-line="118" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/vmware/app/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="43" lean-forward="false" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/services/sync.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/vmware/app/scripts/services/async.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="44" column="62" lean-forward="true" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/resolution.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="47" column="43" lean-forward="false" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/resolutionserver.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1462">
+          <caret line="86" column="31" lean-forward="true" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="14" lean-forward="true" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="61" column="41" lean-forward="true" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Api/Resolution/Handler/ResolutionHandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+        <state relative-caret-position="544">
+          <caret line="32" column="12" lean-forward="true" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
           <folding>
             <element signature="e#15#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/resolution.html">
+    <entry file="file://$PROJECT_DIR$/Api/Resolution/Entity/ResolutionModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
-          <folding />
+        <state relative-caret-position="323">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#76#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
