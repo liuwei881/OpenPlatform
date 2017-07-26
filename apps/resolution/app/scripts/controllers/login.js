@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
     /**
      * @ngdoc function
-     * @name issueApp.controller:LoginCtrl
+     * @name resolutionApp.controller:LoginCtrl
      * @description
      * # LoginCtrl
-     * Controller of the issueApp
+     * Controller of the resolutionApp
      */
-    angular.module('issueApp.controllers.LoginCtrl', [])
+    angular.module('resolutionApp.controllers.LoginCtrl', [])
         .controller('LoginCtrl', function ($scope, $http, $state) {
             $scope.awesomeThings = [
                 'HTML5 Boilerplate',

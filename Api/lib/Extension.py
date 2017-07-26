@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Hipeace86'
+__author__ = 'liuwei'
 __datetime__ = '15-4-13'
 
 from sqlalchemy.orm.interfaces import MapperExtension

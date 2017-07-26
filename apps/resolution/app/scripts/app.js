@@ -1,30 +1,30 @@
 /*jshint unused: vars */
-define(['angular', 'controllers/main', 'controllers/about', 'directives/paging', 'controllers/login', 'controllers/header', 'controllers/sidebar', 'controllers/pagehead', 'controllers/footer', 'controllers/dashboard', 'services/httpinterceptor', 'controllers/modalinstance', 'controllers/issueserver', 'services/async', 'services/sync']/*deps*/, function (angular, MainCtrl, AboutCtrl, PagingDirective, LoginCtrl, HeaderCtrl, SidebarCtrl, PageHeadCtrl, FooterCtrl, DashboardCtrl, PhysicalCtrl, HttpInterceptorFactory, PhysicalService,  ModalinstanceCtrl, IssueServerCtrl)/*invoke*/ {
+define(['angular', 'controllers/main', 'controllers/about', 'directives/paging', 'controllers/login', 'controllers/header', 'controllers/sidebar', 'controllers/pagehead', 'controllers/footer', 'controllers/dashboard', 'services/httpinterceptor', 'controllers/modalinstance', 'controllers/resolutionserver', 'services/async', 'services/sync']/*deps*/, function (angular, MainCtrl, AboutCtrl, PagingDirective, LoginCtrl, HeaderCtrl, SidebarCtrl, PageHeadCtrl, FooterCtrl, DashboardCtrl, PhysicalCtrl, HttpInterceptorFactory, PhysicalService,  ModalinstanceCtrl, resolutionServerCtrl)/*invoke*/ {
     'use strict';
 
     /**
      * @ngdoc overview
-     * @name issueApp
+     * @name resolutionApp
      * @description
-     * # issueApp
+     * # resolutionApp
      *
      * Main module of the application.
      */
     return angular
-        .module('issueApp', ['issueApp.controllers.MainCtrl',
-            'issueApp.controllers.AboutCtrl',
-            'issueApp.directives.Paging',
-            'issueApp.controllers.LoginCtrl',
-            'issueApp.controllers.HeaderCtrl',
-            'issueApp.controllers.SidebarCtrl',
-            'issueApp.controllers.PageHeadCtrl',
-            'issueApp.controllers.FooterCtrl',
-            'issueApp.controllers.DashboardCtrl',
-            'issueApp.services.HttpInterceptor',
-            'issueApp.controllers.ModalInstanceCtrl',
-            'issueApp.controllers.IssueServerCtrl',
-            'issueApp.services.Async',
-            'issueApp.services.Sync',
+        .module('resolutionApp', ['resolutionApp.controllers.MainCtrl',
+            'resolutionApp.controllers.AboutCtrl',
+            'resolutionApp.directives.Paging',
+            'resolutionApp.controllers.LoginCtrl',
+            'resolutionApp.controllers.HeaderCtrl',
+            'resolutionApp.controllers.SidebarCtrl',
+            'resolutionApp.controllers.PageHeadCtrl',
+            'resolutionApp.controllers.FooterCtrl',
+            'resolutionApp.controllers.DashboardCtrl',
+            'resolutionApp.services.HttpInterceptor',
+            'resolutionApp.controllers.ModalInstanceCtrl',
+            'resolutionApp.controllers.resolutionServerCtrl',
+            'resolutionApp.services.Async',
+            'resolutionApp.services.Sync',
 /*angJSDeps*/
             'ngCookies',
             'ngSanitize',
@@ -45,10 +45,10 @@ define(['angular', 'controllers/main', 'controllers/about', 'directives/paging',
                     controller: 'DashboardCtrl',
                     nav: 'DashBoard'
                 })
-                .state('dashboard.issue', {
-                    url: 'issue',
-                    templateUrl: 'views/issue.html',
-                    controller: 'IssueServerCtrl',
+                .state('dashboard.resolution', {
+                    url: 'resolution',
+                    templateUrl: 'views/resolution.html',
+                    controller: 'resolutionServerCtrl',
                     nav: '发布列表',
                     needRequest: true
                 })

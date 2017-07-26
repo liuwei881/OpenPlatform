@@ -1,12 +1,12 @@
 <div class="portlet box blue">
     <div class="portlet-title">
         <div class="caption">
-            <i class="fa fa-cogs"></i>项目构建
+            <i class="fa fa-cogs"></i>DNS解析
         </div>
         <div class="tools">
             <a class="glyphicon glyphicon-plus" href="javascript:;">
             </a>
-            <button type="button" class="btn red-haze btn-sm" ng-click="Create();">新建项目
+            <button type="button" class="btn red-haze btn-sm" ng-click="Create();">新建解析
             </button>
         </div>
     </div>
@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <label>Filter:
-                    <input type="search" class="form-control input-large input-inline" placeholder="域名或端口" ng-model='searchKey'>
+                    <input type="search" class="form-control input-large input-inline" placeholder="域名或IP" ng-model='searchKey'>
                 </label>
                 <a href="javascript:void(0);" ng-click="Search(searchKey)" class="btn btn-sm btn-primary">搜索</a>
                 <a href="javascript:void(0);" ng-click="Search('')" class="btn btn-sm btn-primary">重置</a>
@@ -24,10 +24,9 @@
         <table class="table table-bordered">
             <tbody>
             <tr>
-                <th>项目ID</th>
-                <th>项目域名</th>
-                <th>项目端口</th>
-                <th>健康检查</th>
+                <th>域名ID</th>
+                <th>域名</th>
+                <th>IP</th>
                 <th>创建人</th>
                 <th>创建时间</th>
                 <th>操作</th>

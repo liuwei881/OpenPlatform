@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
     /**
      * @ngdoc service
-     * @name issueApp.httpInterceptor
+     * @name resolutionApp.httpInterceptor
      * @description
      * # httpInterceptor
-     * Factory in the issueApp.
+     * Factory in the resolutionApp.
      */
-    angular.module('issueApp.services.HttpInterceptor', [])
+    angular.module('resolutionApp.services.HttpInterceptor', [])
         .factory('httpInterceptor', function ($q, $rootScope, $cookies) {
             // Service logic
             // ...

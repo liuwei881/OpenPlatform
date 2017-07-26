@@ -2,9 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c0ef2b5-df39-428a-a62c-d0c7269682ba" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/issueserver.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/resolutionserver.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/resolution/app/views/issue.html" afterPath="$PROJECT_DIR$/apps/resolution/app/views/resolution.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/Issue/salt_api.py" afterPath="$PROJECT_DIR$/Api/Issue/salt_api.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/Issue/tasks.py" afterPath="$PROJECT_DIR$/Api/Issue/tasks.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/Extension.py" afterPath="$PROJECT_DIR$/Api/lib/Extension.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/LoginHandler.py" afterPath="$PROJECT_DIR$/Api/lib/LoginHandler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/Route.py" afterPath="$PROJECT_DIR$/Api/lib/Route.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/config.yaml" afterPath="$PROJECT_DIR$/Api/lib/config.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/init_db.py" afterPath="$PROJECT_DIR$/Api/lib/init_db.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Api/lib/urlmap.py" afterPath="$PROJECT_DIR$/Api/lib/urlmap.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/index.html" afterPath="$PROJECT_DIR$/apps/resolution/app/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/app.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/about.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/about.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/dashboard.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/dashboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/footer.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/footer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/header.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/header.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/login.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/main.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/pagehead.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/pagehead.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/sidebar.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/sidebar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/directives/paging.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/directives/paging.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/directives/tasktype.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/directives/tasktype.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/services/httpinterceptor.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/services/httpinterceptor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/scripts/services/sync.js" afterPath="$PROJECT_DIR$/apps/resolution/app/scripts/services/sync.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/resolution/app/views/sidebar.html" afterPath="$PROJECT_DIR$/apps/resolution/app/views/sidebar.html" />
     </list>
     <ignored path="zPlatform.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,11 +47,77 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IssueHandler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Api/Issue/Handler/IssueHandler.py">
+      <file leaf-file-name="LoginHandler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Api/lib/LoginHandler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="42" column="77" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="77" />
+            <state relative-caret-position="17">
+              <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+              <folding>
+                <element signature="e#71#100#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RedisCache.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Api/lib/RedisCache.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Route.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Api/lib/Route.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding>
+                <element signature="e#71#84#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Api/lib/tools.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urlmap.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Api/lib/urlmap.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResolutionModel.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Api/Resolution/Entity/ResolutionModel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="6" />
+              <folding>
+                <element signature="e#14#76#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResolutionHandler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Api/Resolution/Handler/ResolutionHandler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
               <folding>
                 <element signature="e#15#44#0" expanded="true" />
               </folding>
@@ -36,20 +125,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Api/Issue/tasks.py">
+      <file leaf-file-name="resolution.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/resolution.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-              <folding>
-                <element signature="e#15#46#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="398">
+              <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/main.html">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Api/Resolution/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -58,44 +145,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bower.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/apps/resolution/bower.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Gruntfile.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/resolution/Gruntfile.js">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Api/Resolution/Handler/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/resolution/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="37" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="salt_api.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Api/Issue/salt_api.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-              <folding>
-                <element signature="e#15#26#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -117,12 +172,14 @@
       <find>right</find>
       <find>kubernetes</find>
       <find>10.96.5.95</find>
+      <find>issue</find>
     </findStrings>
     <replaceStrings>
       <replace />
       <replace>ngissue</replace>
       <replace>issue</replace>
       <replace>vmlin5736.open.com.cn</replace>
+      <replace>resolution</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -131,34 +188,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/sidebar.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/pagehead.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/modalinstance.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/main.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/login.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/footer.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/dashboard.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/appserver.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/about.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/bower.json" />
-        <option value="$PROJECT_DIR$/apps/ngissue/package.json" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/views/sidebar.html" />
-        <option value="$PROJECT_DIR$/Api/NgIssue/Handler/NgIssueHandler.py" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/header.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/controllers/issueserver.js" />
-        <option value="$PROJECT_DIR$/apps/ngissue/app/scripts/app.js" />
-        <option value="$PROJECT_DIR$/Api/lib/Route.py" />
-        <option value="$PROJECT_DIR$/Api/NgIssue/Handler/__init__.py" />
-        <option value="$PROJECT_DIR$/Api/lib/config.yaml" />
-        <option value="$PROJECT_DIR$/apps/issue/package.json" />
-        <option value="$PROJECT_DIR$/apps/issue/bower.json" />
-        <option value="$PROJECT_DIR$/apps/issue/app/index.html" />
-        <option value="$PROJECT_DIR$/apps/issue/app/views/sidebar.html" />
-        <option value="$PROJECT_DIR$/apps/issue/app/views/header.html" />
-        <option value="$PROJECT_DIR$/apps/issue/app/scripts/app.js" />
-        <option value="$PROJECT_DIR$/apps/issue/app/scripts/services/httpinterceptor.js" />
-        <option value="$PROJECT_DIR$/apps/issue/app/scripts/services/sync.js" />
-        <option value="$PROJECT_DIR$/apps/issue/app/scripts/directives/paging.js" />
         <option value="$PROJECT_DIR$/apps/issue/app/scripts/directives/tasktype.js" />
         <option value="$PROJECT_DIR$/apps/issue/app/scripts/controllers/about.js" />
         <option value="$PROJECT_DIR$/apps/issue/app/scripts/controllers/dashboard.js" />
@@ -182,6 +211,34 @@
         <option value="$PROJECT_DIR$/Api/Issue/salt_api.py" />
         <option value="$PROJECT_DIR$/apps/resolution/bower.json" />
         <option value="$PROJECT_DIR$/apps/resolution/package.json" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/index.html" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/app.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/services/httpinterceptor.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/services/sync.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/directives/paging.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/directives/tasktype.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/about.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/dashboard.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/footer.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/header.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/issueserver.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/login.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/main.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/pagehead.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/scripts/controllers/sidebar.js" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/views/sidebar.html" />
+        <option value="$PROJECT_DIR$/Api/Resolution/Handler/__init__.py" />
+        <option value="$PROJECT_DIR$/Api/lib/Route.py" />
+        <option value="$PROJECT_DIR$/Api/lib/config.yaml" />
+        <option value="$PROJECT_DIR$/Api/lib/Extension.py" />
+        <option value="$PROJECT_DIR$/Api/lib/init_db.py" />
+        <option value="$PROJECT_DIR$/Api/lib/LoginHandler.py" />
+        <option value="$PROJECT_DIR$/Api/lib/urlmap.py" />
+        <option value="$PROJECT_DIR$/Api/Resolution/Entity/ResolutionModel.py" />
+        <option value="$PROJECT_DIR$/Api/Resolution/Handler/ResolutionHandler.py" />
+        <option value="$PROJECT_DIR$/apps/resolution/app/views/resolution.html" />
       </list>
     </option>
   </component>
@@ -278,6 +335,54 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resolution" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenPlatform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenPlatform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resolution" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenPlatform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenPlatform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -322,11 +427,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Api/" />
       <recent name="$PROJECT_DIR$/apps/" />
       <recent name="$PROJECT_DIR$/apps/resolution" />
       <recent name="$PROJECT_DIR$/Api/Issue" />
       <recent name="$PROJECT_DIR$/apps/ngissue" />
-      <recent name="$PROJECT_DIR$/apps/ngissue/app/styles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\工作\zPlatform\Api\Kvm" />
@@ -607,323 +712,79 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/views/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/views/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="43" lean-forward="false" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/views/footer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/views/dashboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/views/about.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/services/httpinterceptor.js">
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/dashboard.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/directives/kubernetes.js" />
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/services/sync.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/directives/paging.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/directives/tasktype.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/controllers/about.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/controllers/dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/controllers/footer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/controllers/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/controllers/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/controllers/pagehead.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="9" lean-forward="false" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/index.html">
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/footer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/404.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+        <state relative-caret-position="170">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/controllers/header.js">
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/header.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="36" lean-forward="false" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/controllers/sidebar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/vmware/app/scripts/controllers/modalinstance.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/vmware/app/views/vm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4568">
-          <caret line="64" column="92" lean-forward="false" selection-start-line="64" selection-start-column="92" selection-end-line="66" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/vmware/app/scripts/services/async.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="37" column="9" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="37" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="23" column="51" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="51" />
+        <state relative-caret-position="170">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/controllers/modalinstance.js">
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/resolutionserver.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="47" lean-forward="false" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/services/async.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="27" lean-forward="false" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/vmware/app/scripts/controllers/vmserver.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="781">
-          <caret line="158" column="10" lean-forward="true" selection-start-line="135" selection-start-column="8" selection-end-line="158" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Api/VmWare/Handler/VmHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1650">
-          <caret line="26" column="49" lean-forward="false" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Api/VmWare/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-262">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Api/Portal/Handler/PortalHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Api/Portal/Entity/PortalModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Api/VmWare/Handler/ImageHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Api/Issue/Entity/IssueModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="22" column="41" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Api/Issue/README.MD">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Api/Portal/README.MD">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="21" lean-forward="false" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.MD">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" column="11" lean-forward="false" selection-start-line="62" selection-start-column="11" selection-end-line="62" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Api/VmWare/README.MD">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/scripts/controllers/issueserver.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="51" lean-forward="false" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/issue/app/views/issue.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="1306">
+          <caret line="91" column="41" lean-forward="false" selection-start-line="91" selection-start-column="41" selection-end-line="91" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Api/Issue/Handler/IssueHandler.py">
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="42" column="77" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="77" />
-          <folding>
-            <element signature="e#15#44#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Api/Issue/salt_api.py">
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-          <folding>
-            <element signature="e#15#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Api/Issue/tasks.py">
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/modalinstance.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#46#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/resolution/app/views/main.html">
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/pagehead.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/controllers/sidebar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -931,26 +792,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/resolution/Gruntfile.js">
+    <entry file="file://$PROJECT_DIR$/apps/resolution/bower.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5605">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/resolution/bower.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="204">
+          <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -971,10 +816,330 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resolution/bower.json">
+    <entry file="file://$PROJECT_DIR$/apps/resolution/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/directives/paging.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="30" lean-forward="false" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/directives/tasktype.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/services/async.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/services/httpinterceptor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/services/sync.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/page-head.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/sidebar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="38" lean-forward="false" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Issue/salt_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+          <folding>
+            <element signature="e#15#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Issue/Handler/IssueHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="22" column="29" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+          <folding>
+            <element signature="e#15#44#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Issue/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+          <folding>
+            <element signature="e#15#46#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Issue/Entity/IssueModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="50" lean-forward="false" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
+          <folding>
+            <element signature="e#14#76#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/VmWare/Entity/IdModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/VmWare/Entity/VmModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="625">
+          <caret line="44" column="59" lean-forward="false" selection-start-line="44" selection-start-column="59" selection-end-line="44" selection-end-column="59" />
+          <folding>
+            <element signature="e#14#76#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/VmWare/Entity/ImageModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/VmWare/Entity/IpModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/VmWare/Handler/VmHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#15#44#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Resolution/Entity/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Resolution/README.MD">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/lib/config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="38" lean-forward="true" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/lib/basehandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <element signature="e#71#85#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/lib/Extension.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+          <folding>
+            <element signature="e#72#125#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/lib/init_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/lib/LoginHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding>
+            <element signature="e#71#100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/lib/RedisCache.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/lib/Route.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="e#71#84#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/lib/tools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/lib/urlmap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Resolution/Entity/ResolutionModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="6" />
+          <folding>
+            <element signature="e#14#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Resolution/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Resolution/Handler/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Resolution/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Api/Resolution/Handler/ResolutionHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+          <folding>
+            <element signature="e#15#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resolution/app/views/resolution.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
           <folding />
         </state>
       </provider>

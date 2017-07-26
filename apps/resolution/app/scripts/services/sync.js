@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
   /**
    * @ngdoc service
-   * @name issueApp.TaskService
+   * @name resolutionApp.TaskService
    * @description
    * # TaskService
-   * Service in the issueApp.
+   * Service in the resolutionApp.
    */
-  angular.module('issueApp.services.Sync', [])
+  angular.module('resolutionApp.services.Sync', [])
 	.service('Sync', function ($http) {
         function fetch(url) {
             var request;

@@ -6,9 +6,9 @@ define(['angular'], function (angular) {
      * @name zCloudApp.controller:AboutCtrl
      * @description
      * # AboutCtrl
-     * Controller of the issueApp
+     * Controller of the resolutionApp
      */
-    angular.module('issueApp.controllers.AboutCtrl', [])
+    angular.module('resolutionApp.controllers.AboutCtrl', [])
         .controller('AboutCtrl', function ($scope) {
             $scope.awesomeThings = [
                 'HTML5 Boilerplate',

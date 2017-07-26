@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
     /**
      * @ngdoc function
-     * @name issueApp.controller:FooterCtrl
+     * @name resolutionApp.controller:FooterCtrl
      * @description
      * # FooterCtrl
-     * Controller of the issueApp
+     * Controller of the resolutionApp
      */
-    angular.module('issueApp.controllers.FooterCtrl', [])
+    angular.module('resolutionApp.controllers.FooterCtrl', [])
         .controller('FooterCtrl', function ($scope) {
             $scope.awesomeThings = [
                 'HTML5 Boilerplate',

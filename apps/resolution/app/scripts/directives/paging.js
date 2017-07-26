@@ -3,11 +3,11 @@ define(['angular'], function (angular) {
 
     /**
      * @ngdoc directive
-     * @name issueApp.directive:paging
+     * @name resolutionApp.directive:paging
      * @description
      * # paging
      */
-    angular.module('issueApp.directives.Paging', [])
+    angular.module('resolutionApp.directives.Paging', [])
         .directive('paging', function () {
             /**
              * Assign default scope values from settings

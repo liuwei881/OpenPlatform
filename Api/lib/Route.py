@@ -63,8 +63,10 @@ class PortalModel(Basebase):
 
 class IssueModel(Basebase):
     pass
-# return session.query(cls).filter(cls.pk.in_(list)).all()
 
+
+class ResolutionModel(Basebase):
+    pass
 
 with open(os.path.join(os.path.dirname(__file__), 'config.yaml'), 'r') as f:
     yaml = load(f)
@@ -78,14 +80,12 @@ class RoutingSession(Session):
     def get_bind(self, mapper=None, clause=None):
         if mapper and issubclass(mapper.class_, VmWareModel):
             return engines['vmware']
-        # elif mapper and issubclass(mapper.class_, KvmModel):
-        #     return engines['vmware']
         elif mapper and issubclass(mapper.class_, PortalModel):
             return engines['portal']
         elif mapper and issubclass(mapper.class_, IssueModel):
             return engines['issue']
-        # elif mapper and issubclass(mapper.class_, Basebase):
-        #     return engines['base']
+        elif mapper and issubclass(mapper.class_, Basebase):
+             return engines['resolution']
         else:
             return engines[
                 random.choice(['base'])

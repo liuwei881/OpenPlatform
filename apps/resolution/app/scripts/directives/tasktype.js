@@ -3,11 +3,11 @@ define(['angular'], function (angular) {
 
   /**
    * @ngdoc directive
-   * @name issueApp.directive:taskType
+   * @name resolutionApp.directive:taskType
    * @description
    * # taskType
    */
-  angular.module('issueApp.directives.TaskType', [])
+  angular.module('resolutionApp.directives.TaskType', [])
     .directive('taskType', function () {
       return {
         restrict: 'E',

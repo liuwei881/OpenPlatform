@@ -2,4 +2,5 @@ engines:
   {'vmware':"mysql+pymysql://root:123456@127.0.0.1/virmath?charset=utf8",
    'base':"mysql+pymysql://root:123456@127.0.0.1/virmath?charset=utf8",
    'portal':"mysql+pymysql://root:123456@127.0.0.1/portal?charset=utf8",
-   'issue':"mysql+pymysql://root:123456@127.0.0.1/ngissue?charset=utf8"}
+   'issue':"mysql+pymysql://root:123456@127.0.0.1/ngissue?charset=utf8",
+   'resolution':"mysql+pymysql://root:123456@127.0.0.1/resolution?charset=utf8"}

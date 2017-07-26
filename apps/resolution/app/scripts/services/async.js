@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
   /**
    * @ngdoc service
-   * @name issueApp.Async
+   * @name resolutionApp.Async
    * @description
    * # Async
-   * Service in the issueApp.
+   * Service in the resolutionApp.
    */
-  angular.module('issueApp.services.Async', [])
+  angular.module('resolutionApp.services.Async', [])
 	.service('Async', function ($http) {
 	// AngularJS will instantiate a singleton by calling "new" on this function
 	    function get(url, params){

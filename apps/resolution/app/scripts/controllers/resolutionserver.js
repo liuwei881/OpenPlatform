@@ -3,13 +3,13 @@ define(['angular'], function (angular) {
 
   /**
    * @ngdoc function
-   * @name issueApp.controller:ImageServerCtrl
+   * @name resolutionApp.controller:ImageServerCtrl
    * @description
    * # ImageServerCtrl
-   * Controller of the issueApp
+   * Controller of the resolutionApp
    */
-  angular.module('issueApp.controllers.IssueServerCtrl', ['ui.bootstrap'])
-    .controller('IssueServerCtrl', function ($scope, $state, $uibModal,Async,Sync) {
+  angular.module('resolutionApp.controllers.resolutionServerCtrl', ['ui.bootstrap'])
+    .controller('resolutionServerCtrl', function ($scope, $state, $uibModal,Async,Sync) {
       this.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
@@ -21,7 +21,7 @@ define(['angular'], function (angular) {
         $scope.page = 1;
         $scope.searchKey = '';
         $scope.initPage = function(searchKey){
-            Async.get('/api/v2/issue',{page: $scope.page, pageSize: $scope.pageSize, searchKey:searchKey}).
+            Async.get('/api/v2/resolution',{page: $scope.page, pageSize: $scope.pageSize, searchKey:searchKey}).
                 success(function (data) {
                     $scope.searchKey = searchKey;
                     $scope.total = data.total;
@@ -50,7 +50,7 @@ define(['angular'], function (angular) {
                 }
             });
             modalInstance.save = function (item) {console.log(item);
-                Async.save('/api/v2/issue/',item).
+                Async.save('/api/v2/resolution/',item).
                     success(function (data) {
                         modalInstance.close();
                         $scope.initPage();
@@ -74,7 +74,7 @@ define(['angular'], function (angular) {
                 }
             });
            modalInstance.Delete = function (item) {
-                Async.Delete('/api/v2/issue/',item).
+                Async.Delete('/api/v2/resolution/',item).
                     success(function (data) {
                     console.log(item);
                         modalInstance.close();
@@ -89,7 +89,7 @@ define(['angular'], function (angular) {
         };
 
         $scope.pageAction = function (page) {
-            Async.get('/api/v2/issue/',{page: page})
+            Async.get('/api/v2/resolution/',{page: page})
                 .success(function (data) {
                     $scope.total = data.total;
                     $scope.rows = data.rows;
