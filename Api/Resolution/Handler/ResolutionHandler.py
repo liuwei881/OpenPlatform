@@ -6,13 +6,14 @@ from tornado import web,gen
 from Resolution.Entity.ResolutionModel import ResolutionServer
 import json
 from sqlalchemy import desc,or_,and_,engine
+from Resolution import tasks
 
 
 @urlmap(r'/resolution\/?([0-9]*)')
 class NgHandler(BaseHandler):
     @web.asynchronous
     def get(self, ident):
-        """获取发布信息"""
+        """获取DNS解析信息"""
         username = self.get_cookie("username")
         page = int(self.get_argument('page', 1))
         searchKey = self.get_argument('searchKey', None)
@@ -20,8 +21,8 @@ class NgHandler(BaseHandler):
         totalquery = self.db.query(ResolutionServer.Id)
         NgIssueObj = self.db.query(ResolutionServer)
         if searchKey:
-            totalquery = totalquery.filter(or_(ResolutionServer.DomainName.like('%%%s%%' % searchKey), ResolutionServer.Ip.like('%%%s%%' % searchKey)))
-            NgIssueObj = NgIssueObj.filter(or_(ResolutionServer.DomainName.like('%%%s%%' % searchKey), ResolutionServer.Ip.like('%%%s%%' % searchKey)))
+            totalquery = totalquery.filter(ResolutionServer.DomainName.like('%%%s%%' % searchKey))
+            NgIssueObj = NgIssueObj.filter(ResolutionServer.DomainName.like('%%%s%%' % searchKey))
         self.Result['total'] = totalquery.count()
         serverTask = NgIssueObj.order_by(desc(ResolutionServer.Id)).limit(pagesize).offset((page - 1) * pagesize).all()
         self.Result['rows'] = list(map(lambda obj: obj.toDict(), serverTask))
@@ -30,20 +31,54 @@ class NgHandler(BaseHandler):
 
     @web.asynchronous
     def post(self, ident):
-        pass
+        """DNS解析操作"""
+        data = json.loads(self.request.body.decode("utf-8"))
+        objTask = ResolutionServer()
+        objTask.ZoneName = data['params'].get('ZoneName', None)
+        objTask.Name = data['params'].get('Name', None)
+        objTask.DomainName = objTask.Name + "." + objTask.ZoneName
+        objTask.RecordType = data['params'].get('RecordType', None)
+        objTask.RecordedValue = data['params'].get('RecordedValue', None)
+        objTask.Publisher = self.get_cookie("username")
+        self.db.add(objTask)
+        self.db.commit()
+        # ttl = 21600
+        tasks.resolution.delay(objTask.ZoneName, objTask.Name, 21600, objTask.RecordType, objTask.RecordedValue)
+        self.Result['rows'] = 1
+        self.Result['info'] = u'创建成功'
+        self.finish(self.Result)
 
     @web.asynchronous
     def put(self, ident):
-        pass
+        """修改DNS解析"""
+        data = json.loads(self.request.body.decode("utf-8"))
+        objTask = self.db.query(ResolutionServer).get(ident)
+        if ident and objTask:
+            objTask.ZoneName = data['params'].get('ZoneName', None)
+            objTask.Name = data['params'].get('Name', None)
+            objTask.DomainName = objTask.Name + "." + objTask.ZoneName
+            objTask.RecordType = data['params'].get('RecordType', None)
+            objTask.RecordedValue = data['params'].get('RecordedValue', None)
+            objTask.Publisher = self.get_cookie("username")
+            self.db.add(objTask)
+            self.db.commit()
+            # ttl = 21600
+            tasks.resolution_edit.delay(objTask.ZoneName, objTask.Name, 21600, objTask.RecordType, objTask.RecordedValue)
+            self.Result['rows'] = 1
+            self.Result['info'] = u'修改成功'
+        else:
+            self.Result['rows'] = 0
+            self.Result['info'] = u'修改失败'
+        self.finish(self.Result)
 
     @web.asynchronous
     def delete(self, ident):
-        """删除nginx及consul"""
-        # pro = self.db.query(IssueServer).filter(IssueServer.Id==ident).first()
-        # domainname = pro.DomainName.split(".")[0]
-        # tasks.issue_del.delay(domainname)
-        # self.db.query(IssueServer).filter(IssueServer.Id==ident).delete()
-        # self.db.commit()
-        # self.Result['info'] = u'删除虚拟机成功'
-        # self.finish(self.Result)
-        pass
+        """删除DNS解析"""
+        pro = self.db.query(ResolutionServer).filter(ResolutionServer.Id==ident).first()
+        name = pro.Name
+        zone = pro.ZoneName
+        tasks.resolution_del.delay(zone, name)
+        self.db.query(ResolutionServer).filter(ResolutionServer.Id==ident).delete()
+        self.db.commit()
+        self.Result['info'] = u'删除虚拟机成功'
+        self.finish(self.Result)

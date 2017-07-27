@@ -84,8 +84,8 @@ class RoutingSession(Session):
             return engines['portal']
         elif mapper and issubclass(mapper.class_, IssueModel):
             return engines['issue']
-        elif mapper and issubclass(mapper.class_, Basebase):
-             return engines['resolution']
+        elif mapper and issubclass(mapper.class_, ResolutionModel):
+            return engines['resolution']
         else:
             return engines[
                 random.choice(['base'])

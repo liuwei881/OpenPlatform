@@ -12,6 +12,7 @@ class ResolutionServer(BaseModel, ResolutionModel):
 
     Id = Column('fi_id', Integer, primary_key=True)
     ZoneName = Column('fs_zone_name', String(50))
+    Name = Column('fs_name', String(50))
     DomainName = Column('fs_domain_name', String(50))
     RecordType = Column('fs_record_type', String(20))
     RecordedValue = Column('fs_record_value', String(50))
@@ -22,6 +23,7 @@ class ResolutionServer(BaseModel, ResolutionModel):
         return {
             'Id': self.Id,
             'ZoneName': self.ZoneName,
+            'Name': self.Name,
             'DomainName': self.DomainName,
             'RecordType': self.RecordType,
             'RecordedValue': self.RecordedValue,
