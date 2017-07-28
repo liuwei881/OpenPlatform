@@ -80,5 +80,5 @@ class NgHandler(BaseHandler):
         tasks.resolution_del.delay(zone, name)
         self.db.query(ResolutionServer).filter(ResolutionServer.Id==ident).delete()
         self.db.commit()
-        self.Result['info'] = u'删除虚拟机成功'
+        self.Result['info'] = u'删除DNS解析成功'
         self.finish(self.Result)

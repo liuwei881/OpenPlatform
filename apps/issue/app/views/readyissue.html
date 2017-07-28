@@ -1,0 +1,156 @@
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-cogs"></i>预生产项目构建
+        </div>
+        <div class="tools">
+            <a class="glyphicon glyphicon-plus" href="javascript:;">
+            </a>
+            <button type="button" class="btn red-haze btn-sm" ng-click="Create();">新建项目
+            </button>
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <label>Filter:
+                    <input type="search" class="form-control input-large input-inline" placeholder="域名或端口" ng-model='searchKey'>
+                </label>
+                <a href="javascript:void(0);" ng-click="Search(searchKey)" class="btn btn-sm btn-primary">搜索</a>
+                <a href="javascript:void(0);" ng-click="Search('')" class="btn btn-sm btn-primary">重置</a>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>项目域名</th>
+                <th>项目端口</th>
+                <th>健康检查</th>
+                <th>创建人</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+
+            <tr ng-repeat="o in rows">
+                <td>{{ o.DomainName }}</td>
+                <td>{{ o.Port }}</td>
+                <td>{{ o.HealthExam }}</td>
+                <td>{{ o.Publisher }}</td>
+                <td>{{ o.CreateTime }}</td>
+                <td>
+                    <div class="btn-group" ng-if="username=='admin'">
+                       <button type="button" class="btn btn-primary btn-sm" ng-click="Delete($index)">删除</button>
+                    </div>
+                    <div class="btn-group">
+                        <a href="http://{{o.DomainName}}{{o.HealthExam}}" target="_blank">
+                       <button type="button" class="btn btn-primary btn-sm">测试访问</button></a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <paging
+                class="small"
+                page="currentPage"
+                page-size="pageSize"
+                total="total"
+                adjacent="{{adjacent}}"
+                dots="{{dots}}"
+                scroll-top="{{scrollTop}}"
+                hide-if-empty="{{hideIfEmpty}}"
+                ul-class="{{ulClass}}"
+                active-class="{{activeClass}}"
+                disabled-class="{{disabledClass}}"
+                show-prev-next="{{showPrevNext}}"
+                paging-action="pageAction( page )">
+        </paging>
+    </div>
+</div>
+
+<script type="text/ng-template" id="readyadd.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form" name="createForm">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">域名前缀
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text"
+                                       class="form-control input-inline input-big" required placeholder="pd0030-open-edu"
+                                       ng-model="item.DomainName">
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">端口
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-md-4">
+                                <input type="number"
+                                       class="form-control input-inline input-big" required placeholder="port"
+                                       ng-model="item.Port">
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">健康检查页面
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="text"
+                                       class="form-control input-inline input-big" required placeholder="/dnotdelet/mom.html"
+                                       ng-model="item.HealthExam">
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="Save()" ng-disabled="!createForm.$valid">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="readydelete.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                           确定要删除{{ item.DomainName }}项目？
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="Delete()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>

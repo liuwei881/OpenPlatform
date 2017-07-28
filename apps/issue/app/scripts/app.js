@@ -1,5 +1,5 @@
 /*jshint unused: vars */
-define(['angular', 'controllers/main', 'controllers/about', 'directives/paging', 'controllers/login', 'controllers/header', 'controllers/sidebar', 'controllers/pagehead', 'controllers/footer', 'controllers/dashboard', 'services/httpinterceptor', 'controllers/modalinstance', 'controllers/issueserver', 'services/async', 'services/sync']/*deps*/, function (angular, MainCtrl, AboutCtrl, PagingDirective, LoginCtrl, HeaderCtrl, SidebarCtrl, PageHeadCtrl, FooterCtrl, DashboardCtrl, PhysicalCtrl, HttpInterceptorFactory, PhysicalService,  ModalinstanceCtrl, IssueServerCtrl)/*invoke*/ {
+define(['angular', 'controllers/main', 'controllers/about', 'directives/paging', 'controllers/login', 'controllers/header', 'controllers/sidebar', 'controllers/pagehead', 'controllers/footer', 'controllers/dashboard', 'services/httpinterceptor', 'controllers/modalinstance', 'controllers/issueserver', 'controllers/readyissueserver', 'services/async', 'services/sync']/*deps*/, function (angular, MainCtrl, AboutCtrl, PagingDirective, LoginCtrl, HeaderCtrl, SidebarCtrl, PageHeadCtrl, FooterCtrl, DashboardCtrl, PhysicalCtrl, HttpInterceptorFactory, PhysicalService,  ModalinstanceCtrl, IssueServerCtrl, ReadyIssueServerCtrl)/*invoke*/ {
     'use strict';
 
     /**
@@ -23,6 +23,7 @@ define(['angular', 'controllers/main', 'controllers/about', 'directives/paging',
             'issueApp.services.HttpInterceptor',
             'issueApp.controllers.ModalInstanceCtrl',
             'issueApp.controllers.IssueServerCtrl',
+            'issueApp.controllers.ReadyIssueServerCtrl',
             'issueApp.services.Async',
             'issueApp.services.Sync',
 /*angJSDeps*/
@@ -49,7 +50,14 @@ define(['angular', 'controllers/main', 'controllers/about', 'directives/paging',
                     url: 'issue',
                     templateUrl: 'views/issue.html',
                     controller: 'IssueServerCtrl',
-                    nav: '发布列表',
+                    nav: '生产发布列表',
+                    needRequest: true
+                })
+                .state('dashboard.readyissue', {
+                    url: 'readyissue',
+                    templateUrl: 'views/readyissue.html',
+                    controller: 'ReadyIssueServerCtrl',
+                    nav: '预生产发布列表',
                     needRequest: true
                 })
                 .state('login',{

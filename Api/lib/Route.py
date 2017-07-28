@@ -65,6 +65,10 @@ class IssueModel(Basebase):
     pass
 
 
+class ReadyIssueModel(Basebase):
+    pass
+
+
 class ResolutionModel(Basebase):
     pass
 
@@ -84,6 +88,8 @@ class RoutingSession(Session):
             return engines['portal']
         elif mapper and issubclass(mapper.class_, IssueModel):
             return engines['issue']
+        elif mapper and issubclass(mapper.class_, ReadyIssueModel):
+            return engines['readyissue']
         elif mapper and issubclass(mapper.class_, ResolutionModel):
             return engines['resolution']
         else:

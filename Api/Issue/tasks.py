@@ -18,6 +18,8 @@ celery.conf.update(
     CELERY_ROUTES = {
             'tasks.nginx_issue': {'queue':'issue'},
             'tasks.issue_del': {'queue':'issue'},
+            'tasks.ready_issue': {'queue':'issue'},
+            'tasks.ready_issue_del': {'queue':'issue'}
     })
 
 
@@ -39,3 +41,23 @@ def issue_del(domainname):
     get_result('cmd.run',
                '/usr/bin/python2.7 /data/salt/consul_nginx_del.py {0}'.format(domainname), tgt='vmlin0520.open.com.cn')
     return "del {0} is finish".format(domainname)
+
+
+@celery.task(name='tasks.ready_issue')
+def ready_issue(name, port, domainname, healthexam):
+    """预生产发布nginx及consul"""
+    get_result('cmd.run',
+               'cp /data/salt/web_pre.json /data/salt/json_back/web_pre.json.{0}'.format(
+                   datetime.datetime.now().strftime('%Y-%m-%d_%H:%M')), tgt="vmlin0520.open.com.cn")
+    get_result('cmd.run',
+               '/usr/bin/python2.7 /data/salt/consul_nginx_pre.py {0} {1} {2} {3}'.format(
+                   name, port, domainname, healthexam), tgt='vmlin0520.open.com.cn')
+    return "issue {0} is finish".format(domainname)
+
+
+@celery.task(name='tasks.ready_issue_del')
+def ready_issue_del(domainname):
+    """删除预生产nginx及consul-template配置"""
+    get_result('cmd.run',
+               '/usr/bin/python2.7 /data/salt/consul_nginx_del_pre.py {0}'.format(domainname), tgt='vmlin0520.open.com.cn')
+    return "issue {0} is finish".format(domainname)
