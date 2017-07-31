@@ -85,8 +85,14 @@
                             <div class="col-md-4">
                                 <input type="text"
                                        class="form-control input-inline input-big" required placeholder="pd0030-open-edu"
-                                       ng-model="item.DomainName">
+                                       ng-model="item.DomainName"
+                                       ng-pattern="/^pd[0-9]{1,4}\-[a-z]{1,10}\-[a-z]{1,10}$/"
+                                       name="domainname">
                                 <span class="help-inline"></span>
+                            </div>
+                            <div class="col-sm-offset-4 col-md-10" ng-show="createForm.domainname.$invalid && createForm.domainname.$dirty">
+                                <span ng-show="createForm.domainname.$error.pattern" style="color:red">格式为pd0030-open-edu</span>
+                                <span ng-show="createForm.domainname.$error.required" style="color:red">此处不能为空</span>
                             </div>
                         </div>
                     </div>
@@ -99,7 +105,7 @@
                             <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
                                 <input type="number"
-                                       class="form-control input-inline input-big" required placeholder="port"
+                                       class="form-control input-inline input-big" min="0" max="65534" required placeholder="port"
                                        ng-model="item.Port">
                                 <span class="help-inline"></span>
                             </div>
