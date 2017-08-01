@@ -105,9 +105,16 @@
                             <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
                                 <input type="number"
-                                       class="form-control input-inline input-big" min="0" max="65534" required placeholder="port"
-                                       ng-model="item.Port">
+                                       class="form-control input-inline input-big"
+                                       min="0"
+                                       max="65534"
+                                       required placeholder="port"
+                                       ng-model="item.Port"
+                                       name="port">
                                 <span class="help-inline"></span>
+                            </div>
+                            <div class="col-sm-offset-4 col-md-10" ng-show="createForm.port.$invalid && createForm.port.$dirty">
+                                <span ng-show="createForm.port.$error.max" style="color:red">端口范围在0-65534之间</span>
                             </div>
                         </div>
                     </div>
@@ -121,8 +128,13 @@
                             <div class="col-sm-4">
                                 <input type="text"
                                        class="form-control input-inline input-big" required placeholder="/dnotdelet/mom.html"
-                                       ng-model="item.HealthExam">
+                                       ng-model="item.HealthExam"
+                                       name="healthexam"
+                                       ng-pattern="/^\//">
                                 <span class="help-inline"></span>
+                                <div class="col-sm-offset-4 col-md-10" ng-show="createForm.healthexam.$invalid && createForm.healthexam.$dirty">
+                                <span ng-show="createForm.healthexam.$error.pattern" style="color:red">必须以"/"开头</span>
+                                </div>
                             </div>
                         </div>
                     </div>

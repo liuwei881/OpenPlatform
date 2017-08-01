@@ -99,8 +99,14 @@
                             <div class="col-md-4">
                                 <input type="text"
                                        class="form-control input-inline input-big" placeholder="www"
-                                       ng-model="item.Name" required>
+                                       ng-model="item.Name"
+                                       name="name"
+                                       ng-pattern="/\-{1}[a-z0-9]+$/"
+                                       required>
                                 <span class="help-inline"></span>
+                            </div>
+                            <div class="col-sm-offset-4 col-md-10" ng-show="createForm.name.$invalid && createForm.name.$dirty">
+                                <span ng-show="createForm.name.$error.pattern" style="color:red">域名符合"a-z,0-9"用"-"相连</span>
                             </div>
                         </div>
                     </div>
