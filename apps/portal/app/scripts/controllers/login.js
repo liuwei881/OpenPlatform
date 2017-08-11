@@ -13,7 +13,7 @@ define(['angular'], function (angular) {
 
             $scope.Login = function () {
                 if ($scope.username !== undefined > 0 && $scope.password !== undefined) {
-                    $http.get('/api/v2/right/login', {
+                    $http.get('/api/v2/login', {
                         params:{'user': $scope.username, 'password': $scope.password}
                     }).
                     success(function (data) {

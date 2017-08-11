@@ -39,10 +39,10 @@
                 <td>{{ o.Publisher }}</td>
                 <td>{{ o.CreateTime }}</td>
                 <td>
-                    <div class="btn-group" ng-if="username=='admin' || username=='liuwei'">
+                    <div class="btn-group" ng-if="username=='liuweia' || username=='liuzhizheng'">
                        <button type="button" class="btn btn-primary btn-sm" ng-click="Delete($index)">删除</button>
                     </div>
-                    <div class="btn-group" ng-if="username=='admin' || username=='liuwei'">
+                    <div class="btn-group" ng-if="username=='liuweia' || username=='liuzhizheng'">
                        <button type="button" class="btn btn-primary btn-sm" ng-click="Edit($index)">修改</button>
                     </div>
                 </td>
@@ -82,9 +82,9 @@
                             <label class="col-md-4 control-label">选择ZONE
                             <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
-                                <select class="form-control input-inline input-big" ng-model="item.ZoneName" required>
-                                    <option value="example.com">example.com</option>
-                                    <option value="test.com">test.com</option>
+                                <select class="form-control input-inline input-big"
+                                        ng-model="item.ZoneName" ng-options="s for s in title.ZoneList" required>
+                                    <option value="">--选择zone--</option>
                                 </select>
                                 <span class="help-inline"></span>
                             </div>
@@ -101,7 +101,7 @@
                                        class="form-control input-inline input-big" placeholder="www"
                                        ng-model="item.Name"
                                        name="name"
-                                       ng-pattern="/\-{0,1}[a-z0-9]+$/"
+                                       ng-pattern="/[\*]?[\-]?[\*a-z0-9]+$/"
                                        required>
                                 <span class="help-inline"></span>
                             </div>
@@ -118,12 +118,9 @@
                             <label class="col-md-4 control-label">记录类型
                             <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
-                                <select class="form-control input-inline input-big" ng-model="item.RecordType" required>
-                                    <option value="A">A</option>
-                                    <option value="CNAME">CNAME</option>
-                                    <option value="TXT">TXT</option>
-                                    <option value="MX">MX</option>
-                                    <option value="NS">NS</option>
+                                <select class="form-control input-inline input-big"
+                                        ng-model="item.RecordType" ng-options="s for s in title.RecordType" required>
+                                    <option value="">--选择记录类型--</option>
                                 </select>
                                 <span class="help-inline"></span>
                             </div>
@@ -140,7 +137,7 @@
                                 <input type="text"
                                        class="form-control input-inline input-big" required
                                        ng-model="item.RecordedValue">
-                                <span class="help-inline"></span>
+                                <span style="color:red">记录类型为CNAME时必须以"."结尾</span>
                             </div>
                         </div>
                     </div>

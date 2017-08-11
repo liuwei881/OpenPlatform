@@ -36,6 +36,8 @@ class NgHandler(BaseHandler):
         objTask = ResolutionServer()
         objTask.ZoneName = data['params'].get('ZoneName', None)
         objTask.Name = data['params'].get('Name', None)
+        if "*" in objTask.Name:
+            objTask.Name = "*"
         objTask.DomainName = objTask.Name + "." + objTask.ZoneName
         objTask.RecordType = data['params'].get('RecordType', None)
         objTask.RecordedValue = data['params'].get('RecordedValue', None)
@@ -44,6 +46,8 @@ class NgHandler(BaseHandler):
         self.db.commit()
         # ttl = 21600
         tasks.resolution.delay(objTask.ZoneName, objTask.Name, 21600, objTask.RecordType, objTask.RecordedValue)
+        if objTask.Name == 'www':
+            tasks.resolution.delay(objTask.ZoneName, "@", 21600, objTask.RecordType, objTask.RecordedValue)
         self.Result['rows'] = 1
         self.Result['info'] = u'创建成功'
         self.finish(self.Result)
@@ -56,6 +60,8 @@ class NgHandler(BaseHandler):
         if ident and objTask:
             objTask.ZoneName = data['params'].get('ZoneName', None)
             objTask.Name = data['params'].get('Name', None)
+            if "*" in objTask.Name:
+                objTask.Name = "*"
             objTask.DomainName = objTask.Name + "." + objTask.ZoneName
             objTask.RecordType = data['params'].get('RecordType', None)
             objTask.RecordedValue = data['params'].get('RecordedValue', None)
@@ -63,7 +69,11 @@ class NgHandler(BaseHandler):
             self.db.add(objTask)
             self.db.commit()
             # ttl = 21600
-            tasks.resolution_edit.delay(objTask.ZoneName, objTask.Name, 21600, objTask.RecordType, objTask.RecordedValue)
+            tasks.resolution_edit.delay(objTask.ZoneName, objTask.Name, 21600, objTask.RecordType,
+                                        objTask.RecordedValue)
+            if objTask.Name == 'www':
+                tasks.resolution_edit.delay(objTask.ZoneName, "@", 21600, objTask.RecordType,
+                                            objTask.RecordedValue)
             self.Result['rows'] = 1
             self.Result['info'] = u'修改成功'
         else:
@@ -74,11 +84,13 @@ class NgHandler(BaseHandler):
     @web.asynchronous
     def delete(self, ident):
         """删除DNS解析"""
-        pro = self.db.query(ResolutionServer).filter(ResolutionServer.Id==ident).first()
+        pro = self.db.query(ResolutionServer).filter(ResolutionServer.Id == ident).first()
         name = pro.Name
         zone = pro.ZoneName
-        tasks.resolution_del.delay(zone, name)
-        self.db.query(ResolutionServer).filter(ResolutionServer.Id==ident).delete()
+        _type = pro.RecordType
+        value = pro.RecordedValue
+        tasks.resolution_del.delay(zone, name, _type, value)
+        self.db.query(ResolutionServer).filter(ResolutionServer.Id == ident).delete()
         self.db.commit()
         self.Result['info'] = u'删除DNS解析成功'
         self.finish(self.Result)

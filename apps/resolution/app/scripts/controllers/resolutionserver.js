@@ -35,6 +35,8 @@ define(['angular'], function (angular) {
         }
 
         $scope.Create = function () {
+            var allZone = JSON.parse(Sync.fetch('/api/v2/zone/'));
+            var recordtype = JSON.parse(Sync.fetch('/api/v2/recordtype/'));
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'add.html',
@@ -45,7 +47,7 @@ define(['angular'], function (angular) {
                         return {};
                     },
                     title: function () {
-                        return {'title':'新建解析'};
+                        return {'title':'新建解析', 'ZoneList':allZone, 'RecordType':recordtype};
                     }
                 }
             });
