@@ -166,9 +166,9 @@
                             <label class="col-md-4 control-label">选择ZONE
                             <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
-                                <select class="form-control input-inline input-big" ng-model="item.ZoneName" required>
-                                    <option value="example.com">example.com</option>
-                                    <option value="test.com">test.com</option>
+                                <select class="form-control input-inline input-big"
+                                        ng-model="item.ZoneName" ng-options="s for s in title.ZoneList" required>
+                                    <option value="">--选择zone--</option>
                                 </select>
                                 <span class="help-inline"></span>
                             </div>
@@ -196,11 +196,9 @@
                             <label class="col-md-4 control-label">记录类型
                             <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
-                                <select class="form-control input-inline input-big" ng-model="item.RecordType" required>
-                                    <option value="A">A</option>
-                                    <option value="CNAME">CNAME</option>
-                                    <option value="MX">MX</option>
-                                    <option value="NS">NS</option>
+                                <select class="form-control input-inline input-big"
+                                        ng-model="item.RecordType" ng-options="s for s in title.RecordType" required>
+                                    <option value="">--选择记录类型--</option>
                                 </select>
                                 <span class="help-inline"></span>
                             </div>

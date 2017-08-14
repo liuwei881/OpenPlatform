@@ -1,6 +1,6 @@
 /*jshint unused: vars */
 
-define(['angular', 'controllers/main', 'directives/paging', 'controllers/login', 'controllers/header', 'controllers/sidebar', 'controllers/pagehead', 'controllers/footer', 'services/httpinterceptor', 'controllers/modalinstance', 'services/async', 'directives/ngspinnerbar']/*deps*/, function (angular, MainCtrl, PagingDirective, LoginCtrl, HeaderCtrl, SidebarCtrl, PageHeadCtrl, FooterCtrl, HttpInterceptorFactory, ModalinstanceCtrl, Syncservice, NgSpinnerBarDirective)/*invoke*/ {
+define(['angular', 'controllers/main', 'directives/paging', 'controllers/login', 'controllers/header', 'controllers/sidebar', 'controllers/pagehead', 'controllers/footer', 'services/httpinterceptor', 'controllers/modalinstance', 'services/async', 'services/encrypt', 'directives/ngspinnerbar']/*deps*/, function (angular, MainCtrl, PagingDirective, LoginCtrl, HeaderCtrl, SidebarCtrl, PageHeadCtrl, FooterCtrl, HttpInterceptorFactory, ModalinstanceCtrl, Syncservice, Encryptservice, NgSpinnerBarDirective)/*invoke*/ {
 
   'use strict';
 
@@ -23,6 +23,7 @@ define(['angular', 'controllers/main', 'directives/paging', 'controllers/login',
        'portalApp.services.HttpInterceptor',
        'portalApp.controllers.ModalInstanceCtrl',
        'portalApp.services.Async',
+       'portalApp.services.Encrypt',
        'portalApp.directives.NgSpinnerBar',
        /*angJSDeps*/'ngCookies','ngResource','ngSanitize','ui.router'])
     .config(function ($stateProvider, $urlRouterProvider) {

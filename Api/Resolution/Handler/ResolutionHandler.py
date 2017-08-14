@@ -7,6 +7,7 @@ from Resolution.Entity.ResolutionModel import ResolutionServer
 import json
 from sqlalchemy import desc,or_,and_,engine
 from Resolution import tasks
+import datetime
 
 
 @urlmap(r'/resolution\/?([0-9]*)')
@@ -42,12 +43,19 @@ class NgHandler(BaseHandler):
         objTask.RecordType = data['params'].get('RecordType', None)
         objTask.RecordedValue = data['params'].get('RecordedValue', None)
         objTask.Publisher = self.get_cookie("username")
+        objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         self.db.add(objTask)
         self.db.commit()
         # ttl = 21600
-        tasks.resolution.delay(objTask.ZoneName, objTask.Name, 21600, objTask.RecordType, objTask.RecordedValue)
+        tasks.resolution.delay('10.96.5.96', objTask.ZoneName, objTask.Name, 21600, objTask.RecordType,
+                               objTask.RecordedValue, 'add')
+        tasks.resolution.delay('10.96.5.91', objTask.ZoneName, objTask.Name, 21600, objTask.RecordType,
+                               objTask.RecordedValue, 'add')
         if objTask.Name == 'www':
-            tasks.resolution.delay(objTask.ZoneName, "@", 21600, objTask.RecordType, objTask.RecordedValue)
+            tasks.resolution.delay('10.96.5.96', objTask.ZoneName, "@", 21600, objTask.RecordType,
+                                   objTask.RecordedValue, 'add')
+            tasks.resolution.delay('10.96.5.91', objTask.ZoneName, "@", 21600, objTask.RecordType,
+                                   objTask.RecordedValue, 'add')
         self.Result['rows'] = 1
         self.Result['info'] = u'创建成功'
         self.finish(self.Result)
@@ -66,14 +74,19 @@ class NgHandler(BaseHandler):
             objTask.RecordType = data['params'].get('RecordType', None)
             objTask.RecordedValue = data['params'].get('RecordedValue', None)
             objTask.Publisher = self.get_cookie("username")
+            objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
             self.db.add(objTask)
             self.db.commit()
             # ttl = 21600
-            tasks.resolution_edit.delay(objTask.ZoneName, objTask.Name, 21600, objTask.RecordType,
-                                        objTask.RecordedValue)
+            tasks.resolution.delay('10.96.5.96', objTask.ZoneName, objTask.Name, 21600, objTask.RecordType,
+                                   objTask.RecordedValue, 'change')
+            tasks.resolution.delay('10.96.5.91', objTask.ZoneName, objTask.Name, 21600, objTask.RecordType,
+                                   objTask.RecordedValue, 'change')
             if objTask.Name == 'www':
-                tasks.resolution_edit.delay(objTask.ZoneName, "@", 21600, objTask.RecordType,
-                                            objTask.RecordedValue)
+                tasks.resolution.delay('10.96.5.96', objTask.ZoneName, "@", 21600, objTask.RecordType,
+                                       objTask.RecordedValue, 'change')
+                tasks.resolution.delay('10.96.5.91', objTask.ZoneName, "@", 21600, objTask.RecordType,
+                                       objTask.RecordedValue, 'change')
             self.Result['rows'] = 1
             self.Result['info'] = u'修改成功'
         else:
@@ -85,11 +98,8 @@ class NgHandler(BaseHandler):
     def delete(self, ident):
         """删除DNS解析"""
         pro = self.db.query(ResolutionServer).filter(ResolutionServer.Id == ident).first()
-        name = pro.Name
-        zone = pro.ZoneName
-        _type = pro.RecordType
-        value = pro.RecordedValue
-        tasks.resolution_del.delay(zone, name, _type, value)
+        tasks.resolution.delay('10.96.5.96', pro.ZoneName, pro.Name, 21600, pro.RecordType, pro.RecordedValue, 'delete')
+        tasks.resolution.delay('10.96.5.91', pro.ZoneName, pro.Name, 21600, pro.RecordType, pro.RecordedValue, 'delete')
         self.db.query(ResolutionServer).filter(ResolutionServer.Id == ident).delete()
         self.db.commit()
         self.Result['info'] = u'删除DNS解析成功'

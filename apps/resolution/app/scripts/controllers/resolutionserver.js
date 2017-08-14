@@ -86,6 +86,8 @@ define(['angular'], function (angular) {
         };
 
         $scope.Edit = function (i) {
+            var allZone = JSON.parse(Sync.fetch('/api/v2/zone/'));
+            var recordtype = JSON.parse(Sync.fetch('/api/v2/recordtype/'));
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'edit.html',
@@ -96,7 +98,7 @@ define(['angular'], function (angular) {
                         return $scope.rows[i];
                     },
                     title: function () {
-                        return {'title':'修改解析'};
+                        return {'title':'修改解析', 'ZoneList':allZone, 'RecordType':recordtype};
                     }
                 }
             });
