@@ -117,9 +117,10 @@ define(['angular'], function (angular) {
             $scope.initPage(searchKey);
         };
 
-        $scope.pageAction = function (page) {
-            Async.get('/api/v2/resolution/',{page: page})
+        $scope.pageAction = function (page, searchKey) {
+            Async.get('/api/v2/resolution/',{page: page, pageSize: $scope.pageSize, searchKey:searchKey})
                 .success(function (data) {
+                    $scope.searchKey = searchKey;
                     $scope.total = data.total;
                     $scope.rows = data.rows;
                 });
