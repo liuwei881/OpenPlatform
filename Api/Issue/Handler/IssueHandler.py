@@ -7,6 +7,7 @@ from Issue.Entity.IssueModel import IssueServer
 import json
 from sqlalchemy import desc,or_,and_,engine
 from Issue import tasks
+import datetime
 
 @urlmap(r'/issue\/?([0-9]*)')
 class NgHandler(BaseHandler):
@@ -38,9 +39,11 @@ class NgHandler(BaseHandler):
         objTask.HealthExam = data['params'].get('HealthExam', None)
         objTask.Port = int(data['params'].get('Port', None))
         objTask.Publisher = self.get_cookie("username")
+        objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         self.db.add(objTask)
         self.db.commit()
         tasks.nginx_issue.delay(domainname, objTask.Port, objTask.HealthExam)
+        tasks.dns_resolution.delay('add', domainname, 7200, 'A', '10.100.138.112')
         self.Result['rows'] = 1
         self.Result['info'] = u'创建成功'
         self.finish(self.Result)
@@ -51,6 +54,7 @@ class NgHandler(BaseHandler):
         pro = self.db.query(IssueServer).filter(IssueServer.Id==ident).first()
         domainname = pro.DomainName.split(".")[0]
         tasks.issue_del.delay(domainname)
+        tasks.dns_resolution.delay('delete', domainname, 7200, 'A', '10.100.138.112')
         self.db.query(IssueServer).filter(IssueServer.Id==ident).delete()
         self.db.commit()
         self.Result['info'] = u'删除nginx及consul成功'

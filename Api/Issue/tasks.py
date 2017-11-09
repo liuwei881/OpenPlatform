@@ -3,6 +3,9 @@
 from celery import Celery, task
 import os
 import datetime
+import dns.tsigkeyring
+import dns.update
+import dns.query
 try:
     from salt_api import api_login, get_result
 except Exception as e:
@@ -15,11 +18,12 @@ celery.conf.update(
     CELERY_TASK_SERIALIZER='json',
     CELERY_ACCEPT_CONTENT=['json'],
     CELERY_RESULT_SERIALIZER='json',
-    CELERY_ROUTES = {
-            'tasks.nginx_issue': {'queue':'issue'},
-            'tasks.issue_del': {'queue':'issue'},
-            'tasks.ready_issue': {'queue':'issue'},
-            'tasks.ready_issue_del': {'queue':'issue'}
+    CELERY_ROUTES={
+        'tasks.nginx_issue': {'queue': 'issue'},
+        'tasks.issue_del': {'queue': 'issue'},
+        'tasks.ready_issue': {'queue': 'issue'},
+        'tasks.ready_issue_del': {'queue': 'issue'},
+        'tasks.dns_resolution': {'queue': 'issue'},
     })
 
 
@@ -61,3 +65,22 @@ def ready_issue_del(domainname):
     get_result('cmd.run',
                '/usr/bin/python2.7 /data/salt/consul_nginx_del_pre.py {0}'.format(domainname), tgt='vmlin0520.open.com.cn')
     return "issue {0} is finish".format(domainname)
+
+
+@celery.task(name='tasks.dns_resolution')
+def dns_resolution(action, name, ttl, _type, value):
+    """发布openkf.cn直接解析"""
+    keyring = dns.tsigkeyring.from_text({'other-key': 'WWFjaI4lkvXNkRAIExbFYA=='})
+    up = dns.update.Update('openkf.cn', keyring=keyring)
+    server = '10.100.14.219'
+    server2 = '10.100.132.16'
+    if action == 'add':
+        up.add(name, ttl, _type, value)
+        dns.query.tcp(up, server)
+        dns.query.tcp(up, server2)
+    elif action == 'delete':
+        up.delete(name, _type)
+        dns.query.tcp(up, server)
+        dns.query.tcp(up, server2)
+        return 'delete {0} to {1} is ok'.format(name, value)
+    return 'resolution {0} to {1} is ok'.format(name, value)

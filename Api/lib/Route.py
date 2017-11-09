@@ -97,5 +97,5 @@ class RoutingSession(Session):
                 random.choice(['base'])
             ]
 
-Session = sessionmaker(class_=RoutingSession,autocommit=False)
+Session = sessionmaker(class_=RoutingSession, autocommit=False)
 db_session = Session()
