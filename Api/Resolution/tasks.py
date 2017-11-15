@@ -9,8 +9,11 @@ from fabric.api import *
 import datetime
 
 
-celery = Celery("tasks", broker="amqp://")
+# celery = Celery("tasks", broker="amqp://")
+celery = Celery("tasks", broker="amqp://admin:open@2018@10.100.17.197:5672//")
 celery.conf.CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'amqp')
+
+
 celery.conf.update(
     CELERY_TASK_SERIALIZER='json',
     CELERY_ACCEPT_CONTENT=['json'],

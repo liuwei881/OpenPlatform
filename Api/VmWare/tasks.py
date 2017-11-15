@@ -17,8 +17,11 @@ requests.packages.urllib3.disable_warnings()
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
 context.verify_mode = ssl.CERT_NONE
 
-celery = Celery("tasks", broker="amqp://")
+#celery = Celery("tasks", broker="amqp://")
+celery = Celery("tasks", broker="amqp://admin:open@2018@10.100.17.197:5672//")
 celery.conf.CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'amqp')
+
+
 celery.conf.update(
     CELERY_TASK_SERIALIZER='json',
     CELERY_ACCEPT_CONTENT=['json'],
@@ -30,6 +33,7 @@ celery.conf.update(
             'tasks.reboot_vm': {'queue': 'vmware'},
             'tasks.migration_vm': {'queue': 'vmware'},
     })
+
 
 @celery.task(name='tasks.create_vm')
 def create_vm(
