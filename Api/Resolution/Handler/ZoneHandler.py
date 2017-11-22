@@ -13,5 +13,5 @@ class ZoneHandler(BaseHandler):
     def get(self):
         """获取ZONE信息"""
         zone = self.db.query(ZoneServer).all()
-        data = json.dumps([i.ZoneName for i in zone], indent=2)
+        data = json.dumps(sorted([i.ZoneName for i in zone]), indent=2)
         self.finish(data)

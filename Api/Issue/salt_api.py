@@ -31,10 +31,11 @@ def api_login():
 
 
 def get_result(cmd, arg, token=api_login(), tgt='*', tgt_type='glob'):
-    data = json.dumps([{"client":"local", "tgt":tgt, "fun":cmd,"arg":arg, 'tgt_type':tgt_type}])
-    header = {"Content-Type":"application/json", "Accept":"application/x-yaml", "X-Auth-Token":"{0}".format(token)}
+    data = json.dumps([{"client": "local", "tgt": tgt, "fun": cmd, "arg": arg, 'tgt_type': tgt_type}])
+    header = {"Content-Type":"application/json", "Accept": "application/x-yaml", "X-Auth-Token": "{0}".format(token)}
     request = requests.post(url=url, data=data, headers=header, verify=False)
     return request.text
+
 
 if __name__ == "__main__":
     print(get_result("cmd.run", "ls", tgt="rancher_group", tgt_type="nodegroup"))

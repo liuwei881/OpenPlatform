@@ -7,7 +7,7 @@ from Resolution.Entity.ResolutionModel import ResolutionServer
 import json
 from sqlalchemy import desc,or_,and_,engine
 from Resolution import tasks
-import datetime
+import datetime, time
 
 
 @urlmap(r'/resolution\/?([0-9]*)')
@@ -46,15 +46,11 @@ class NgHandler(BaseHandler):
         objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         self.db.add(objTask)
         self.db.commit()
-        # ttl = 21600
-        tasks.resolution.delay('10.96.5.96', objTask.ZoneName, objTask.Name, 21600, objTask.RecordType,
-                               objTask.RecordedValue, 'add')
-        tasks.resolution.delay('10.96.5.91', objTask.ZoneName, objTask.Name, 21600, objTask.RecordType,
+        # ttl = 3600
+        tasks.resolution.delay('10.96.140.61', objTask.ZoneName, objTask.Name, 3600, objTask.RecordType,
                                objTask.RecordedValue, 'add')
         if objTask.Name == 'www':
-            tasks.resolution.delay('10.96.5.96', objTask.ZoneName, "@", 21600, objTask.RecordType,
-                                   objTask.RecordedValue, 'add')
-            tasks.resolution.delay('10.96.5.91', objTask.ZoneName, "@", 21600, objTask.RecordType,
+            tasks.resolution.delay('10.96.140.61', objTask.ZoneName, "@", 3600, objTask.RecordType,
                                    objTask.RecordedValue, 'add')
         self.Result['rows'] = 1
         self.Result['info'] = u'创建成功'
@@ -64,42 +60,40 @@ class NgHandler(BaseHandler):
     def put(self, ident):
         """修改DNS解析"""
         data = json.loads(self.request.body.decode("utf-8"))
-        objTask = self.db.query(ResolutionServer).get(ident)
-        if ident and objTask:
-            objTask.ZoneName = data['params'].get('ZoneName', None)
-            objTask.Name = data['params'].get('Name', None)
-            if "*" in objTask.Name:
-                objTask.Name = "*"
-            objTask.DomainName = objTask.Name + "." + objTask.ZoneName
-            objTask.RecordType = data['params'].get('RecordType', None)
-            objTask.RecordedValue = data['params'].get('RecordedValue', None)
-            objTask.Publisher = self.get_cookie("username")
-            objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-            self.db.add(objTask)
-            self.db.commit()
-            # ttl = 21600
-            tasks.resolution.delay('10.96.5.96', objTask.ZoneName, objTask.Name, 21600, objTask.RecordType,
-                                   objTask.RecordedValue, 'change')
-            tasks.resolution.delay('10.96.5.91', objTask.ZoneName, objTask.Name, 21600, objTask.RecordType,
-                                   objTask.RecordedValue, 'change')
-            if objTask.Name == 'www':
-                tasks.resolution.delay('10.96.5.96', objTask.ZoneName, "@", 21600, objTask.RecordType,
-                                       objTask.RecordedValue, 'change')
-                tasks.resolution.delay('10.96.5.91', objTask.ZoneName, "@", 21600, objTask.RecordType,
-                                       objTask.RecordedValue, 'change')
-            self.Result['rows'] = 1
-            self.Result['info'] = u'修改成功'
-        else:
-            self.Result['rows'] = 0
-            self.Result['info'] = u'修改失败'
+        objTaskOld = self.db.query(ResolutionServer).get(ident)
+        # put 删除原解析
+        tasks.resolution.delay('10.96.140.61', objTaskOld.ZoneName, objTaskOld.Name, 3600,
+                               objTaskOld.RecordType, objTaskOld.RecordedValue, 'delete')
+        time.sleep(1)
+        self.db.query(ResolutionServer).filter(ResolutionServer.Id == ident).delete()
+        objTask = ResolutionServer()
+        objTask.ZoneName = data['params'].get('ZoneName', None)
+        objTask.Name = data['params'].get('Name', None)
+        if "*" in objTask.Name:
+            objTask.Name = "*"
+        objTask.DomainName = objTask.Name + "." + objTask.ZoneName
+        objTask.RecordType = data['params'].get('RecordType', None)
+        objTask.RecordedValue = data['params'].get('RecordedValue', None)
+        objTask.Publisher = self.get_cookie("username")
+        objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
+        self.db.add(objTask)
+        # ttl = 3600
+        tasks.resolution.delay('10.96.140.61', objTask.ZoneName, objTask.Name, 3600, objTask.RecordType,
+                               objTask.RecordedValue, 'add')
+        if objTask.Name == 'www':
+            tasks.resolution.delay('10.96.140.61', objTask.ZoneName, "@", 3600, objTask.RecordType,
+                                   objTask.RecordedValue, 'add')
+        self.db.commit()
+        self.Result['rows'] = 1
+        self.Result['info'] = u'修改成功'
         self.finish(self.Result)
 
     @web.asynchronous
     def delete(self, ident):
         """删除DNS解析"""
         pro = self.db.query(ResolutionServer).filter(ResolutionServer.Id == ident).first()
-        tasks.resolution.delay('10.96.5.96', pro.ZoneName, pro.Name, 21600, pro.RecordType, pro.RecordedValue, 'delete')
-        tasks.resolution.delay('10.96.5.91', pro.ZoneName, pro.Name, 21600, pro.RecordType, pro.RecordedValue, 'delete')
+        tasks.resolution.delay('10.96.140.61', pro.ZoneName, pro.Name, 3600,
+                               pro.RecordType, pro.RecordedValue, 'delete')
         self.db.query(ResolutionServer).filter(ResolutionServer.Id == ident).delete()
         self.db.commit()
         self.Result['info'] = u'删除DNS解析成功'

@@ -14,14 +14,14 @@ class LoginHandler(BaseHandler):
     def get(self):
         account = self.get_argument('user', '')
         password = self.get_argument('password', '')
-        try:
-            Connection(Server('10.96.140.61', get_info=ALL), user='open\{}'.format(account),
-                       password='{}'.format(password), auto_bind=True)
+        conn = Connection(Server('10.96.140.61', get_info=ALL), user='open\{}'.format(account),
+                          password='{}'.format(password), auto_bind=True)
+        if conn.bind():
             self.Result['info'] = u'登陆成功'
             self.Result['status'] = 200
             self.set_cookie('username', str(account), expires_days=0.5)
             self.set_secure_cookie('user', str(account), expires_days=0.5)
-        except Exception as e:
+        else:
             self.Result['info'] = u'登陆失败, 原因{}'.format(e)
             self.Result['status'] = 400
         self.finish(self.Result)
