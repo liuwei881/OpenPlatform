@@ -111,6 +111,23 @@ define(['angular'], function (angular) {
             };
         };
 
+        $scope.Test = function (i) {
+            var digtest = Sync.fetch('/api/v2/digtest/' + $scope.rows[i].Id);
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'test.html',
+                controller: 'ModalInstanceCtrl',
+                size: 'lg',
+                resolve: {
+                    item: function () {
+                        return $scope.rows[i];
+                    },
+                    title: function () {
+                        return {'title':'dig测试', 'digtest': digtest};
+                    }
+                }
+            });
+        };
 
         $scope.Search = function (searchKey) {
             $scope.initPage(searchKey);
