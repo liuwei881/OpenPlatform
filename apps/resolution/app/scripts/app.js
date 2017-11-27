@@ -40,7 +40,7 @@ define(['angular', 'controllers/main', 'controllers/about', 'directives/paging',
                     nav: 'DashHome'
                 })
                 .state('dashboard.home', {
-                    url: '/dashboard',
+                    url: 'dashboard',
                     templateUrl: 'views/dashboard.html',
                     controller: 'DashboardCtrl',
                     nav: 'DashBoard'

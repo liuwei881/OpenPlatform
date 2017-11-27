@@ -11,7 +11,7 @@ import datetime, time
 
 
 @urlmap(r'/resolution\/?([0-9]*)')
-class NgHandler(BaseHandler):
+class DnsHandler(BaseHandler):
     @web.asynchronous
     def get(self, ident):
         """获取DNS解析信息"""
@@ -20,12 +20,12 @@ class NgHandler(BaseHandler):
         searchKey = self.get_argument('searchKey', None)
         pagesize = int(self.get_argument('pagesize', self._PageSize))
         totalquery = self.db.query(ResolutionServer.Id)
-        NgIssueObj = self.db.query(ResolutionServer)
+        DnsIssueObj = self.db.query(ResolutionServer)
         if searchKey:
             totalquery = totalquery.filter(ResolutionServer.DomainName.like('%%%s%%' % searchKey))
-            NgIssueObj = NgIssueObj.filter(ResolutionServer.DomainName.like('%%%s%%' % searchKey))
+            DnsIssueObj = DnsIssueObj.filter(ResolutionServer.DomainName.like('%%%s%%' % searchKey))
         self.Result['total'] = totalquery.count()
-        serverTask = NgIssueObj.order_by(desc(ResolutionServer.Id)).limit(pagesize).offset((page - 1) * pagesize).all()
+        serverTask = DnsIssueObj.order_by(desc(ResolutionServer.Id)).limit(pagesize).offset((page - 1) * pagesize).all()
         self.Result['rows'] = list(map(lambda obj: obj.toDict(), serverTask))
         self.Result['username'] = username
         self.finish(self.Result)
@@ -97,4 +97,33 @@ class NgHandler(BaseHandler):
         self.db.query(ResolutionServer).filter(ResolutionServer.Id == ident).delete()
         self.db.commit()
         self.Result['info'] = u'删除DNS解析成功'
+        self.finish(self.Result)
+
+
+@urlmap(r'/getinfo/')
+class InfoHandler(BaseHandler):
+    @web.asynchronous
+    def get(self):
+        """获取DNS统计信息"""
+        result_record = []
+        Now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        Before = (datetime.datetime.now() - datetime.timedelta(days=5)).strftime("%Y-%m-%d %H:%M:%S")
+        totalquery = self.db.query(ResolutionServer)
+        datetimequery = totalquery.filter(and_(ResolutionServer.CreateTime < Now,
+                                               ResolutionServer.CreateTime > Before))
+        zone_list = [(k.CreateTime.strftime('%Y-%m-%d'), k.ZoneName) for k in datetimequery]
+        zone_list_only = sorted(set(zone_list))
+        zone_name = set([k.ZoneName for k in datetimequery])
+        for i in zone_name:
+            record_dict = {}
+            record_dict['name'] = i
+            record_dict['data'] = []
+            for j in zone_list_only:
+                if j[1] == i:
+                    record_dict['data'].append(zone_list.count(j))
+                else:
+                    record_dict['data'].append(0)
+            result_record.append(record_dict)
+        self.Result['datetime'] = list(map(lambda x: x[0], list(zone_list_only)))
+        self.Result['data'] = result_record
         self.finish(self.Result)

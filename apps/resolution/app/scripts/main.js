@@ -17,7 +17,9 @@ require.config({
         layout: '../../asserts/metronic/admin/layout/layout',
         'angular-resource': '../../asserts/angular-resource/angular-resource',
         'angular-bootstrap': '../../asserts/angular-bootstrap/ui-bootstrap-tpls',
-        'bootstrap-tpls': '../../asserts/angular-bootstrap/ui-bootstrap-tpls.min'
+        'bootstrap-tpls': '../../asserts/angular-bootstrap/ui-bootstrap-tpls.min',
+        highcharts: '../../bower_components/highcharts/highcharts',
+        'highcharts-more': '../../bower_components/highcharts/highcharts-more',
     },
     shim: {
         angular: {
@@ -104,7 +106,8 @@ require([
     'angular-animate',
     'angular-ui-router',
     'layout',
-    'angular-bootstrap'
+    'angular-bootstrap',
+    'highcharts',
 ], function (angular, app, ngCookies, ngSanitize, ngAnimate, uiRouter, layout, bootstrap) {
     'use strict';
     /* jshint ignore:start */
