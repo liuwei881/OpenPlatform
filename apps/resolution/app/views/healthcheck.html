@@ -1,0 +1,304 @@
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-cogs"></i>健康检查
+        </div>
+        <div class="tools">
+            <a class="glyphicon glyphicon-plus" href="javascript:;">
+            </a>
+            <button type="button" class="btn red-haze btn-sm" ng-click="Create();">新建健康检查
+            </button>
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <label>Filter:
+                    <input type="search" class="form-control input-large input-inline" placeholder="域名" ng-model='searchKey'>
+                </label>
+                <a href="javascript:void(0);" ng-click="Search(searchKey)" class="btn btn-sm btn-primary">搜索</a>
+                <a href="javascript:void(0);" ng-click="Search('')" class="btn btn-sm btn-primary">重置</a>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>域名</th>
+                <th>记录值</th>
+                <th>检查类型</th>
+                <th>状态</th>
+                <th>检查周期(秒)</th>
+                <th>创建人</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+
+            <tr ng-repeat="o in rows">
+                <td>{{ o.DomainName }}</td>
+                <td>{{ o.RecordValue }}</td>
+                <td>{{ o.CheckType }}</td>
+                <td>{{ o.CheckCycle }}</td>
+                <td class="statusClass{{ o.StatusNum }}">{{ o.CheckStatus }}</td>
+                <td>{{ o.Publisher }}</td>
+                <td>{{ o.CreateTime }}</td>
+                <td>
+                    <div class="btn-group" ng-if="username=='liuweia' || username=='liuzhizheng'">
+                       <button type="button" class="btn btn-primary btn-sm" ng-click="Delete($index)">删除</button>
+                    </div>
+                    <div class="btn-group" ng-if="username=='liuweia' || username=='liuzhizheng'">
+                       <button type="button" class="btn btn-primary btn-sm" ng-click="Edit($index)">修改</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <paging
+                class="small"
+                page="currentPage"
+                page-size="pageSize"
+                total="total"
+                adjacent="{{adjacent}}"
+                dots="{{dots}}"
+                scroll-top="{{scrollTop}}"
+                hide-if-empty="{{hideIfEmpty}}"
+                ul-class="{{ulClass}}"
+                active-class="{{activeClass}}"
+                disabled-class="{{disabledClass}}"
+                show-prev-next="{{showPrevNext}}"
+                paging-action="pageAction( page, searchKey )">
+        </paging>
+    </div>
+</div>
+
+<script type="text/ng-template" id="add.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form" name="createForm">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">域名
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text"
+                                       class="form-control input-inline input-big" placeholder="www.open.com.cn"
+                                       ng-model="item.DomainName"
+                                       ng-pattern="/[0-9a-zA-Z]{2,14}$/"
+                                       name="domainname"
+                                       required>
+                                <span class="help-inline"></span>
+                            </div>
+                            <div class="col-sm-offset-4 col-md-10" ng-show="createForm.domainname.$invalid && createForm.domainname.$dirty">
+                                <span ng-show="createForm.domainname.$error.pattern" style="color:red">必须正确域名</span>
+                                <span ng-show="createForm.domainname.$error.required" style="color:red">此处不能为空</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">记录值
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text"
+                                       class="form-control input-inline input-big" placeholder="10.100.x.x"
+                                       ng-model="item.RecordValue"
+                                       name="recordvalue"
+                                       ng-pattern="/^10(\.([2][0-4]\d|[2][5][0-5]|[01]?\d?\d)){3}$/"
+                                       required>
+                                <span class="help-inline"></span>
+                            </div>
+                            <div class="col-sm-offset-4 col-md-10" ng-show="createForm.recordvalue.$invalid && createForm.recordvalue.$dirty">
+                                <span ng-show="createForm.recordvalue.$error.pattern" style="color:red">必须用内网地址</span>
+                                <span ng-show="createForm.recordvalue.$error.required" style="color:red">此处不能为空</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">检查类型
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big"
+                                        ng-model="item.CheckType" required>
+                                    <option value="tcp">TCP</option>
+                                    <option value="http">HTTP</option>
+                                    <option value="https">HTTPS</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">检查端口
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="number"
+                                       class="form-control input-inline input-big" required
+                                       min="0"
+                                       max="65534"
+                                       ng-model="item.CheckPort"
+                                       name="port">
+                            </div>
+                            <div class="col-sm-offset-4 col-md-10" ng-show="createForm.port.$invalid && createForm.port.$dirty">
+                                <span ng-show="createForm.port.$error.max" style="color:red">端口范围在0-65534之间</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">检查周期(秒)
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="number"
+                                       class="form-control input-inline input-big" required
+                                       min="1"
+                                       max="1800"
+                                       ng-model="item.CheckCycle"
+                                       name="cycle">
+                            </div>
+                            <div class="col-sm-offset-4 col-md-10" ng-show="createForm.cycle.$invalid && createForm.cycle.$dirty">
+                                <span ng-show="createForm.cycle.$error.max" style="color:red">端口范围在1-1800之间</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" ng-show="item.CheckType!='tcp'">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">检查url
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="text"
+                                       class="form-control input-inline input-big"
+                                       ng-model="item.CheckUrl" value="/dnotdelet/mom.html">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="Save()" ng-disabled="!createForm.$valid">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="edit.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form" name="createForm">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">选择ZONE
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-md-4">
+                                <h4>{{ item.ZoneName}}</h4>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">主机记录
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text"
+                                       class="form-control input-inline input-big" placeholder="www"
+                                       ng-model="item.Name" required>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">记录类型
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-md-4">
+                                <select class="form-control input-inline input-big"
+                                        ng-model="item.RecordType" ng-options="s for s in title.RecordType" required>
+                                    <option value="">--选择记录类型--</option>
+                                </select>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">记录值
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="text"
+                                       class="form-control input-inline input-big" required
+                                       ng-model="item.RecordedValue">
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="Edit()" ng-disabled="!createForm.$valid">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="delete.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                           确定要删除{{ item.DomainName }}的解析？
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="Delete()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>

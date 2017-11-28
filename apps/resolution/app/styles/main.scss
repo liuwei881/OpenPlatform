@@ -14,7 +14,7 @@ $icon-font-path: "../asserts/bootstrap-sass-official/assets/fonts/bootstrap/";
 
 // @import "/asserts/metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css";
 // @import "/asserts/metronic/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css";
-// @import "/asserts/metronic/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css"; 
+// @import "/asserts/metronic/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css";
 
 .browsehappy {
   margin: 0.2em 0;
@@ -107,6 +107,5 @@ body {
 }
 .modal-dialog{top: 60px;}
 th,td{text-align:center;}
-.statusClass1{background-color: #F5DBE7;}
-.statusClass2{background-color: #00ff00;}
-.statusClass3{background-color: #ff0000;}
+.statusClass1{background-color: #00ff00;}
+.statusClass2{background-color: #ff0000;}

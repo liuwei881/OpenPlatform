@@ -30,13 +30,11 @@ class HealthCheckHandler(BaseHandler):
 
     @web.asynchronous
     def post(self, ident):
-        """DNS解析操作"""
+        """创建健康检查"""
         data = json.loads(self.request.body.decode("utf-8"))
-        objTask = ResolutionServer()
-        objTask.ZoneName = data['params'].get('ZoneName', None)
+        objTask = HealthCheckServer()
+        objTask.DomainName = data['params'].get('DomainName', None)
         objTask.Name = data['params'].get('Name', None)
-        if "*" in objTask.Name:
-            objTask.Name = "*"
         objTask.DomainName = objTask.Name + "." + objTask.ZoneName
         objTask.RecordType = data['params'].get('RecordType', None)
         objTask.RecordedValue = data['params'].get('RecordedValue', None)
@@ -44,12 +42,6 @@ class HealthCheckHandler(BaseHandler):
         objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         self.db.add(objTask)
         self.db.commit()
-        # ttl = 3600
-        tasks.resolution.delay('10.96.140.61', objTask.ZoneName, objTask.Name, 3600, objTask.RecordType,
-                               objTask.RecordedValue, 'add')
-        if objTask.Name == 'www':
-            tasks.resolution.delay('10.96.140.61', objTask.ZoneName, "@", 3600, objTask.RecordType,
-                                   objTask.RecordedValue, 'add')
         self.Result['rows'] = 1
         self.Result['info'] = u'创建成功'
         self.finish(self.Result)
