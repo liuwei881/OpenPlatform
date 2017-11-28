@@ -34,6 +34,10 @@ define(['angular'], function (angular) {
         }
 
         $scope.Create = function () {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
                 animation: true,
                 templateUrl: 'add.html',
                 controller: 'ModalInstanceCtrl',
