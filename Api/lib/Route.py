@@ -72,6 +72,11 @@ class ReadyIssueModel(Basebase):
 class ResolutionModel(Basebase):
     pass
 
+
+class HealthCheckModel(Basebase):
+    pass
+
+
 with open(os.path.join(os.path.dirname(__file__), 'config.yaml'), 'r') as f:
     yaml = load(f)
 
@@ -92,10 +97,13 @@ class RoutingSession(Session):
             return engines['readyissue']
         elif mapper and issubclass(mapper.class_, ResolutionModel):
             return engines['resolution']
+        elif mapper and issubclass(mapper.class_, HealthCheckModel):
+            return engines['healthcheck']
         else:
             return engines[
                 random.choice(['base'])
             ]
+
 
 Session = sessionmaker(class_=RoutingSession, autocommit=False)
 db_session = Session()

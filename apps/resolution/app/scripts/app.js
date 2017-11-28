@@ -1,5 +1,5 @@
 /*jshint unused: vars */
-define(['angular', 'controllers/main', 'controllers/about', 'directives/paging', 'controllers/login', 'controllers/header', 'controllers/sidebar', 'controllers/pagehead', 'controllers/footer', 'controllers/dashboard', 'services/httpinterceptor', 'controllers/modalinstance', 'controllers/resolutionserver', 'services/async', 'services/sync']/*deps*/, function (angular, MainCtrl, AboutCtrl, PagingDirective, LoginCtrl, HeaderCtrl, SidebarCtrl, PageHeadCtrl, FooterCtrl, DashboardCtrl, PhysicalCtrl, HttpInterceptorFactory, PhysicalService,  ModalinstanceCtrl, resolutionServerCtrl)/*invoke*/ {
+define(['angular', 'controllers/main', 'controllers/about', 'directives/paging', 'controllers/login', 'controllers/header', 'controllers/sidebar', 'controllers/pagehead', 'controllers/footer', 'controllers/dashboard', 'controllers/healthcheck', 'services/httpinterceptor', 'controllers/modalinstance', 'controllers/resolutionserver', 'services/async', 'services/sync']/*deps*/, function (angular, MainCtrl, AboutCtrl, PagingDirective, LoginCtrl, HeaderCtrl, SidebarCtrl, PageHeadCtrl, FooterCtrl, DashboardCtrl, PhysicalCtrl, HttpInterceptorFactory, PhysicalService,  ModalinstanceCtrl, resolutionServerCtrl, healthcheckCtrl)/*invoke*/ {
     'use strict';
 
     /**
@@ -23,6 +23,7 @@ define(['angular', 'controllers/main', 'controllers/about', 'directives/paging',
             'resolutionApp.services.HttpInterceptor',
             'resolutionApp.controllers.ModalInstanceCtrl',
             'resolutionApp.controllers.resolutionServerCtrl',
+            'resolutionApp.controllers.healthcheckCtrl',
             'resolutionApp.services.Async',
             'resolutionApp.services.Sync',
 /*angJSDeps*/
@@ -50,6 +51,13 @@ define(['angular', 'controllers/main', 'controllers/about', 'directives/paging',
                     templateUrl: 'views/resolution.html',
                     controller: 'resolutionServerCtrl',
                     nav: '解析列表',
+                    needRequest: true
+                })
+                .state('dashboard.healthcheck', {
+                    url: 'healthcheck',
+                    templateUrl: 'views/healthcheck.html',
+                    controller: 'healthcheckCtrl',
+                    nav: '健康检查',
                     needRequest: true
                 })
                 .state('login',{

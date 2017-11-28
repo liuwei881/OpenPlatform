@@ -1,1 +1,1 @@
-from Resolution.Handler import ResolutionHandler, ZoneHandler, RecordTypeHandler, DigHandler
+from Resolution.Handler import ResolutionHandler, ZoneHandler, RecordTypeHandler, DigHandler, HealthCheckHandler
