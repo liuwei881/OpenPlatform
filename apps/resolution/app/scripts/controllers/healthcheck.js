@@ -68,12 +68,12 @@ define(['angular'], function (angular) {
                         return $scope.rows[i];
                     },
                     title: function () {
-                        return {'title':'删除解析'};
+                        return {'title':'删除健康检查'};
                     }
                 }
             });
            modalInstance.Delete = function (item) {
-                Async.Delete('/api/v2/resolution/',item).
+                Async.Delete('/api/v2/healthcheck/',item).
                     success(function (data) {
                     console.log(item);
                         modalInstance.close();

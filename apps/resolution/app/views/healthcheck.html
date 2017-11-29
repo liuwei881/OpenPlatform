@@ -28,6 +28,7 @@
                 <th>记录值</th>
                 <th>检查类型</th>
                 <th>检查周期(秒)</th>
+                <th>检查页面</th>
                 <th>创建人</th>
                 <th>创建时间</th>
                 <th>状态</th>
@@ -39,6 +40,7 @@
                 <td>{{ o.RecordValue }}</td>
                 <td>{{ o.CheckType }}</td>
                 <td>{{ o.CheckCycle }}</td>
+                <td>{{ o.CheckUrl}}</td>
                 <td>{{ o.Publisher }}</td>
                 <td>{{ o.CreateTime }}</td>
                 <td class="statusClass{{ o.StatusNum }}">{{ o.CheckStatus }}</td>
@@ -290,7 +292,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                           确定要删除{{ item.DomainName }}的解析？
+                           确定要删除<font color="#FF0000">{{ item.DomainName }}</font>的健康检查？
                         </div>
                     </div>
                 </div>

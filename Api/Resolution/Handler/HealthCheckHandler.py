@@ -12,6 +12,9 @@ from apscheduler.schedulers.tornado import TornadoScheduler
 import socket
 import requests
 
+scheduler = TornadoScheduler()
+scheduler.start()
+
 
 @urlmap(r'/healthcheck\/?([0-9]*)')
 class HealthCheckHandler(BaseHandler):
@@ -59,7 +62,8 @@ class HealthCheckHandler(BaseHandler):
                     if name == 'www':
                         tasks.resolution.delay('10.96.140.61', zonename, "@", 3600, 'A', recordvalue, 'add')
                 return '{0} is open'.format(checkport)
-            except Exception:
+            except Exception as e:
+                print('error', e)
                 pro.update({'CheckStatus': 2})
                 self.db.commit()
                 tasks.resolution.delay('10.96.140.61', zonename, name, 3600, 'A', recordvalue, 'delete')
@@ -78,7 +82,8 @@ class HealthCheckHandler(BaseHandler):
                         if name == 'www':
                             tasks.resolution.delay('10.96.140.61', zonename, "@", 3600, 'A', recordvalue, 'add')
                     return 'healthcheck is ok'
-            except Exception:
+            except Exception as e:
+                print('error', e)
                 pro.update({'CheckStatus': 2})
                 self.db.commit()
                 tasks.resolution.delay('10.96.140.61', zonename, name, 3600, 'A', recordvalue, 'delete')
@@ -97,7 +102,8 @@ class HealthCheckHandler(BaseHandler):
                         if name == 'www':
                             tasks.resolution.delay('10.96.140.61', zonename, "@", 3600, 'A', recordvalue, 'add')
                     return 'healthcheck is ok'
-            except Exception:
+            except Exception as e:
+                print('error', e)
                 pro.update({'CheckStatus': 2})
                 self.db.commit()
                 tasks.resolution.delay('10.96.140.61', zonename, name, 3600, 'A', recordvalue, 'delete')
@@ -121,12 +127,11 @@ class HealthCheckHandler(BaseHandler):
         objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         self.db.add(objTask)
         self.db.commit()
-        scheduler = TornadoScheduler()
         scheduler.add_job(self.scheduler_add, 'interval',
                           seconds=objTask.CheckCycle,
+                          id='{0}'.format(objTask.CreateTime),
                           kwargs={'domainname': objTask.DomainName, 'checktype': objTask.CheckType,
                                   'recordvalue': objTask.RecordValue, 'checkport': objTask.CheckPort, 'checkurl': objTask.CheckUrl})
-        scheduler.start()
         self.Result['rows'] = 1
         self.Result['info'] = u'创建成功'
         self.finish(self.Result)
@@ -152,8 +157,10 @@ class HealthCheckHandler(BaseHandler):
     @web.asynchronous
     def delete(self, ident):
         """删除健康检查"""
-        pro = self.db.query(HealthCheckServer).filter(HealthCheckServer.Id == ident).first()
-        self.db.query(HealthCheckServer).filter(HealthCheckServer.Id == ident).delete()
+        pro = self.db.query(HealthCheckServer).filter(HealthCheckServer.Id == ident)
+        job_id = pro.first().CreateTime
+        scheduler.remove_job('{0}'.format(job_id))
+        pro.delete()
         self.db.commit()
-        self.Result['info'] = u'删除DNS解析成功'
+        self.Result['info'] = u'删除健康检查成功remove job: {0}'.format(job_id)
         self.finish(self.Result)
