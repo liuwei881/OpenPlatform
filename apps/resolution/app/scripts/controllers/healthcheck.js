@@ -34,10 +34,7 @@ define(['angular'], function (angular) {
         }
 
         $scope.Create = function () {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
+            var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'add.html',
                 controller: 'ModalInstanceCtrl',
@@ -47,12 +44,12 @@ define(['angular'], function (angular) {
                         return {};
                     },
                     title: function () {
-                        return {'title':'新建解析', 'ZoneList':allZone, 'RecordType':recordtype};
+                        return {'title':'新建健康检查'};
                     }
                 }
             });
             modalInstance.save = function (item) {console.log(item);
-                Async.save('/api/v2/resolution/',item).
+                Async.save('/api/v2/healthcheck/',item).
                     success(function (data) {
                         modalInstance.close();
                         $scope.initPage();

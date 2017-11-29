@@ -89,21 +89,34 @@ def default(view, zone, name, _type, value, action):
 @celery.task(name='tasks.resolution')
 def resolution(server, zone, name, ttl, _type, value, action):
     """添加DNS解析"""
-    if zone == "open.com.cn" and '10.100' in value or '10.96' in value:
-        # for win AD
+    if zone == "open.com.cn":
+        view = 'default'
         up = dns.update.Update(zone)
-        if action == 'add':
-            up.add(name, ttl, _type, value)
-            return dns.query.tcp(up, server)
-        elif action == 'change':
-            up = dns.update.Update(zone)
-            up.delete(name, _type)
-            up.add(name, ttl, _type, value)
-            return dns.query.tcp(up, server)
-        elif action == 'delete':
-            up = dns.update.Update(zone)
-            up.delete(name, _type)
-            return dns.query.tcp(up, server)
+        if '10.100' in value or '10.96' in value or '10.98' in value:
+            if action == 'add':
+                up.add(name, ttl, _type, value)
+                return dns.query.tcp(up, server)
+            elif action == 'change':
+                up.delete(name, _type)
+                up.add(name, ttl, _type, value)
+                return dns.query.tcp(up, server)
+            elif action == 'delete':
+                up.delete(name, _type)
+                return dns.query.tcp(up, server)
+        elif _type == 'CNAME':
+            if action == 'add':
+                up.add(name, ttl, _type, value)
+                dns.query.tcp(up, server)
+                return default(view, zone, name, _type, value, action)
+            elif action == 'change':
+                up.delete(name, _type)
+                up.add(name, ttl, _type, value)
+                dns.query.tcp(up, server)
+                return default(view, zone, name, _type, value, action)
+            elif action == 'delete':
+                up.delete(name, _type)
+                dns.query.tcp(up, server)
+                return default(view, zone, name, _type, value, action)
     elif '10.100' in value or '10.96' in value or '10.98' in value:
         view = 'view_internal'
         return view_internal(view, zone, name, _type, value, action)
