@@ -83,7 +83,6 @@ define(['angular'], function (angular) {
         };
 
         $scope.Edit = function (i) {
-            var recordtype = JSON.parse(Sync.fetch('/api/v2/recordtype/'));
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'edit.html',
@@ -94,12 +93,12 @@ define(['angular'], function (angular) {
                         return $scope.rows[i];
                     },
                     title: function () {
-                        return {'title':'修改解析','RecordType':recordtype};
+                        return {'title':'修改健康检查'};
                     }
                 }
             });
            modalInstance.Edit = function (item) {
-                Async.Edit('/api/v2/resolution/',item).
+                Async.Edit('/api/v2/healthcheck/',item).
                     success(function (data) {
                     console.log(item);
                         modalInstance.close();
@@ -108,30 +107,13 @@ define(['angular'], function (angular) {
             };
         };
 
-        $scope.Test = function (i) {
-            var digtest = Sync.fetch('/api/v2/digtest/' + $scope.rows[i].Id);
-            var modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'test.html',
-                controller: 'ModalInstanceCtrl',
-                size: 'lg',
-                resolve: {
-                    item: function () {
-                        return $scope.rows[i];
-                    },
-                    title: function () {
-                        return {'title':'dig测试', 'digtest': digtest};
-                    }
-                }
-            });
-        };
 
         $scope.Search = function (searchKey) {
             $scope.initPage(searchKey);
         };
 
         $scope.pageAction = function (page, searchKey) {
-            Async.get('/api/v2/resolution/',{page: page, pageSize: $scope.pageSize, searchKey:searchKey})
+            Async.get('/api/v2/healthcheck/',{page: page, pageSize: $scope.pageSize, searchKey:searchKey})
                 .success(function (data) {
                     $scope.searchKey = searchKey;
                     $scope.total = data.total;

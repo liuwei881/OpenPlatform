@@ -217,10 +217,10 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-4 control-label">选择ZONE
-                            <span class="redClassFont">*</span></label>
+                            <label class="col-md-4 control-label">域名
+                            </label>
                             <div class="col-md-4">
-                                <h4>{{ item.ZoneName}}</h4>
+                                <h4>{{ item.DomainName}}</h4>
                                 <span class="help-inline"></span>
                             </div>
                         </div>
@@ -230,11 +230,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="col-md-4 control-label">主机记录
-                            <span class="redClassFont">*</span></label>
+                            </label>
                             <div class="col-md-4">
-                                <input type="text"
-                                       class="form-control input-inline input-big" placeholder="www"
-                                       ng-model="item.Name" required>
+                                <h4>{{ item.RecordValue}}</h4>
                                 <span class="help-inline"></span>
                             </div>
                         </div>
@@ -244,13 +242,10 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-4 control-label">记录类型
-                            <span class="redClassFont">*</span></label>
+                            <label class="col-md-4 control-label">检查类型
+                            </label>
                             <div class="col-md-4">
-                                <select class="form-control input-inline input-big"
-                                        ng-model="item.RecordType" ng-options="s for s in title.RecordType" required>
-                                    <option value="">--选择记录类型--</option>
-                                </select>
+                                <h4>{{ item.CheckType}}</h4>
                                 <span class="help-inline"></span>
                             </div>
                         </div>
@@ -260,17 +255,49 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-md-4 control-label">记录值
+                            <label class="col-md-4 control-label">检查端口
+                            </label>
+                            <div class="col-md-4">
+                                <h4>{{ item.CheckPort}}</h4>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">检查周期(秒)
                             <span class="redClassFont">*</span></label>
                             <div class="col-sm-4">
-                                <input type="text"
+                                <input type="number"
                                        class="form-control input-inline input-big" required
-                                       ng-model="item.RecordedValue">
+                                       min="1"
+                                       max="1800"
+                                       ng-model="item.CheckCycle"
+                                       name="cycle">
+                            </div>
+                            <div class="col-sm-offset-4 col-md-10" ng-show="createForm.cycle.$invalid && createForm.cycle.$dirty">
+                                <span ng-show="createForm.cycle.$error.max" style="color:red">端口范围在1-1800之间</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">检查URL
+                            </label>
+                            <div class="col-md-4">
+                                <h4>{{ item.CheckUrl}}</h4>
                                 <span class="help-inline"></span>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </form>
     </div>
@@ -292,7 +319,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                           确定要删除<font color="#FF0000">{{ item.DomainName }}</font>的健康检查？
+                           确定要删除<font color="#FF0000">{{ item.RecordValue }}</font>的健康检查？
                         </div>
                     </div>
                 </div>

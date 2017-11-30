@@ -11,6 +11,8 @@ import datetime
 from apscheduler.schedulers.tornado import TornadoScheduler
 import socket
 import requests
+import random
+import string
 
 scheduler = TornadoScheduler()
 scheduler.start()
@@ -62,8 +64,7 @@ class HealthCheckHandler(BaseHandler):
                     if name == 'www':
                         tasks.resolution.delay('10.96.140.61', zonename, "@", 3600, 'A', recordvalue, 'add')
                 return '{0} is open'.format(checkport)
-            except Exception as e:
-                print('error', e)
+            except ConnectionRefusedError:
                 pro.update({'CheckStatus': 2})
                 self.db.commit()
                 tasks.resolution.delay('10.96.140.61', zonename, name, 3600, 'A', recordvalue, 'delete')
@@ -82,8 +83,7 @@ class HealthCheckHandler(BaseHandler):
                         if name == 'www':
                             tasks.resolution.delay('10.96.140.61', zonename, "@", 3600, 'A', recordvalue, 'add')
                     return 'healthcheck is ok'
-            except Exception as e:
-                print('error', e)
+            except requests.exceptions.ConnectionError:
                 pro.update({'CheckStatus': 2})
                 self.db.commit()
                 tasks.resolution.delay('10.96.140.61', zonename, name, 3600, 'A', recordvalue, 'delete')
@@ -102,8 +102,7 @@ class HealthCheckHandler(BaseHandler):
                         if name == 'www':
                             tasks.resolution.delay('10.96.140.61', zonename, "@", 3600, 'A', recordvalue, 'add')
                     return 'healthcheck is ok'
-            except Exception as e:
-                print('error', e)
+            except requests.exceptions.ConnectionError:
                 pro.update({'CheckStatus': 2})
                 self.db.commit()
                 tasks.resolution.delay('10.96.140.61', zonename, name, 3600, 'A', recordvalue, 'delete')
@@ -123,13 +122,14 @@ class HealthCheckHandler(BaseHandler):
         objTask.CheckUrl = data['params'].get('CheckUrl', None)
         objTask.CheckStatus = 1
         objTask.CheckCycle = data['params'].get('CheckCycle', None)
+        objTask.JobId = ''.join(random.sample(string.ascii_letters + string.digits, 16))    # 随机生成16位的字符与数字确保id唯一
         objTask.Publisher = self.get_cookie("username")
         objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         self.db.add(objTask)
         self.db.commit()
         scheduler.add_job(self.scheduler_add, 'interval',
                           seconds=objTask.CheckCycle,
-                          id='{0}'.format(objTask.CreateTime),
+                          id=objTask.JobId,
                           kwargs={'domainname': objTask.DomainName, 'checktype': objTask.CheckType,
                                   'recordvalue': objTask.RecordValue, 'checkport': objTask.CheckPort, 'checkurl': objTask.CheckUrl})
         self.Result['rows'] = 1
@@ -141,15 +141,11 @@ class HealthCheckHandler(BaseHandler):
         """修改健康检查"""
         data = json.loads(self.request.body.decode("utf-8"))
         objTask = self.db.query(HealthCheckServer).get(ident)
-        objTask.ZoneName = data['params'].get('ZoneName', None)
-        objTask.Name = data['params'].get('Name', None)
-        objTask.DomainName = objTask.Name + "." + objTask.ZoneName
-        objTask.RecordType = data['params'].get('RecordType', None)
-        objTask.RecordedValue = data['params'].get('RecordedValue', None)
+        objTask.CheckCycle = data['params'].get('CheckCycle', None)
         objTask.Publisher = self.get_cookie("username")
-        objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
         self.db.add(objTask)
         self.db.commit()
+        scheduler.reschedule_job(objTask.JobId, trigger='interval', seconds=objTask.CheckCycle)
         self.Result['rows'] = 1
         self.Result['info'] = u'修改成功'
         self.finish(self.Result)
@@ -158,9 +154,9 @@ class HealthCheckHandler(BaseHandler):
     def delete(self, ident):
         """删除健康检查"""
         pro = self.db.query(HealthCheckServer).filter(HealthCheckServer.Id == ident)
-        job_id = pro.first().CreateTime
-        scheduler.remove_job('{0}'.format(job_id))
+        jobid = pro.first().JobId
+        scheduler.remove_job(jobid)
         pro.delete()
         self.db.commit()
-        self.Result['info'] = u'删除健康检查成功remove job: {0}'.format(job_id)
+        self.Result['info'] = u'删除健康检查成功remove job: {0}'.format(jobid)
         self.finish(self.Result)

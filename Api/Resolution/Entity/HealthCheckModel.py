@@ -19,6 +19,7 @@ class HealthCheckServer(BaseModel, HealthCheckModel):
     CheckUrl = Column('fs_check_url', String(30))
     CheckStatus = Column('fi_status_type', Integer)
     CheckCycle = Column('fi_check_cycle', Integer)  # 检查周期
+    JobId = Column('fs_job_id', String(50))     # jobid
     Publisher = Column('fs_publisher', String(50))
     CreateTime = Column('ft_create_time', DateTime, default=datetime.datetime.now())
 
@@ -33,6 +34,7 @@ class HealthCheckServer(BaseModel, HealthCheckModel):
             'CheckStatus': getStatusId(self.CheckStatus),
             'StatusNum': self.CheckStatus,
             'CheckCycle': self.CheckCycle,
+            'JobId': self.JobId,
             'Publisher': self.Publisher,
             'CreateTime': self.CreateTime.strftime('%Y-%m-%d %H:%M:%S') if self.CreateTime else ''
         }
