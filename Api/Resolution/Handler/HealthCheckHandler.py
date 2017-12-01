@@ -48,10 +48,10 @@ class HealthCheckHandler(BaseHandler):
         domainname_list = domainname.split('.')
         if domainname_list[-1] == 'cn':
             zonename = '.'.join(domainname_list[-3:])
-            name = domainname_list[0:-3][0]
+            name = '.'.join(domainname_list[0:-3])
         else:
             zonename = '.'.join(domainname_list[-2:])
-            name = domainname_list[0:-2][0]
+            name = '.'.join(domainname_list[0:-2])
         if checktype == 'tcp':
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             try:
