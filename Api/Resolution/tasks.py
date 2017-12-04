@@ -117,6 +117,8 @@ def resolution(server, zone, name, ttl, _type, value, action):
                 up.delete(name, _type)
                 dns.query.tcp(up, server)
                 return default(view, zone, name, _type, value, action)
+        else:
+            return default(view, zone, name, _type, value, action)
     elif '10.100' in value or '10.96' in value or '10.98' in value:
         view = 'view_internal'
         return view_internal(view, zone, name, _type, value, action)
