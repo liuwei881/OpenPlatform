@@ -127,6 +127,9 @@ class HealthCheckHandler(BaseHandler):
         objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         self.db.add(objTask)
         self.db.commit()
+        scheduler.add_jobstore('redis', jobs_key=objTask.JobId,
+                               run_times_key='jobs' + objTask.JobId, host='10.96.141.112',
+                               port=6379, db=10)
         scheduler.add_job(self.scheduler_add, 'interval',
                           seconds=objTask.CheckCycle,
                           id=objTask.JobId,

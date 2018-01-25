@@ -61,11 +61,15 @@ class PortalModel(Basebase):
     pass
 
 
-class IssueModel(Basebase):
+class ReleaseModel(Basebase):
     pass
 
 
-class ReadyIssueModel(Basebase):
+class TcpReleaseModel(Basebase):
+    pass
+
+
+class ReadyReleaseModel(Basebase):
     pass
 
 
@@ -79,10 +83,9 @@ class HealthCheckModel(Basebase):
 
 with open(os.path.join(os.path.dirname(__file__), 'config.yaml'), 'r') as f:
     yaml = load(f)
-
-engines = {}
-for item in yaml['engines'].items():
-    engines[item[0]] = create_engine(item[1], pool_recycle=120, echo=True, max_overflow=0, pool_size=5)
+    engines = {}
+    for item in yaml['engines'].items():
+        engines[item[0]] = create_engine(item[1], pool_recycle=120, echo=True, max_overflow=0, pool_size=5)
 
 
 class RoutingSession(Session):
@@ -91,10 +94,12 @@ class RoutingSession(Session):
             return engines['vmware']
         elif mapper and issubclass(mapper.class_, PortalModel):
             return engines['portal']
-        elif mapper and issubclass(mapper.class_, IssueModel):
-            return engines['issue']
-        elif mapper and issubclass(mapper.class_, ReadyIssueModel):
-            return engines['readyissue']
+        elif mapper and issubclass(mapper.class_, ReleaseModel):
+            return engines['release']
+        elif mapper and issubclass(mapper.class_, ReadyReleaseModel):
+            return engines['readyrelease']
+        elif mapper and issubclass(mapper.class_, TcpReleaseModel):
+            return engines['tcprelease']
         elif mapper and issubclass(mapper.class_, ResolutionModel):
             return engines['resolution']
         elif mapper and issubclass(mapper.class_, HealthCheckModel):
