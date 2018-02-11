@@ -10,7 +10,7 @@ import requests
 import json
 
 requests.packages.urllib3.disable_warnings()
-# celery = Celery("tasks", broker="amqp://")
+#celery = Celery("tasks", broker="amqp://")
 celery = Celery("tasks", broker="amqp://admin:open@2018@rabbitmq.sysgroup.open.com.cn:5672//")
 celery.conf.CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'amqp')
 
@@ -45,9 +45,9 @@ def view_internal(view, zone, name, _type, value, action):
             'extend_ids': ['{0}${1}${2}'.format(name, _type, value)],
             'current_user': "liuwei"}
         headers = {'Content-type': 'application/json'}
-        r = requests.delete(url, auth=('liuwei', 'Liuwei@2017'), data=json.dumps(payload),
+        requests.delete(url, auth=('liuwei', 'Liuwei@2017'), data=json.dumps(payload),
                             headers=headers, verify=False)
-        return r.text
+        return {'ip': '{}'.format(value), 'name': '{}'.format('.'.join([name, zone]) + '.')}
 
 
 def default(view, zone, name, _type, value, action):
@@ -81,9 +81,25 @@ def default(view, zone, name, _type, value, action):
             'extend_ids': ['{0}${1}${2}'.format(name, _type, value)],
             'current_user': "liuwei"}
         headers = {'Content-type': 'application/json'}
-        r = requests.delete(url, auth=('liuwei', 'Liuwei@2017'), data=json.dumps(payload),
-                            headers=headers, verify=False)
-        return r.text
+        requests.delete(url, auth=('liuwei', 'Liuwei@2017'), data=json.dumps(payload),
+                        headers=headers, verify=False)
+        return {'ip': '{}'.format(value), 'name': '{}'.format('.'.join([name, zone]) + '.')}
+
+
+def result_to_cmdb(result, action):
+    """将结果传入cmdb"""
+    import urllib.request
+    import urllib.parse
+    if action == 'delete':
+        url = "http://10.100.17.175:5555/business/dns/delDNS"
+        data = urllib.parse.urlencode(result).encode(encoding='UTF8')
+    else:
+        url = "http://10.100.17.175:5555/business/dns/addDNS"
+        data = urllib.parse.urlencode({'dnsJson': '{}'.format(result)}).encode(encoding='UTF8')
+    request = urllib.request.Request(url)
+    request.add_header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
+    urllib.request.urlopen(request, data)
+    return result
 
 
 @celery.task(name='tasks.resolution')
@@ -95,33 +111,82 @@ def resolution(server, zone, name, ttl, _type, value, action):
         if '10.100' in value or '10.96' in value or '10.98' in value:
             if action == 'add':
                 up.add(name, ttl, _type, value)
-                return dns.query.tcp(up, server)
+                dns.query.tcp(up, server)
+                result = {
+                    "id": "{}".format('$'.join([_type, name, value, zone])),
+                    "href": "",
+                    "is_shared": "",
+                    "state": "",
+                    "name": "{}".format('.'.join([name, zone]) + '.'),
+                    "type": "{}".format(_type),
+                    "klass": "IN",
+                    "ttl": 3600,
+                    "rdata": "{}".format(value),
+                    "reverse_name": "",
+                    "is_enable": "yes",
+                    "row_id": '',
+                    "comment": "",
+                    "audit_status": "",
+                    "expire_time": "",
+                    "expire_style": "",
+                    "create_time": "{}".format(datetime.datetime.now().strftime('%Y-%m-%d')),
+                    "expire_is_enable": "no"
+                }
+                result_to_cmdb(result, action)
             elif action == 'change':
                 up.delete(name, _type)
                 up.add(name, ttl, _type, value)
-                return dns.query.tcp(up, server)
+                dns.query.tcp(up, server)
+                result = {
+                    "id": "{}".format('$'.join([_type, name, value, zone])),
+                    "href": "",
+                    "is_shared": "",
+                    "state": "",
+                    "name": "{}".format('.'.join([name, zone]) + '.'),
+                    "type": "{}".format(_type),
+                    "klass": "IN",
+                    "ttl": 3600,
+                    "rdata": "{}".format(value),
+                    "reverse_name": "",
+                    "is_enable": "yes",
+                    "row_id": '',
+                    "comment": "",
+                    "audit_status": "",
+                    "expire_time": "",
+                    "expire_style": "",
+                    "create_time": "{}".format(datetime.datetime.now().strftime('%Y-%m-%d')),
+                    "expire_is_enable": "no"
+                }
+                result_to_cmdb(result, action)
             elif action == 'delete':
                 up.delete(name, _type)
-                return dns.query.tcp(up, server)
+                dns.query.tcp(up, server)
+                result = {'ip': '{}'.format(value), 'name': '{}'.format('.'.join([name, zone]) + '.')}
+                result_to_cmdb(result, action)
         elif _type == 'CNAME':
             if action == 'add':
                 up.add(name, ttl, _type, value)
                 dns.query.tcp(up, server)
-                return default(view, zone, name, _type, value, action)
+                result = default(view, zone, name, _type, value, action)
+                result_to_cmdb(result, action)
             elif action == 'change':
                 up.delete(name, _type)
                 up.add(name, ttl, _type, value)
                 dns.query.tcp(up, server)
-                return default(view, zone, name, _type, value, action)
+                result = default(view, zone, name, _type, value, action)
+                result_to_cmdb(result, action)
             elif action == 'delete':
                 up.delete(name, _type)
                 dns.query.tcp(up, server)
-                return default(view, zone, name, _type, value, action)
+                result = default(view, zone, name, _type, value, action)
+                result_to_cmdb(result, action)
         else:
             return default(view, zone, name, _type, value, action)
     elif '10.100' in value or '10.96' in value or '10.98' in value:
         view = 'view_internal'
-        return view_internal(view, zone, name, _type, value, action)
+        result = view_internal(view, zone, name, _type, value, action)
+        result_to_cmdb(result, action)
     else:
         view = 'default'
-        return default(view, zone, name, _type, value, action)
+        result = default(view, zone, name, _type, value, action)
+        result_to_cmdb(result, action)

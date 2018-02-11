@@ -16,6 +16,7 @@ class ResolutionServer(BaseModel, ResolutionModel):
     DomainName = Column('fs_domain_name', String(50))
     RecordType = Column('fs_record_type', String(20))
     RecordedValue = Column('fs_record_value', String(50))
+    Status = Column('fi_status', Integer)
     Publisher = Column('fs_publisher', String(50))
     CreateTime = Column('ft_create_time', DateTime, default=datetime.datetime.now())
 
@@ -27,6 +28,7 @@ class ResolutionServer(BaseModel, ResolutionModel):
             'DomainName': self.DomainName,
             'RecordType': self.RecordType,
             'RecordedValue': self.RecordedValue,
+            'Status': self.Status,
             'Publisher': self.Publisher,
             'CreateTime': self.CreateTime.strftime('%Y-%m-%d %H:%M:%S') if self.CreateTime else ''
         }

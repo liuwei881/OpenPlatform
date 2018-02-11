@@ -27,18 +27,13 @@ define(['angular'], function (angular) {
             }
         }
 
-        function showroleright(url, RoleId) {
-            return $http.get(url + RoleId)
-        }
-
-        function showuserrole(url, RoleId) {
-            return $http.get(url + RoleId)
+        function showresolv(url) {
+            return $http.get(url)
         }
 
         return {
             fetch: fetch,
-            showroleright: showroleright,
-            showuserrole: showuserrole
+            showresolv: showresolv
         }
 	});
 });

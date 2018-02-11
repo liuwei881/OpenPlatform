@@ -9,7 +9,7 @@ define(['angular'], function (angular) {
    * Controller of the resolutionApp
    */
   angular.module('resolutionApp.controllers.resolutionServerCtrl', ['ui.bootstrap'])
-    .controller('resolutionServerCtrl', function ($scope, $state, $uibModal,Async,Sync) {
+    .controller('resolutionServerCtrl', function ($scope, $state, $uibModal, $http, Async, Sync) {
       this.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
@@ -34,6 +34,32 @@ define(['angular'], function (angular) {
             $scope.initPage();
         }
 
+        $scope.Select = function (i) {
+            Async.get('/api/v2/status/' + $scope.rows[i].Id).success(function (data) {
+                $scope.status = data.rows;
+                var item = $scope.status;
+                Async.Edit('/api/v2/status/', item).
+                    success(function (data) {
+                    console.log(item);
+                 });
+
+            });
+        };
+
+        $scope.All = function () {
+            Async.get('/api/v2/status',{page: $scope.page, pageSize: $scope.pageSize}).
+                success(function (data) {
+                    $scope.status = data.rows;
+                    var item = $scope.status;
+                    for(var i=0;i<$scope.status.length;i++){
+                        Async.Edit('/api/v2/status/', item[i]).
+                        success(function (data) {
+                        console.log(item);
+                    });
+                   }
+                })
+            };
+
         $scope.Create = function () {
             var allZone = JSON.parse(Sync.fetch('/api/v2/zone/'));
             var recordtype = JSON.parse(Sync.fetch('/api/v2/recordtype/'));
@@ -48,6 +74,18 @@ define(['angular'], function (angular) {
                     },
                     title: function () {
                         return {'title':'新建解析', 'ZoneList':allZone, 'RecordType':recordtype};
+                    },
+                    choices: function () {
+                        return {};
+                    },
+                    addNewChoice: function () {
+                        return {};
+                    },
+                    removeNewChoice: function () {
+                        return {};
+                    },
+                    showAddChoice: function () {
+                        return {}
                     }
                 }
             });
@@ -84,6 +122,39 @@ define(['angular'], function (angular) {
                     });
             };
         };
+
+        $scope.DelBox = function () {
+            var allName = JSON.parse(Sync.fetch('/api/v2/resolv/'));
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'delbox.html',
+                controller: 'ModalInstanceCtrl',
+                size: 'lg',
+                resolve: {
+                    item: function () {
+                        return {}
+                    },
+                    title: function () {
+                        return {'title':'批量删除解析', 'allName':allName};
+                    }
+                }
+            });
+           modalInstance.DelBox = function (item) {
+                Async.get('/api/v2/resolv/').
+                    success(function (data) {
+                    $scope.all = data.all;
+                    var item = $scope.all
+                    for(var i=0;i<item.length;i++){
+                        Async.Delete('/api/v2/resolution/',item[i]).
+                        success(function (data) {
+                        console.log(item);
+                        modalInstance.close();
+                    });
+                };
+                    $scope.initPage();
+                });
+               };
+           };
 
         $scope.Edit = function (i) {
             var recordtype = JSON.parse(Sync.fetch('/api/v2/recordtype/'));

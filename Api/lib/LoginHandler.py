@@ -5,25 +5,29 @@ __datetime__ = '16-3-9'
 from lib.urlmap import urlmap
 from lib.basehandler import BaseHandler
 from tornado import web
-from ldap3 import Connection, Server,ALL
+from ldap3 import Connection, Server, ALL
+import json
 
 
 @urlmap(r'/login')
 class LoginHandler(BaseHandler):
     @web.asynchronous
-    def get(self):
-        account = self.get_argument('user', '')
-        password = self.get_argument('password', '')
-        conn = Connection(Server('10.96.140.61', get_info=ALL), user='open\{}'.format(account),
-                          password='{}'.format(password), auto_bind=True)
-        if conn.bind():
-            self.Result['info'] = u'登陆成功'
-            self.Result['status'] = 200
-            self.set_cookie('username', str(account), expires_days=0.5)
-            self.set_secure_cookie('user', str(account), expires_days=0.5)
-        else:
+    def post(self):
+        data = json.loads(self.request.body.decode("utf-8"))
+        username = data['username']
+        password = data['password']
+        try:
+            conn = Connection(Server('10.96.140.61', get_info=ALL), user='open\{}'.format(username),
+                              password='{}'.format(password), auto_bind=True)
+        except Exception as e:
             self.Result['info'] = u'登陆失败, 原因{}'.format(e)
             self.Result['status'] = 400
+        else:
+            if conn.bind():
+                self.Result['info'] = u'登陆成功'
+                self.Result['status'] = 200
+                self.set_cookie('username', str(username), expires_days=0.5)
+                self.set_secure_cookie('user', str(username), expires_days=0.5)
         self.finish(self.Result)
 
 

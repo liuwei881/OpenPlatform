@@ -22,13 +22,13 @@ celery.conf.update(
     CELERY_ACCEPT_CONTENT=['json'],
     CELERY_RESULT_SERIALIZER='json',
     CELERY_ROUTES={
-        'tasks.nginx_release': {'queue': 'Release'},
-        'tasks.release_del': {'queue': 'Release'},
-        'tasks.ready_release': {'queue': 'Release'},
-        'tasks.tcp_release': {'queue': 'Release'},
-        'tasks.tcp_release_del': {'queue': 'Release'},
-        'tasks.ready_release_del': {'queue': 'Release'},
-        'tasks.dns_resolution': {'queue': 'Release'},
+        'tasks.nginx_release': {'queue': 'release'},
+        'tasks.release_del': {'queue': 'release'},
+        'tasks.ready_release': {'queue': 'release'},
+        'tasks.tcp_release': {'queue': 'release'},
+        'tasks.tcp_release_del': {'queue': 'release'},
+        'tasks.ready_release_del': {'queue': 'release'},
+        'tasks.dns_resolution': {'queue': 'release'},
     })
 
 

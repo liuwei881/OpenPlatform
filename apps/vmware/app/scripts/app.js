@@ -84,7 +84,7 @@ define(['angular', 'controllers/main', 'controllers/about', 'directives/paging',
                 } else {
                     $('body').removeClass('login');
                     if ($cookies.get('user') === undefined) {
-                        //event.preventDefault();
+                        event.preventDefault();
                         $state.go('login');
                     }
                 }

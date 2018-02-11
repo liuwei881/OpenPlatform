@@ -6,9 +6,11 @@ import tornado
 import json
 from lib.RedisCache import RightsCache
 
+
 class CurrentUser(object):
     def __init__(self, uid=None):
         self.Uid = uid
+
 
 _Current_User = CurrentUser(None)
 
@@ -18,7 +20,7 @@ class BaseHandler(tornado.web.RequestHandler):
         super(BaseHandler, self).__init__(*argc, **argkw)
 
         _Current_User.Uid = self.get_current_user()
-        self._PageSize = 15
+        self._PageSize = 10
         self.Result = {'status': 200, 'rows': [], 'total': 0, 'info': 'ok'}
 
     @property

@@ -17,18 +17,19 @@ define(['angular'], function (angular) {
             ];
             $scope.Login = function () {
                 if ($scope.username !== undefined > 0 && $scope.password !== undefined) {
-                    $http.get('/api/v2/login', {
-                        params:{'user': $scope.username, 'password': $scope.password}
-                }).
-                        success(function (data) {
-                            switch (data.status){
-                                case 200:
-                                    $scope.alert = {type: 'alert-success', message: '登陆成功'}
-                                    $state.go('dashboard');
-                                    break;
-                                case 404:
-                                    $scope.alert = {type: 'alert-danger', message: '帐号密码错误'}
-                                    break;
+                    $http.post('/api/v2/login', {'username': $scope.username, 'password': $scope.password})
+                    .success(function (data) {
+                        switch (data.status){
+                            case 200:
+                                $scope.alert = {type: 'alert-success', message: '登陆成功'}
+                                $state.go('dashboard');
+                                break;
+                            case 404:
+                                $scope.alert = {type: 'alert-danger', message: '帐号密码错误'}
+                                break;
+                            case 400:
+                                $scope.alert = {type: 'alert-danger', message: 'ldap绑定错误'}
+                                break;
                             }
                         });
                 } else {

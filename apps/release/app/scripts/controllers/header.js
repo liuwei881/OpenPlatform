@@ -22,7 +22,7 @@ define(['angular'], function (angular) {
             $scope.Logout = function() {
                 $cookies.remove('user');
                 $http.get('/api/v2/logout');
-                $state.go('/#/login');
+                //$state.go('/#/login');
             };
         });
 });

@@ -24,6 +24,9 @@
         <table class="table table-bordered">
             <tbody>
             <tr>
+                <th>
+                    <input type="checkbox" ng-model="selectAll" ng-click="All(selectAll)">
+                </th>
                 <th>域名</th>
                 <th>记录值</th>
                 <th>记录类型</th>
@@ -33,6 +36,9 @@
             </tr>
 
             <tr ng-repeat="o in rows">
+                <td>
+                    <input type="checkbox" ng-checked="selectAll" ng-model="o.Status" ng-click="Select($index)">
+                </td>
                 <td>{{ o.DomainName }}</td>
                 <td>{{ o.RecordedValue }}</td>
                 <td>{{ o.RecordType }}</td>
@@ -52,6 +58,10 @@
             </tr>
             </tbody>
         </table>
+        <div class="tools">
+            <button type="button" class="btn red-haze btn-sm" ng-click="DelBox();">批量删除解析
+            </button>
+        </div>
         <paging
                 class="small"
                 page="currentPage"
@@ -100,12 +110,11 @@
                             <label class="col-md-4 control-label">主机记录
                             <span class="redClassFont">*</span></label>
                             <div class="col-md-4">
-                                <input type="text"
+	                            <input type="text"
                                        class="form-control input-inline input-big" placeholder="www"
                                        ng-model="item.Name"
                                        name="name"
-                                       ng-pattern="/[\*]?[\-]?[\*a-z0-9]+$/"
-                                       required>
+                                       ng-pattern="/[\*]?[\-]?[\*a-z0-9]+$/" required>
                                 <span class="help-inline"></span>
                             </div>
                             <div class="col-sm-offset-4 col-md-10" ng-show="createForm.name.$invalid && createForm.name.$dirty">
@@ -136,12 +145,21 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">记录值
                             <span class="redClassFont">*</span></label>
-                            <div class="col-sm-4">
-                                <input type="text"
-                                       class="form-control input-inline input-big" required
-                                       ng-model="item.RecordedValue">
-                                <span style="color:red">记录类型为CNAME时必须以"."结尾</span>
+                            <div class="col-md-offset-5" data-ng-repeat="choice in choices">
+                                <div class="btn-group">
+                                    <input class="form-control input-inline input-big" type="text"
+                                           ng-model="item.RecordedValue[choice.id]" name="name" placeholder="记录值" required>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary btn-sm" ng-show="showAddChoice(choice)" ng-click="addNewChoice()">+</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary btn-sm" ng-click="removeNewChoice()">-</button>
+                                </div>
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            <span style="color:red">记录类型为CNAME时必须以"."结尾</span>
                         </div>
                     </div>
                 </div>
@@ -274,6 +292,31 @@
         </form>
     </div>
     <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="delbox.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                           确定要批量删除<br><span style="color:red">{{ title.allName.rows }}<br></span>的解析？
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="DelBox()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
     </div>
 </script>

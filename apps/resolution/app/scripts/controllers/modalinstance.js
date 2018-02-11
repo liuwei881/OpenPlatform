@@ -33,8 +33,30 @@ define(['angular'], function (angular) {
                 $uibModalInstance.Test($scope.item);
             };
 
+            $scope.DelBox = function () {
+                $uibModalInstance.DelBox($scope.item);
+            }
+
             $scope.cancel = function () {
                 $uibModalInstance.dismiss('cancel');
             };
+            $scope.choices = [{id: '1', name: '1'}];
+
+            $scope.addNewChoice = function() {
+                var newItemNo = $scope.choices.length+1;
+                $scope.choices.push({'id' : '' + newItemNo, 'name' : '' + newItemNo});
+                };
+
+            $scope.removeNewChoice = function() {
+            var newItemNo = $scope.choices.length-1;
+            if ( newItemNo !== 0 ) {
+                $scope.choices.pop();
+                }
+            };
+
+            $scope.showAddChoice = function(choice) {
+            return choice.id === $scope.choices[$scope.choices.length-1].id;
+            };
+
         });
 });
