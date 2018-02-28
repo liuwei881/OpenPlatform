@@ -43,8 +43,8 @@ class NgHandler(BaseHandler):
         objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         self.db.add(objTask)
         self.db.commit()
-        tasks.nginx_Release.delay(domainname, objTask.Port, objTask.HealthExam)
-        tasks.dns_resolution.delay('add', domainname, 7200, 'A', '10.100.138.112')
+        tasks.nginx_release.delay(domainname, objTask.Port, objTask.HealthExam)
+        tasks.dns_resolution.delay('add', domainname, 60, 'A', '10.100.138.112')
         self.Result['rows'] = 1
         self.Result['info'] = u'创建成功'
         self.finish(self.Result)
@@ -55,7 +55,7 @@ class NgHandler(BaseHandler):
         pro = self.db.query(ReleaseServer).filter(ReleaseServer.Id==ident).first()
         domainname = pro.DomainName.split(".")[0]
         tasks.Release_del.delay(domainname)
-        tasks.dns_resolution.delay('delete', domainname, 7200, 'A', '10.100.138.112')
+        tasks.dns_resolution.delay('delete', domainname, 60, 'A', '10.100.138.112')
         self.db.query(ReleaseServer).filter(ReleaseServer.Id==ident).delete()
         self.db.commit()
         self.Result['info'] = u'删除nginx及consul成功'

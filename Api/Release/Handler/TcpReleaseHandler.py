@@ -42,8 +42,9 @@ class NgTcpHandler(BaseHandler):
         objTask.CreateTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         self.db.add(objTask)
         self.db.commit()
-        tasks.tcp_release.delay(domainname, objTask.Port)
+        tasks.nginx_tcp_release.delay(domainname, objTask.Port)
         tasks.dns_resolution.delay('add', domainname, 60, 'A', '10.100.138.135')
+        tasks.dns_resolution.delay('add', domainname, 60, 'A', '10.100.20.135')
         self.Result['rows'] = 1
         self.Result['info'] = u'创建成功'
         self.finish(self.Result)
@@ -53,8 +54,9 @@ class NgTcpHandler(BaseHandler):
         """删除nginx及consul"""
         pro = self.db.query(TcpReleaseServer).filter(TcpReleaseServer.Id == ident).first()
         domainname = pro.DomainName.split(".")[0]
-        tasks.tcp_release_del.delay(domainname)
+        tasks.release_del.delay(domainname)
         tasks.dns_resolution.delay('delete', domainname, 60, 'A', '10.100.138.135')
+        tasks.dns_resolution.delay('delete', domainname, 60, 'A', '10.100.20.135')
         self.db.query(TcpReleaseServer).filter(TcpReleaseServer.Id == ident).delete()
         self.db.commit()
         self.Result['info'] = u'删除nginx及consul成功'
