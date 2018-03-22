@@ -36,7 +36,7 @@ define(['angular'], function (angular) {
 
         $scope.Create = function () {
             var allImage = JSON.parse(Sync.fetch('/api/v2/mirror/'));
-            //var allproject = JSON.parse(Sync.fetch('/api/v2/projectlist/'));
+            var datacenter = JSON.parse(Sync.fetch('/api/v2/datacenter/'));
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'add.html',
@@ -47,7 +47,7 @@ define(['angular'], function (angular) {
                         return {};
                     },
                     title: function () {
-                        return {'title':'新建','imageList':allImage,'projectlist':[]};
+                        return {'title':'新建','imageList':allImage,'datacenter':datacenter};
                     }
                 }
             });

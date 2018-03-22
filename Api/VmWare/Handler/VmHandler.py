@@ -4,7 +4,7 @@ from lib.urlmap import urlmap
 from lib.basehandler import BaseHandler
 from tornado import web,gen
 from VmWare.Entity.VmModel import VmwareList
-from VmWare.Entity.IpModel import IpPool
+# from VmWare.Entity.IpModel import IpPool
 from VmWare.Entity.IdModel import IdPool
 import random
 import json

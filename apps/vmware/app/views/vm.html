@@ -232,9 +232,9 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">选择数据中心</label>
                             <div class="col-md-4">
-                                <select class="form-control input-inline input-big" ng-model="item.DataCenter" required>
-                                    <option value="ceshi">ceshi</option>
-                                    <option value="MD-CS">MD-CS</option>
+                                <select class="form-control input-inline input-big"
+                                        ng-model="item.DataCenter" ng-options="s.name for s in title.datacenter" required>
+                                        <option value="">--选择数据中心--</option>
                                 </select>
                                 <span class="help-inline"></span>
                             </div>
@@ -247,9 +247,9 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">选择集群</label>
                             <div class="col-md-4">
-                                <select class="form-control input-inline input-big" ng-model="item.Cluster" required>
-                                    <option value="cluster1">cluster1</option>
-                                    <option value="cs">cs</option>
+                               <select class="form-control input-inline input-big"
+                                        ng-model="item.Cluster" ng-options="sh.name for sh in item.DataCenter.child" required>
+                                <option value="">--选择集群--</option>
                                 </select>
                                 <span class="help-inline"></span>
                             </div>
@@ -262,11 +262,9 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">选择资源池</label>
                             <div class="col-md-4">
-                                <select class="form-control input-inline input-big" ng-model="item.ResourcePool">
-                                    <option value="test1">test1</option>
-                                    <option value="test2">test2</option>
-                                    <option value="autovm">autovm</option>
-                                    <option value="LiuWei">LiuWei</option>
+                                <select class="form-control input-inline input-big"
+                                        ng-model="item.ResourcePool" ng-options="sh.name for sh in item.Cluster.grandchild" required>
+                                <option value="">--选择资源池--</option>
                                 </select>
                                 <span class="help-inline"></span>
                             </div>
