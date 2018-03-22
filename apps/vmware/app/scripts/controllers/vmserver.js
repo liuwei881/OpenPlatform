@@ -183,6 +183,23 @@ define(['angular'], function (angular) {
             };
         };
 
+        $scope.CheckOrder = function (i) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'checkorder.html',
+                controller: 'ModalInstanceCtrl',
+                size: 'lg',
+                resolve: {
+                    item: function () {
+                        return $scope.rows[i];
+                    },
+                    title: function () {
+                        return {'title':'查看工单'};
+                    }
+                }
+            });
+        };
+
         $scope.Search = function (searchKey) {
             $scope.initPage(searchKey);
         };

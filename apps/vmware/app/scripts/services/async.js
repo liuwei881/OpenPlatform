@@ -41,21 +41,13 @@ define(['angular'], function (angular) {
             return $http.get(url + params.VmwareId)
         }
 
-        function mount(url, params){
-            return $http.post(url + params.CloudDiskId, {params: params})
-        }
-
-        function umount(url, params){
-            return $http.get(url + params.CloudDiskId)
-        }
-
         return {
-            get : get,
-            save : save,
-            Stop : Stop,
-            Restart : Restart,
-            Delete : Delete,
-            MigrateVm : MigrateVm,
+            get: get,
+            save: save,
+            Stop: Stop,
+            Restart: Restart,
+            Delete: Delete,
+            MigrateVm: MigrateVm,
         }
 	});
 });

@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 from sqlalchemy import Column, Integer, String, Text, DateTime
 from lib.Route import BaseModel
 from VmWare.Handler.functions import getStatusId
@@ -12,6 +12,7 @@ class VmwareList(BaseModel):
     __tablename__ = 'bk_vmware_list'
 
     VmwareId = Column('fi_id', Integer, primary_key=True)
+    WorkOrder = Column('fs_work_order', String(255))
     VmwareName = Column('fs_vmwarename', String(40))
     HostName = Column('fs_hostname', String(20))
     VmCpu = Column('fi_cpu', Integer)
@@ -25,28 +26,28 @@ class VmwareList(BaseModel):
     NetworkName = Column('fs_networkname', String(50))
     Person = Column('fs_person', String(50))
     HostStatus = Column('fi_hoststatus', Integer)
-    CreateTime = Column('ft_create_time', DateTime, default=datetime.datetime.now())
+    CreateTime = Column(
+        'ft_create_time',
+        DateTime,
+        default=datetime.datetime.now())
 
     def toDict(self):
         return {
-            'VmwareId': self.VmwareId,                  #id
-            'VmwareName': self.VmwareName,               #虚拟机名称
-            'HostName': self.HostName,                   #虚拟机hostname
+            'VmwareId': self.VmwareId,  # id
+            'WorkOrder': self.WorkOrder,    # 工单编号
+            'VmwareName': self.VmwareName,  # 虚拟机名称
+            'HostName': self.HostName,  # 虚拟机hostname
             'VmCpu': self.VmCpu,
             'VmMem': self.VmMem,
-            'TemplateName': self.TemplateName,          #模版名称
+            'TemplateName': self.TemplateName,  # 模版名称
             'Ip': self.Ip,
-            'DataCenter': self.DataCenter,              #数据中心
-            'Cluster': self.Cluster,                     #集群
-            'DataStore': self.DataStore,                 #存储
-            'ResourcePool': self.ResourcePool,           #资源池
-            'NetworkName': self.NetworkName,            #网络名称
-            'Person': self.Person,                      #使用人
-            'HostStatus': getStatusId(self.HostStatus), #状态
+            'DataCenter': self.DataCenter,  # 数据中心
+            'Cluster': self.Cluster,  # 集群
+            'DataStore': self.DataStore,  # 存储
+            'ResourcePool': self.ResourcePool,  # 资源池
+            'NetworkName': self.NetworkName,  # 网络名称
+            'Person': self.Person,  # 使用人
+            'HostStatus': getStatusId(self.HostStatus),  # 状态
             'StatusNum': self.HostStatus,
             'CreateTime': self.CreateTime.strftime('%Y-%m-%d %H:%M:%S') if self.CreateTime else ''
         }
-
-
-
-

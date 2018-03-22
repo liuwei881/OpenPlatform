@@ -34,9 +34,10 @@
                 <th>存储名称</th>
                 <th>资源池</th>
                 <th>网络</th>
-                <th>使用人</th>
+                <th>创建人</th>
                 <th>状态</th>
                 <th>创建时间</th>
+                <th>工单编号</th>
                 <th>操作</th>
             </tr>
 
@@ -54,6 +55,7 @@
                 <td>{{ o.Person }}</td>
                 <td class="statusClass{{ o.StatusNum }}">{{ o.HostStatus }}</td>
                 <td>{{ o.CreateTime }}</td>
+                <td>{{ o.WorkOrder }}</td>
                 <td>
                     <div class="btn-group">
                         <div class="btn-group">
@@ -68,6 +70,10 @@
                             <li><a href="javascript:;" ng-click="MigrateVm($index)">迁移虚拟机</a></li>
                         </ul>
                     </div>
+                        <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="CheckOrder($index)">
+                            <span class="hidden-sm hidden-xs">查看工单</span>
+                        </button>
                     </div>
                 </td>
             </tr>
@@ -103,10 +109,24 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label class="col-md-4 control-label">工单编号
+                            <span class="redClassFont">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text"
+                                       class="form-control input-inline input-big" placeholder="1234455"
+                                       ng-model="item.WorkOrder" required>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label class="col-md-4 control-label">选择主机CPU</label>
                             <div class="col-md-4">
                                 <select class="form-control input-inline input-big" ng-model="item.VmCpu" required>
-                                    <option value="2">2_Core</option>
                                     <option value="4">4_Core</option>
                                     <option value="6">6_Core</option>
                                     <option value="8">8_Core</option>
@@ -127,7 +147,6 @@
                             <label class="col-md-4 control-label">选择主机内存</label>
                             <div class="col-md-4">
                                 <select class="form-control input-inline input-big" ng-model="item.VmMem" required>
-                                    <option value="2">2G</option>
                                     <option value="4">4G</option>
                                     <option value="6">6G</option>
                                     <option value="8">8G</option>
@@ -249,28 +268,11 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">使用人</label>
-                            <div class="col-md-4">
-                                <select class="form-control input-inline input-big" ng-model="item.Person">
-                                    <option value="zhangsan">zhangsan</option>
-                                    <option value="lisi">lisi</option>
-                                    <option value="wangwu">wangwu</option>
-                                    <option value="wangerma">wangerma</option>
-                                </select>
-                                <span class="help-inline"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="Save()">OK</button>
+        <button class="btn btn-primary" ng-click="Save()" ng-disabled="!createForm.$valid">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
     </div>
 </script>
@@ -374,6 +376,32 @@
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="MigrateVm()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="checkorder.html">
+    <div class="modal-header">
+        <div class="caption">
+            <h4>{{ title.title }}</h4>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                           工单编号{{ item.WorkOrder }}
+                            <br/>
+                            创建虚拟机完成
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
         <button class="btn btn-warning" ng-click="cancel()">Cancle</button>
     </div>
 </script>
