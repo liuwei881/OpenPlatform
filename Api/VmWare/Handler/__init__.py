@@ -1,1 +1,1 @@
-from VmWare.Handler import (VmHandler, ImageHandler)
+from VmWare.Handler import (VmHandler, ImageHandler, DataCenterHandler)

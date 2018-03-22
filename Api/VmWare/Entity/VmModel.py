@@ -12,7 +12,7 @@ class VmwareList(BaseModel):
     __tablename__ = 'bk_vmware_list'
 
     VmwareId = Column('fi_id', Integer, primary_key=True)
-    WorkOrder = Column('fs_work_order', String(255))
+    WorkOrder = Column('fs_work_order', String(50))
     VmwareName = Column('fs_vmwarename', String(40))
     HostName = Column('fs_hostname', String(20))
     VmCpu = Column('fi_cpu', Integer)
@@ -24,7 +24,9 @@ class VmwareList(BaseModel):
     DataStore = Column('fs_datastore', String(50))
     ResourcePool = Column('fs_resourcepool', String(50))
     NetworkName = Column('fs_networkname', String(50))
-    Person = Column('fs_person', String(50))
+    CreatePerson = Column('fs_create_person', String(50))
+    UsePerson = Column('fs_use_person', String(100))
+    UseDepartment = Column('fs_use_department', String(100))
     HostStatus = Column('fi_hoststatus', Integer)
     CreateTime = Column(
         'ft_create_time',
@@ -46,7 +48,9 @@ class VmwareList(BaseModel):
             'DataStore': self.DataStore,  # 存储
             'ResourcePool': self.ResourcePool,  # 资源池
             'NetworkName': self.NetworkName,  # 网络名称
-            'Person': self.Person,  # 使用人
+            'CreatePerson': self.CreatePerson,  # 创建人
+            'UsePerson': self.UsePerson,    # 使用人
+            'UseDepartment': self.UseDepartment,    # 使用部门
             'HostStatus': getStatusId(self.HostStatus),  # 状态
             'StatusNum': self.HostStatus,
             'CreateTime': self.CreateTime.strftime('%Y-%m-%d %H:%M:%S') if self.CreateTime else ''

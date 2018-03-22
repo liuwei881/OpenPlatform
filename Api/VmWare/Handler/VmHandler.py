@@ -9,9 +9,9 @@ from VmWare.Entity.IdModel import IdPool
 import random
 import json
 from VmWare import tasks
-from .functions import (get_datastores_info, get_datastores_max)
+from .functions import (get_datastores_info, get_datastores_max, get_ip)
 from sqlalchemy import (desc,or_,and_)
-import socket, struct
+import pypinyin
 
 
 @urlmap(r'/vms\/?([0-9]*)')
@@ -39,6 +39,7 @@ class VmsHandler(BaseHandler):
         """创建虚拟机"""
         data = json.loads(self.request.body.decode("utf-8"))
         objTask = VmwareList()
+        objTask.WorkOrder = data['params'].get('WorkOrder', None)
         objTask.VmCpu = int(data['params'].get('VmCpu', None))
         objTask.VmMem = int(data['params'].get('VmMem', None)) * 1024
         objTask.TemplateName = data['params'].get('TemplateName', None).get('name',None)
@@ -46,48 +47,63 @@ class VmsHandler(BaseHandler):
         objTask.Cluster = data['params'].get('Cluster', None)
         objTask.ResourcePool = data['params'].get('ResourcePool', None)
         objTask.NetworkName = data['params'].get('NetworkName', None)
-        objTask.Person = data['params'].get('Person', None)
+        objTask.CreatePerson = self.get_cookie("username")
+        objTask.UsePerson = data['params'].get('UsePerson', None)
+        objTask.UseDepartment = data['params'].get('UseDepartment', None)
+        objTask.addressSegment = data['params'].get('addressSegment', None)
+        objTask.subnetMask = data['params'].get('subnetMask', None)
         objTask.HostStatus = 1
-        ip_pool = self.db.query(IpPool).all()
+        # ip_pool = self.db.query(IpPool).all()
         number = int(data['params'].get('Number', None))
-        datastore_list = get_datastores_info('10.96.140.157', 'autovm', '1qaz!QAZ', 443, objTask.DataCenter)
+        datastore_list = get_datastores_info('vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443, objTask.DataCenter)
+        UseDepartment = ''.join(pypinyin.lazy_pinyin(objTask.UseDepartment))
+        UsePerson = ''.join(pypinyin.lazy_pinyin(objTask.UsePerson))
         if number == 1:
             objTask.DataStore = random.choice(datastore_list)
-            ip = random.choice(ip_pool).Ip
-            objTask.Ip = socket.inet_ntoa(struct.pack('I',socket.htonl(ip)))
+            # ip = random.choice(ip_pool).Ip
+            url = 'http://10.100.17.175:5555/ip/ip/randomIp'
+            try:
+                objTask.Ip = get_ip(url, objTask.addressSegment, objTask.subnetMask)
+            except Exception as e:
+                objTask.Ip = '10.10.10.10'
             id_pool = self.db.query(IdPool).first()
             id = id_pool.IdPool
             if "centos" in objTask.TemplateName.lower() or "ubuntu" in objTask.TemplateName.lower() or 'mac' in objTask.TemplateName.lower():
-                objTask.VmwareName = "_".join(["{}".format(id),"lin", "mdcs", objTask.Person, "".join(objTask.Ip.split(".")[-2:])])
+                objTask.VmwareName = "_".join(["{}".format(id), "lin", UseDepartment, UsePerson, "".join(objTask.Ip.split(".")[-2:])])
                 objTask.HostName = "".join(["vmlin", "{}".format(id)])
             else:
-                objTask.VmwareName = "_".join(["{}".format(id), "win", "mdcs", objTask.Person, "".join(objTask.Ip.split(".")[-2:])])
+                objTask.VmwareName = "_".join(["{}".format(id), "win", UseDepartment, UsePerson, "".join(objTask.Ip.split(".")[-2:])])
                 objTask.HostName = "".join(["vmwin", "{}".format(id)])
             tasks.create_vm.delay(
-                '10.96.140.157', 'autovm', '1qaz!QAZ', 443,
+                'vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443,
                 objTask.VmwareName, objTask.HostName, objTask.VmCpu,
                 objTask.VmMem, objTask.TemplateName, objTask.Ip,
                 objTask.DataCenter, objTask.Cluster, objTask.DataStore,
                 objTask.ResourcePool, objTask.NetworkName)
-            self.db.query(IpPool).filter(IpPool.Ip == ip).delete()
+            # self.db.query(IpPool).filter(IpPool.Ip == ip).delete()
             self.db.query(IdPool).filter(IdPool.IdPool == id).delete()
             self.db.add(objTask)
             self.db.commit()
         else:
             for i in range(number):
                 objTask.DataStore = random.choice(datastore_list)
-                ip = random.choice(ip_pool).Ip
-                objTask.Ip = socket.inet_ntoa(struct.pack('I', socket.htonl(ip)))       # 将ip整型转换成ip地址形式
+                # ip = random.choice(ip_pool).Ip
+                # objTask.Ip = socket.inet_ntoa(struct.pack('I', socket.htonl(ip)))       # 将ip整型转换成ip地址形式
+                url = 'http://10.100.17.175:5555/ip/ip/randomIp'
+                try:
+                    objTask.Ip = get_ip(url, objTask.addressSegment, objTask.subnetMask)
+                except Exception as e:
+                    objTask.Ip = '10.10.10.10'
                 id_pool = self.db.query(IdPool).first()
                 id = id_pool.IdPool
                 if "centos" in objTask.TemplateName.lower() or "ubuntu" in objTask.TemplateName.lower() or 'mac' in objTask.TemplateName.lower():
-                    objTask.VmwareName = "_".join(["{}".format(id), "lin", "mdcs", objTask.Person, "".join(objTask.Ip.split(".")[-2:])])
+                    objTask.VmwareName = "_".join(["{}".format(id), "lin", UseDepartment, UsePerson, "".join(objTask.Ip.split(".")[-2:])])
                     objTask.HostName = "".join(["vmlin", "{}".format(id)])
                 else:
-                    objTask.VmwareName = "_".join(["{}".format(id), "win", "mdcs", objTask.Person, "".join(objTask.Ip.split(".")[-2:])])
+                    objTask.VmwareName = "_".join(["{}".format(id), "win", UseDepartment, UsePerson, "".join(objTask.Ip.split(".")[-2:])])
                     objTask.HostName = "".join(["vmwin", "{}".format(id)])
                 tasks.create_vm.delay(
-                    '10.96.140.157', 'autovm', '1qaz!QAZ', 443,
+                    'vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443,
                     objTask.VmwareName, objTask.HostName, objTask.VmCpu,
                     objTask.VmMem, objTask.TemplateName, objTask.Ip,
                     objTask.DataCenter, objTask.Cluster, objTask.DataStore,
@@ -98,7 +114,7 @@ class VmsHandler(BaseHandler):
                                  DataCenter=objTask.DataCenter, Cluster=objTask.Cluster,
                                  DataStore=objTask.DataStore, ResourcePool=objTask.ResourcePool,
                                  NetworkName=objTask.NetworkName, Person=objTask.Person, HostStatus=objTask.HostStatus)
-                self.db.query(IpPool).filter(IpPool.Ip == ip).delete()
+                # self.db.query(IpPool).filter(IpPool.Ip == ip).delete()
                 self.db.query(IdPool).filter(IdPool.IdPool == id).delete()
                 self.db.add(pro)
                 self.db.commit()
@@ -111,10 +127,10 @@ class VmsHandler(BaseHandler):
         """删除虚拟机"""
         vm = self.db.query(VmwareList).filter(VmwareList.VmwareId==ident).first()
         ip = vm.Ip
-        ip_recycle = lambda x: sum([256 ** j * int(i) for j, i in enumerate(x.split('.')[::-1])])       # ip地址回收
-        pro = IpPool(Ip=ip_recycle(ip))
-        self.db.add(pro)
-        tasks.del_vm.delay('10.96.140.157', 'autovm', '1qaz!QAZ', 443, ip)
+        # ip_recycle = lambda x: sum([256 ** j * int(i) for j, i in enumerate(x.split('.')[::-1])])       # ip地址回收
+        # pro = IpPool(Ip=ip_recycle(ip))
+        # self.db.add(pro)
+        tasks.del_vm.delay('vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443, ip)
         self.db.query(VmwareList).filter(VmwareList.VmwareId == ident).delete()
         self.db.commit()
         self.Result['info'] = u'删除虚拟机成功'
@@ -128,7 +144,7 @@ class StopHandler(BaseHandler):
         """关闭虚拟机"""
         vm = self.db.query(VmwareList).filter(VmwareList.VmwareId == ident).first()
         Ip = vm.Ip
-        tasks.stop_vm.delay('10.96.140.157', 'autovm', '1qaz!QAZ', 443, Ip)
+        tasks.stop_vm.delay('vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443, Ip)
         self.Result['info'] = u'关闭虚拟机成功'
         self.finish(self.Result)
 
@@ -144,7 +160,7 @@ class RestartHandler(BaseHandler):
             DnsName = ''.join([Name, ".open.com.cn"])
         else:
             DnsName = Name
-        tasks.reboot_vm.delay('10.96.140.157', 'autovm', '1qaz!QAZ', 443, DnsName)
+        tasks.reboot_vm.delay('vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443, DnsName)
         self.Result['info'] = u'重启虚拟机成功'
         self.finish(self.Result)
 
@@ -157,8 +173,8 @@ class MigrateVmHandler(BaseHandler):
         vm = self.db.query(VmwareList).filter(VmwareList.VmwareId == ident).first()
         vmname = vm.VmwareName
         datacenter = vm.DataCenter
-        DataStorage = get_datastores_max('10.96.140.157', 'autovm', '1qaz!QAZ', 443, datacenter)
-        tasks.migration_vm.delay('10.96.140.157', 'autovm', '1qaz!QAZ', 443, DataStorage, vmname)
+        DataStorage = get_datastores_max('vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443, datacenter)
+        tasks.migration_vm.delay('vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443, DataStorage, vmname)
         self.db.query(VmwareList).filter(VmwareList.VmwareId==ident).update({
             'DataStore': DataStorage,
         })
