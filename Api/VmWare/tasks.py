@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 
 from celery import Celery, task
 import os
@@ -8,7 +8,8 @@ import atexit
 import requests
 import ssl
 import sys
-import uuid, time
+import uuid
+import time
 from pyVmomi import vmodl
 
 requests.packages.urllib3.disable_warnings()
@@ -18,20 +19,23 @@ context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
 context.verify_mode = ssl.CERT_NONE
 
 #celery = Celery("tasks", broker="amqp://")
-celery = Celery("tasks", broker="amqp://admin:open@2018@rabbitmq.sysgroup.open.com.cn:5672//")
-celery.conf.CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'amqp')
+celery = Celery(
+    "tasks",
+    broker="amqp://admin:open@2018@rabbitmq.sysgroup.open.com.cn:5672//")
+celery.conf.CELERY_RESULT_BACKEND = os.environ.get(
+    'CELERY_RESULT_BACKEND', 'amqp')
 
 
 celery.conf.update(
     CELERY_TASK_SERIALIZER='json',
     CELERY_ACCEPT_CONTENT=['json'],
     CELERY_RESULT_SERIALIZER='json',
-    CELERY_ROUTES = {
-            'tasks.create_vm': {'queue':'vmware'},
-            'tasks.del_vm': {'queue': 'vmware'},
-            'tasks.stop_vm': {'queue': 'vmware'},
-            'tasks.reboot_vm': {'queue': 'vmware'},
-            'tasks.migration_vm': {'queue': 'vmware'},
+    CELERY_ROUTES={
+        'tasks.create_vm': {'queue': 'vmware'},
+        'tasks.del_vm': {'queue': 'vmware'},
+        'tasks.stop_vm': {'queue': 'vmware'},
+        'tasks.reboot_vm': {'queue': 'vmware'},
+        'tasks.migration_vm': {'queue': 'vmware'},
     })
 
 
@@ -123,7 +127,8 @@ def create_vm(
                 nicspec.device = device
                 nicspec.device.wakeOnLanEnabled = True
                 nicspec.device.backing = vim.vm.device.VirtualEthernetCard.NetworkBackingInfo()
-                nicspec.device.backing.network = get_obj(content, [vim.Network], network_name)
+                nicspec.device.backing.network = get_obj(
+                    content, [vim.Network], network_name)
                 nicspec.device.backing.deviceName = network_name
                 nicspec.device.connectable = vim.vm.device.VirtualDevice.ConnectInfo()
                 nicspec.device.connectable.startConnected = True
@@ -141,6 +146,42 @@ def create_vm(
                   'dns': ['10.96.140.61', '10.96.140.62'],
                   'domain': 'open.com.cn'
                   }
+        gateway_dict = {'10.96.140':
+                        {'gateway': '10.96.140.1', 'dns': ['10.96.140.61', '10.96.140.62'], 'subnet': '255.255.255.0'},
+                        '10.96.141':
+                            {'gateway': '10.96.141.1', 'dns': ['10.96.140.61', '10.96.140.62'], 'subnet': '255.255.255.0'},
+                        '10.96.142':
+                            {'gateway': '10.96.142.1', 'dns': ['10.96.140.61', '10.96.140.62'], 'subnet': '255.255.255.0'},
+                        '10.96.128':
+                            {'gateway': '10.96.128.1', 'dns': ['10.96.140.61', '10.96.140.62'], 'subnet': '255.255.255.0'},
+                        '10.100.130':
+                            {'gateway': '10.100.130.1', 'dns': ['10.100.132.13', '10.100.132.226'], 'subnet': '255.255.254.0'},
+                        '10.100.132':
+                            {'gateway': '10.100.132.1', 'dns': ['10.100.132.13', '10.100.132.226'], 'subnet': '255.255.254.0'},
+                        '10.100.134':
+                            {'gateway': '10.100.134.1', 'dns': ['10.100.132.13', '10.100.132.226'], 'subnet': '255.255.254.0'},
+                        '10.100.136':
+                            {'gateway': '10.100.136.1', 'dns': ['10.100.132.13', '10.100.132.226'], 'subnet': '255.255.254.0'},
+                        '10.100.138':
+                            {'gateway': '10.100.138.1', 'dns': ['10.100.132.13', '10.100.132.226'], 'subnet': '255.255.254.0'},
+                        '10.100.14':
+                            {'gateway': '10.100.14.1', 'dns': ['10.100.15.32', '10.100.15.212'], 'subnet': '255.255.254.0'},
+                        '10.100.16':
+                            {'gateway': '10.100.16.1', 'dns': ['10.100.15.32', '10.100.15.212'], 'subnet': '255.255.254.0'},
+                        '10.100.18':
+                            {'gateway': '10.100.18.1', 'dns': ['10.100.15.32', '10.100.15.212'], 'subnet': '255.255.254.0'},
+                        '10.100.20':
+                            {'gateway': '10.100.20.1', 'dns': ['10.100.15.32', '10.100.15.212'], 'subnet': '255.255.254.0'}
+                        }
+        for ip, gate in gateway_dict.items():
+            if ip in Ip:
+                inputs = {'isDHCP': False,
+                          'vm_ip': Ip,
+                          'subnet': gate['subnet'],
+                          'gateway': gate['gateway'],
+                          'dns': gate['dns'],
+                          'domain': 'open.com.cn'
+                          }
 
         if vm.runtime.powerState != 'poweredOff':
             print("WARNING:: Power off your VM before reconfigure")
@@ -166,12 +207,15 @@ def create_vm(
         if "centos" in vm.summary.config.guestFullName.lower() \
                 or "ubuntu" in vm.summary.config.guestFullName.lower() \
                 or "mac" in vm.summary.config.guestFullName.lower():
-            ident = vim.vm.customization.LinuxPrep(domain=inputs['domain'],
-                                                   hostName=vim.vm.customization.FixedName(name=vm_name))
+            ident = vim.vm.customization.LinuxPrep(
+                domain=inputs['domain'],
+                hostName=vim.vm.customization.FixedName(
+                    name=vm_name))
         else:
             ident = vim.vm.customization.Sysprep()
             # 不自动登录
-            ident.guiUnattended = vim.vm.customization.GuiUnattended(autoLogon=False)
+            ident.guiUnattended = vim.vm.customization.GuiUnattended(
+                autoLogon=False)
             # windows用户名和计算机名，组织名称
             ident.userData = vim.vm.customization.UserData()
             ident.userData.fullName = VmwareName
@@ -209,7 +253,7 @@ def create_vm(
     if template:
         clone_vm(
             content, template, HostName, si,
-            DataCenter,DataStore, Cluster,
+            DataCenter, DataStore, Cluster,
             ResourcePool, NetworkName)
     else:
         print("template not found")
@@ -226,16 +270,16 @@ def del_vm(Host, User, Password, Port, Ip):
         # Create filter
         obj_specs = [vmodl.query.PropertyCollector.ObjectSpec(obj=task)
                      for task in tasks]
-        property_spec = vmodl.query.PropertyCollector.PropertySpec(type=vim.Task,
-                                                                   pathSet=[],
-                                                                   all=True)
+        property_spec = vmodl.query.PropertyCollector.PropertySpec(
+            type=vim.Task, pathSet=[], all=True)
         filter_spec = vmodl.query.PropertyCollector.FilterSpec()
         filter_spec.objectSet = obj_specs
         filter_spec.propSet = [property_spec]
         pcfilter = property_collector.CreateFilter(filter_spec, True)
         try:
             version, state = None, None
-            # Loop looking for updates till the state moves to a completed state.
+            # Loop looking for updates till the state moves to a completed
+            # state.
             while len(task_list):
                 update = property_collector.WaitForUpdates(version)
                 for filter_set in update.filterSet:
@@ -269,7 +313,8 @@ def del_vm(Host, User, Password, Port, Ip):
     # disconnect this thing
     atexit.register(Disconnect, si)
     if not si:
-        raise SystemExit("Unable to connect to host with supplied credentials.")
+        raise SystemExit(
+            "Unable to connect to host with supplied credentials.")
     VM = si.content.searchIndex.FindByIp(None, Ip, True)
 
     if VM is None:
@@ -301,16 +346,16 @@ def stop_vm(Host, User, Password, Port, Ip):
         # Create filter
         obj_specs = [vmodl.query.PropertyCollector.ObjectSpec(obj=task)
                      for task in tasks]
-        property_spec = vmodl.query.PropertyCollector.PropertySpec(type=vim.Task,
-                                                                   pathSet=[],
-                                                                   all=True)
+        property_spec = vmodl.query.PropertyCollector.PropertySpec(
+            type=vim.Task, pathSet=[], all=True)
         filter_spec = vmodl.query.PropertyCollector.FilterSpec()
         filter_spec.objectSet = obj_specs
         filter_spec.propSet = [property_spec]
         pcfilter = property_collector.CreateFilter(filter_spec, True)
         try:
             version, state = None, None
-            # Loop looking for updates till the state moves to a completed state.
+            # Loop looking for updates till the state moves to a completed
+            # state.
             while len(task_list):
                 update = property_collector.WaitForUpdates(version)
                 for filter_set in update.filterSet:
@@ -351,6 +396,7 @@ def stop_vm(Host, User, Password, Port, Ip):
     wait_for_tasks(si, [TASK])
     return "shutdown vmware {0} ok.".format(VM.name)
 
+
 @task(name='tasks.reboot_vm')
 def reboot_vm(Host, User, Password, Port, DnsName):
     """重启虚拟机"""
@@ -361,16 +407,16 @@ def reboot_vm(Host, User, Password, Port, DnsName):
         # Create filter
         obj_specs = [vmodl.query.PropertyCollector.ObjectSpec(obj=task)
                      for task in tasks]
-        property_spec = vmodl.query.PropertyCollector.PropertySpec(type=vim.Task,
-                                                                   pathSet=[],
-                                                                   all=True)
+        property_spec = vmodl.query.PropertyCollector.PropertySpec(
+            type=vim.Task, pathSet=[], all=True)
         filter_spec = vmodl.query.PropertyCollector.FilterSpec()
         filter_spec.objectSet = obj_specs
         filter_spec.propSet = [property_spec]
         pcfilter = property_collector.CreateFilter(filter_spec, True)
         try:
             version, state = None, None
-            # Loop looking for updates till the state moves to a completed state.
+            # Loop looking for updates till the state moves to a completed
+            # state.
             while len(task_list):
                 update = property_collector.WaitForUpdates(version)
                 for filter_set in update.filterSet:
@@ -396,9 +442,9 @@ def reboot_vm(Host, User, Password, Port, DnsName):
             if pcfilter:
                 pcfilter.Destroy()
     si = SmartConnect(host=Host,
-                    user=User,
-                    pwd=Password,
-                    port=Port, sslContext=context)
+                      user=User,
+                      pwd=Password,
+                      port=Port, sslContext=context)
     atexit.register(Disconnect, si)
     if not si:
         raise SystemExit("Unable to connect to host with supplied info.")
@@ -421,7 +467,8 @@ def migration_vm(Host, User, Password, Port, DataStorage, VmName):
     def get_obj(content, vimtype, name):
         """Get the vsphere object associated with a given text name"""
         obj = None
-        container = content.viewManager.CreateContainerView(content.rootFolder, vimtype, True)
+        container = content.viewManager.CreateContainerView(
+            content.rootFolder, vimtype, True)
         for c in container.view:
             if c.name == name:
                 obj = c
@@ -435,18 +482,25 @@ def migration_vm(Host, User, Password, Port, DataStorage, VmName):
 
         if task.info.state == vim.TaskInfo.State.success:
             if task.info.result is not None and not hideResult:
-                out = '%s completed successfully, result: %s' % (actionName, task.info.result)
+                out = '%s completed successfully, result: %s' % (
+                    actionName, task.info.result)
                 print(out)
             else:
                 out = '%s completed successfully.' % actionName
                 print(out)
         else:
-            out = '%s did not complete successfully: %s' % (actionName, task.info.error)
+            out = '%s did not complete successfully: %s' % (
+                actionName, task.info.error)
             print(out)
             raise task.info.error
         return task.info.result
 
-    si = SmartConnect(host=Host, user=User, pwd=Password, port=Port, sslContext=context)
+    si = SmartConnect(
+        host=Host,
+        user=User,
+        pwd=Password,
+        port=Port,
+        sslContext=context)
     atexit.register(Disconnect, si)
     content = si.RetrieveContent()
     vm = get_obj(content, [vim.VirtualMachine], VmName)

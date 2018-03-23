@@ -198,10 +198,20 @@
                             <div class="col-md-4">
                                 <select class="form-control input-inline input-big"
                                         ng-model="item.addressSegment" required>
-                                    <option value="10.100.0.0">10.100.0.0</option>
-                                    <option value="10.96.0.0">10.96.0.0</option>
-                                    <option value="10.0.0.0">10.0.0.0</option>
-                                    <option value="100.0.0.0">100.0.0.0</option>
+                                    <option value="10.96.140.0">10.96.140.0</option>
+                                    <option value="10.96.141.0">10.96.141.0</option>
+                                    <option value="10.96.142.0">10.96.142.0</option>
+                                    <option value="10.96.128.0">10.96.128.0</option>
+                                    <option value="10.100.130.0">10.100.130.0</option>
+                                    <option value="10.100.132.0">10.100.132.0</option>
+                                    <option value="10.100.134.0">10.100.134.0</option>
+                                    <option value="10.100.136.0">10.100.136.0</option>
+                                    <option value="10.100.138.0">10.100.138.0</option>
+                                    <option value="10.100.12.0">10.100.12.0</option>
+                                    <option value="10.100.14.0">10.100.14.0</option>
+                                    <option value="10.100.16.0">10.100.16.0</option>
+                                    <option value="10.100.18.0">10.100.18.0</option>
+                                    <option value="10.100.20.0">10.100.20.0</option>
                                 </select>
                                 <span class="help-inline"></span>
                             </div>
@@ -217,7 +227,7 @@
                                 <select class="form-control input-inline input-big"
                                         ng-model="item.subnetMask" required>
                                     <option value="255.255.255.0">255.255.255.0</option>
-                                    <option value="255.255.0.0">255.255.0.0</option>
+                                    <option value="255.255.254.0">255.255.254.0</option>
                                 </select>
                                 <span class="help-inline"></span>
                             </div>
@@ -263,22 +273,6 @@
                                 <select class="form-control input-inline input-big"
                                         ng-model="item.ResourcePool" ng-options="sh.name for sh in item.Cluster.grandchild" required>
                                 <option value="">--选择资源池--</option>
-                                </select>
-                                <span class="help-inline"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">加入网络</label>
-                            <div class="col-md-4">
-                                <select class="form-control input-inline input-big" ng-model="item.NetworkName">
-                                    <option value="mdnet140">mdnet140</option>
-                                    <option value="mdnet141">mdnet141</option>
-                                    <option value="mdnet142">mdnet142</option>
                                 </select>
                                 <span class="help-inline"></span>
                             </div>
