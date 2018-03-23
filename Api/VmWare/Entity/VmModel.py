@@ -25,8 +25,6 @@ class VmwareList(BaseModel):
     ResourcePool = Column('fs_resourcepool', String(50))
     NetworkName = Column('fs_networkname', String(50))
     CreatePerson = Column('fs_create_person', String(50))
-    UsePerson = Column('fs_use_person', String(100))
-    UseDepartment = Column('fs_use_department', String(100))
     HostStatus = Column('fi_hoststatus', Integer)
     CreateTime = Column(
         'ft_create_time',
@@ -49,8 +47,6 @@ class VmwareList(BaseModel):
             'ResourcePool': self.ResourcePool,  # 资源池
             'NetworkName': self.NetworkName,  # 网络名称
             'CreatePerson': self.CreatePerson,  # 创建人
-            'UsePerson': self.UsePerson,    # 使用人
-            'UseDepartment': self.UseDepartment,    # 使用部门
             'HostStatus': getStatusId(self.HostStatus),  # 状态
             'StatusNum': self.HostStatus,
             'CreateTime': self.CreateTime.strftime('%Y-%m-%d %H:%M:%S') if self.CreateTime else ''

@@ -35,7 +35,6 @@
                 <th>资源池</th>
                 <th>网络</th>
                 <th>创建人</th>
-                <th>使用人</th>
                 <th>状态</th>
                 <th>创建时间</th>
                 <th>工单编号</th>
@@ -54,7 +53,6 @@
                 <td>{{ o.ResourcePool }}</td>
                 <td>{{ o.NetworkName }}</td>
                 <td>{{ o.CreatePerson }}</td>
-                <td>{{ o.UsePerson}}</td>
                 <td class="statusClass{{ o.StatusNum }}">{{ o.HostStatus }}</td>
                 <td>{{ o.CreateTime }}</td>
                 <td>{{ o.WorkOrder }}</td>
@@ -298,34 +296,6 @@
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                 </select>
-                                <span class="help-inline"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">使用部门
-                            <span class="redClassFont">*</span></label>
-                            <div class="col-md-4">
-                                <input type="text"
-                                       class="form-control input-inline input-big" placeholder="开发部"
-                                       ng-model="item.UseDepartment" required>
-                                <span class="help-inline"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">使用人
-                            <span class="redClassFont">*</span></label>
-                            <div class="col-md-4">
-                                <input type="text"
-                                       class="form-control input-inline input-big" placeholder="谭某某"
-                                       ng-model="item.UsePerson" required>
                                 <span class="help-inline"></span>
                             </div>
                         </div>

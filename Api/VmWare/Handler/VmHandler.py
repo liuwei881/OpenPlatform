@@ -48,16 +48,12 @@ class VmsHandler(BaseHandler):
         objTask.ResourcePool = data['params'].get('ResourcePool', None)
         objTask.NetworkName = data['params'].get('NetworkName', None)
         objTask.CreatePerson = self.get_cookie("username")
-        objTask.UsePerson = data['params'].get('UsePerson', None)
-        objTask.UseDepartment = data['params'].get('UseDepartment', None)
         objTask.addressSegment = data['params'].get('addressSegment', None)
         objTask.subnetMask = data['params'].get('subnetMask', None)
         objTask.HostStatus = 1
         # ip_pool = self.db.query(IpPool).all()
         number = int(data['params'].get('Number', None))
         datastore_list = get_datastores_info('vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443, objTask.DataCenter)
-        UseDepartment = ''.join(pypinyin.lazy_pinyin(objTask.UseDepartment))
-        UsePerson = ''.join(pypinyin.lazy_pinyin(objTask.UsePerson))
         if number == 1:
             objTask.DataStore = random.choice(datastore_list)
             # ip = random.choice(ip_pool).Ip
@@ -69,10 +65,10 @@ class VmsHandler(BaseHandler):
             id_pool = self.db.query(IdPool).first()
             id = id_pool.IdPool
             if "centos" in objTask.TemplateName.lower() or "ubuntu" in objTask.TemplateName.lower() or 'mac' in objTask.TemplateName.lower():
-                objTask.VmwareName = "_".join(["{}".format(id), "lin", UseDepartment, UsePerson, "".join(objTask.Ip.split(".")[-2:])])
+                objTask.VmwareName = "_".join(["{}".format(id), "lin", "".join(objTask.Ip.split(".")[-2:])])
                 objTask.HostName = "".join(["vmlin", "{}".format(id)])
             else:
-                objTask.VmwareName = "_".join(["{}".format(id), "win", UseDepartment, UsePerson, "".join(objTask.Ip.split(".")[-2:])])
+                objTask.VmwareName = "_".join(["{}".format(id), "win", "".join(objTask.Ip.split(".")[-2:])])
                 objTask.HostName = "".join(["vmwin", "{}".format(id)])
             tasks.create_vm.delay(
                 'vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443,
@@ -97,10 +93,10 @@ class VmsHandler(BaseHandler):
                 id_pool = self.db.query(IdPool).first()
                 id = id_pool.IdPool
                 if "centos" in objTask.TemplateName.lower() or "ubuntu" in objTask.TemplateName.lower() or 'mac' in objTask.TemplateName.lower():
-                    objTask.VmwareName = "_".join(["{}".format(id), "lin", UseDepartment, UsePerson, "".join(objTask.Ip.split(".")[-2:])])
+                    objTask.VmwareName = "_".join(["{}".format(id), "lin", "".join(objTask.Ip.split(".")[-2:])])
                     objTask.HostName = "".join(["vmlin", "{}".format(id)])
                 else:
-                    objTask.VmwareName = "_".join(["{}".format(id), "win", UseDepartment, UsePerson, "".join(objTask.Ip.split(".")[-2:])])
+                    objTask.VmwareName = "_".join(["{}".format(id), "win", "".join(objTask.Ip.split(".")[-2:])])
                     objTask.HostName = "".join(["vmwin", "{}".format(id)])
                 tasks.create_vm.delay(
                     'vmwin0466.open.com.cn', 'open\\vc_auto', 'openVC2018@@', 443,
