@@ -65,9 +65,7 @@ class VmsHandler(BaseHandler):
         objTask.ResourcePool = data['params']['ResourcePool'].get('name', None)
         objTask.CreatePerson = self.get_cookie("username")
         objTask.addressSegment = data['params'].get('addressSegment', None)
-        objTask.subnetMask = data['params'].get('subnetMask', None)
         objTask.HostStatus = 1
-        # ip_pool = self.db.query(IpPool).all()
         number = int(data['params'].get('Number', None))
         datastore_list = get_datastores_info(
             'vmwin0466.open.com.cn',
@@ -75,19 +73,20 @@ class VmsHandler(BaseHandler):
             'openVC2018@@',
             443,
             objTask.DataCenter)
-        network_dict = {'10.96.140': 'mdnet140',
-                        '10.96.141': 'mdnet141',
-                        '10.96.142': 'mdnet142',
-                        '10.96.128': 'mdnet128',
-                        '10.100.130': 'syqnet130',
-                        '10.100.132': 'syqnet132',
-                        '10.100.134': 'syqnet134',
-                        '10.100.136': 'syqnet136',
-                        '10.100.138': 'syqnet138',
-                        '10.100.14': 'hltnet14',
-                        '10.100.16': 'hltnet16',
-                        '10.100.18': 'hltnet18',
-                        '10.100.20': 'hltnet20'}
+        network_dict = {'10.96.140': {'network': 'mdnet140', 'subnet': '255.255.255.0'},
+                        '10.96.141': {'network': 'mdnet141', 'subnet': '255.255.255.0'},
+                        '10.96.142': {'network': 'mdnet142', 'subnet': '255.255.255.0'},
+                        '10.96.128': {'network': 'mdnet128', 'subnet': '255.255.255.0'},
+                        '10.100.130': {'network': 'syqnet130', 'subnet': '255.255.254.0'},
+                        '10.100.132': {'network': 'syqnet132', 'subnet': '255.255.254.0'},
+                        '10.100.134': {'network': 'syqnet134', 'subnet': '255.255.254.0'},
+                        '10.100.136': {'network': 'syqnet136', 'subnet': '255.255.254.0'},
+                        '10.100.138': {'network': 'syqnet138', 'subnet': '255.255.254.0'},
+                        '10.100.14': {'network': 'hltnet14', 'subnet': '255.255.254.0'},
+                        '10.100.16': {'network': 'hltnet16', 'subnet': '255.255.254.0'},
+                        '10.100.18': {'network': 'hltnet18', 'subnet': '255.255.254.0'},
+                        '10.100.20': {'network': 'hltnet20', 'subnet': '255.255.254.0'}
+                        }
         if number == 1:
             objTask.DataStore = random.choice(datastore_list)
             # ip = random.choice(ip_pool).Ip
@@ -120,7 +119,8 @@ class VmsHandler(BaseHandler):
                 id = sorted(id_pool)[0][0]
             for ip, network in network_dict.items():
                 if ip in objTask.Ip:
-                    objTask.NetworkName = network
+                    objTask.NetworkName = network['network']
+                    objTask.subnetMask = network['subnet']
             if "centos" in objTask.TemplateName.lower() or "ubuntu" in objTask.TemplateName.lower(
             ) or 'mac' in objTask.TemplateName.lower():
                 objTask.VmwareName = "_".join(
@@ -171,7 +171,8 @@ class VmsHandler(BaseHandler):
                     id = sorted(id_pool)[0][0]
                 for ip, network in network_dict.items():
                     if ip in objTask.Ip:
-                        objTask.NetworkName = network
+                        objTask.NetworkName = network['network']
+                        objTask.subnetMask = network['subnet']
                 if "centos" in objTask.TemplateName.lower() or "ubuntu" in objTask.TemplateName.lower(
                 ) or 'mac' in objTask.TemplateName.lower():
                     objTask.VmwareName = "_".join(

@@ -1,5 +1,5 @@
 /*jshint unused: vars */
-define(['angular', 'controllers/main', 'controllers/about', 'directives/paging', 'controllers/login', 'controllers/header', 'controllers/sidebar', 'controllers/pagehead', 'controllers/footer', 'controllers/dashboard','services/httpinterceptor', 'controllers/modalinstance', 'controllers/assetserver','controllers/vmserver','controllers/safetyserver','controllers/clouddiskserver','controllers/projectserver','controllers/showsnapserver','directives/kvmkeyname','directives/cloudimagename','services/async', 'services/sync',]/*deps*/, function (angular, MainCtrl, AboutCtrl, PagingDirective, LoginCtrl, HeaderCtrl, SidebarCtrl, PageHeadCtrl, FooterCtrl, DashboardCtrl, PhysicalCtrl, HttpInterceptorFactory, PhysicalService, ModalinstanceCtrl, AssetServerCtrl,VmServerCtrl,SafetyServerCtrl,CloudDiskServerCtrl,ProjectServerCtrl,ShowSnapServerCtrl)/*invoke*/ {
+define(['angular', 'controllers/main', 'controllers/about', 'directives/paging', 'controllers/login', 'controllers/header', 'controllers/sidebar', 'controllers/pagehead', 'controllers/footer', 'controllers/dashboard','services/httpinterceptor', 'controllers/modalinstance', 'controllers/assetserver','controllers/vmserver','services/async', 'services/sync',]/*deps*/, function (angular, MainCtrl, AboutCtrl, PagingDirective, LoginCtrl, HeaderCtrl, SidebarCtrl, PageHeadCtrl, FooterCtrl, DashboardCtrl, PhysicalCtrl, HttpInterceptorFactory, PhysicalService, ModalinstanceCtrl, AssetServerCtrl,VmServerCtrl,SafetyServerCtrl,CloudDiskServerCtrl,ProjectServerCtrl,ShowSnapServerCtrl)/*invoke*/ {
     'use strict';
 
     /**
@@ -24,10 +24,6 @@ define(['angular', 'controllers/main', 'controllers/about', 'directives/paging',
             'vmwareApp.controllers.ModalInstanceCtrl',
             'vmwareApp.controllers.AssetServerCtrl',
             'vmwareApp.controllers.VmServerCtrl',
-            'vmwareApp.controllers.SafetyServerCtrl',
-            'vmwareApp.controllers.CloudDiskServerCtrl',
-            'vmwareApp.controllers.ProjectServerCtrl',
-            'vmwareApp.controllers.ShowSnapServerCtrl',
             'vmwareApp.services.Async',
             'vmwareApp.services.Sync',
 
