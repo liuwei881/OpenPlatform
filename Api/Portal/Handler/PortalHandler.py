@@ -17,8 +17,6 @@ class ProtalHandler(BaseHandler):
         server = self.db.query(PortalServer)
         if username == 'liuweia':
             serverTask = server.filter(PortalServer.Name != "权限不足").all()
-        elif username == 'yangxg':
-            serverTask = server.filter(PortalServer.Name == "nginx发布").all()
         elif username == 'liuzhizheng':
             serverTask = server.filter(and_(PortalServer.Name == "虚拟机管理", PortalServer.Name == "DNS解析")).all()
         else:
