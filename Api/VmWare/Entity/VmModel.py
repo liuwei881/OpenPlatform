@@ -24,6 +24,7 @@ class VmwareList(BaseModel):
     DataStore = Column('fs_datastore', String(50))
     ResourcePool = Column('fs_resourcepool', String(50))
     NetworkName = Column('fs_networkname', String(50))
+    Types = Column('fs_types', String(50))
     CreatePerson = Column('fs_create_person', String(50))
     HostStatus = Column('fi_hoststatus', Integer)
     CreateTime = Column(
@@ -46,6 +47,7 @@ class VmwareList(BaseModel):
             'DataStore': self.DataStore,  # 存储
             'ResourcePool': self.ResourcePool,  # 资源池
             'NetworkName': self.NetworkName,  # 网络名称
+            'Types': self.Types,  # 使用类型组, 网络组net, 系统组sys
             'CreatePerson': self.CreatePerson,  # 创建人
             'HostStatus': getStatusId(self.HostStatus),  # 状态
             'StatusNum': self.HostStatus,

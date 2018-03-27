@@ -32,6 +32,8 @@ class VmsHandler(BaseHandler):
                         '%%%s%%' %
                         searchKey), VmwareList.HostName.like(
                         '%%%s%%' %
+                        searchKey), VmwareList.WorkOrder.like(
+                        '%%%s%%' %
                         searchKey)))
             VmwarelistObj = VmwarelistObj.filter(
                 or_(
@@ -65,6 +67,7 @@ class VmsHandler(BaseHandler):
         objTask.ResourcePool = data['params']['ResourcePool'].get('name', None)
         objTask.CreatePerson = self.get_cookie("username")
         objTask.addressSegment = data['params'].get('addressSegment', None)
+        objTask.Types = data['params'].get('Types', None)
         objTask.HostStatus = 1
         number = int(data['params'].get('Number', None))
         datastore_list = get_datastores_info(
@@ -81,21 +84,21 @@ class VmsHandler(BaseHandler):
                         '10.100.132': {'network': 'syqnet132', 'subnet': '255.255.254.0'},
                         '10.100.134': {'network': 'syqnet134', 'subnet': '255.255.254.0'},
                         '10.100.136': {'network': 'syqnet136', 'subnet': '255.255.254.0'},
-                        '10.100.138': {'network': 'syqnet138', 'subnet': '255.255.254.0'},
+                        '10.100.138': {'network': 'syqnet138', 'subnet': '255.255.255.0'},
                         '10.100.14': {'network': 'hltnet14', 'subnet': '255.255.254.0'},
                         '10.100.16': {'network': 'hltnet16', 'subnet': '255.255.254.0'},
                         '10.100.18': {'network': 'hltnet18', 'subnet': '255.255.254.0'},
-                        '10.100.20': {'network': 'hltnet20', 'subnet': '255.255.254.0'}
+                        '10.100.20': {'network': 'hltnet20', 'subnet': '255.255.255.0'}
                         }
         if number == 1:
             objTask.DataStore = random.choice(datastore_list)
             # ip = random.choice(ip_pool).Ip
-            url = 'http://10.100.17.175:5555/ip/ip/randomIp'
-            try:
-                objTask.Ip = get_ip(
-                    url, objTask.addressSegment, objTask.subnetMask)
-            except Exception as e:
-                objTask.Ip = '10.96.10.10'
+            url = 'http://10.100.17.175:10001/ip/randomIp'
+            for ip, network in network_dict.items():
+                if ip in objTask.addressSegment:
+                    objTask.NetworkName = network['network']
+                    objTask.subnetMask = network['subnet']
+            objTask.Ip = get_ip(url, objTask.addressSegment, objTask.subnetMask, objTask.Types)
             if '10.96' in objTask.Ip:
                 id_pool = self.db.query(
                     IdPool.IdPool).filter(
@@ -117,10 +120,6 @@ class VmsHandler(BaseHandler):
                         IdPool.IdPool <= 9999,
                         IdPool.IdPool >= 7637))
                 id = sorted(id_pool)[0][0]
-            for ip, network in network_dict.items():
-                if ip in objTask.Ip:
-                    objTask.NetworkName = network['network']
-                    objTask.subnetMask = network['subnet']
             if "centos" in objTask.TemplateName.lower() or "ubuntu" in objTask.TemplateName.lower(
             ) or 'mac' in objTask.TemplateName.lower():
                 objTask.VmwareName = "_".join(
@@ -142,12 +141,12 @@ class VmsHandler(BaseHandler):
         else:
             for i in range(number):
                 objTask.DataStore = random.choice(datastore_list)
-                url = 'http://10.100.17.175:5555/ip/ip/randomIp'
-                try:
-                    objTask.Ip = get_ip(
-                        url, objTask.addressSegment, objTask.subnetMask)
-                except Exception as e:
-                    objTask.Ip = '10.96.10.10'
+                url = 'http://10.100.17.175:10001/ip/randomIp'
+                for ip, network in network_dict.items():
+                    if ip in objTask.addressSegment:
+                        objTask.NetworkName = network['network']
+                        objTask.subnetMask = network['subnet']
+                objTask.Ip = get_ip(url, objTask.addressSegment, objTask.subnetMask, objTask.Types)
                 if '10.96' in objTask.Ip:
                     id_pool = self.db.query(
                         IdPool.IdPool).filter(
@@ -169,10 +168,6 @@ class VmsHandler(BaseHandler):
                             IdPool.IdPool <= 9999,
                             IdPool.IdPool >= 7637))
                     id = sorted(id_pool)[0][0]
-                for ip, network in network_dict.items():
-                    if ip in objTask.Ip:
-                        objTask.NetworkName = network['network']
-                        objTask.subnetMask = network['subnet']
                 if "centos" in objTask.TemplateName.lower() or "ubuntu" in objTask.TemplateName.lower(
                 ) or 'mac' in objTask.TemplateName.lower():
                     objTask.VmwareName = "_".join(
@@ -199,6 +194,7 @@ class VmsHandler(BaseHandler):
                     objTask.ResourcePool,
                     objTask.NetworkName)
                 pro = VmwareList(
+                    WorkOrder=objTask.WorkOrder,
                     VmwareName=objTask.VmwareName,
                     HostName=objTask.HostName,
                     VmCpu=objTask.VmCpu,
@@ -210,8 +206,9 @@ class VmsHandler(BaseHandler):
                     DataStore=objTask.DataStore,
                     ResourcePool=objTask.ResourcePool,
                     NetworkName=objTask.NetworkName,
-                    Person=objTask.Person,
-                    HostStatus=objTask.HostStatus)
+                    CreatePerson=objTask.CreatePerson,
+                    HostStatus=objTask.HostStatus
+                )
                 self.db.query(IdPool).filter(IdPool.IdPool == id).delete()
                 self.db.add(pro)
                 self.db.commit()

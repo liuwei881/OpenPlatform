@@ -138,14 +138,6 @@ def create_vm(
         spec.deviceChange = device_change
         print("reconfig task...")
         vm.ReconfigVM_Task(spec=spec)
-
-        inputs = {'isDHCP': False,
-                  'vm_ip': Ip,
-                  'subnet': '255.255.255.0',
-                  'gateway': '10.96.140.1',
-                  'dns': ['10.96.140.61', '10.96.140.62'],
-                  'domain': 'open.com.cn'
-                  }
         gateway_dict = {'10.96.140':
                         {'gateway': '10.96.140.1', 'dns': ['10.96.140.61', '10.96.140.62'], 'subnet': '255.255.255.0'},
                         '10.96.141':
@@ -163,7 +155,7 @@ def create_vm(
                         '10.100.136':
                             {'gateway': '10.100.136.1', 'dns': ['10.100.132.13', '10.100.132.226'], 'subnet': '255.255.254.0'},
                         '10.100.138':
-                            {'gateway': '10.100.138.1', 'dns': ['10.100.132.13', '10.100.132.226'], 'subnet': '255.255.254.0'},
+                            {'gateway': '10.100.138.1', 'dns': ['10.100.132.13', '10.100.132.226'], 'subnet': '255.255.255.0'},
                         '10.100.14':
                             {'gateway': '10.100.14.1', 'dns': ['10.100.15.32', '10.100.15.212'], 'subnet': '255.255.254.0'},
                         '10.100.16':
@@ -171,7 +163,7 @@ def create_vm(
                         '10.100.18':
                             {'gateway': '10.100.18.1', 'dns': ['10.100.15.32', '10.100.15.212'], 'subnet': '255.255.254.0'},
                         '10.100.20':
-                            {'gateway': '10.100.20.1', 'dns': ['10.100.15.32', '10.100.15.212'], 'subnet': '255.255.254.0'}
+                            {'gateway': '10.100.20.1', 'dns': ['10.100.15.32', '10.100.15.212'], 'subnet': '255.255.255.0'}
                         }
         for ip, gate in gateway_dict.items():
             if ip in Ip:
@@ -182,7 +174,6 @@ def create_vm(
                           'dns': gate['dns'],
                           'domain': 'open.com.cn'
                           }
-
         if vm.runtime.powerState != 'poweredOff':
             print("WARNING:: Power off your VM before reconfigure")
             sys.exit()
@@ -190,7 +181,6 @@ def create_vm(
         adaptermap = vim.vm.customization.AdapterMapping()
         globalip = vim.vm.customization.GlobalIPSettings()
         adaptermap.adapter = vim.vm.customization.IPSettings()
-
         isDHDCP = inputs['isDHCP']
         if not isDHDCP:
             """Static IP Configuration"""
@@ -204,9 +194,11 @@ def create_vm(
             adaptermap.adapter.ip = vim.vm.customization.DhcpIpGenerator()
         adaptermap.adapter.dnsDomain = inputs['domain']
         # For Linux . For windows follow Sysprep
+        print(vm.summary.config.guestFullName)
         if "centos" in vm.summary.config.guestFullName.lower() \
                 or "ubuntu" in vm.summary.config.guestFullName.lower() \
-                or "mac" in vm.summary.config.guestFullName.lower():
+                or "mac" in vm.summary.config.guestFullName.lower() \
+                or 'coreos' in vm.summary.config.guestFullName.lower():
             ident = vim.vm.customization.LinuxPrep(
                 domain=inputs['domain'],
                 hostName=vim.vm.customization.FixedName(

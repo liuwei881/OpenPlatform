@@ -7,7 +7,6 @@ import requests
 import ssl
 from pyVim.connect import SmartConnect, Disconnect
 from pyVmomi import vim
-import ast
 
 
 requests.packages.urllib3.disable_warnings()
@@ -111,10 +110,10 @@ def get_datastores_max(Host, User, Pwd, Port, datacenter):
     return max_datastore
 
 
-def get_ip(url, ip, mask):
+def get_ip(url, ip, mask, types):
     """获取可用ip地址"""
-    payload = {'addressSegment': ip, 'subnetMask': mask}
+    payload = {'addressSegment': ip, 'subnetMask': mask, 'type': types}
     headers = {"Content-Type": "application/x-www-form-urlencoded;charset=utf-8"}
     r = requests.post(url, data=payload, headers=headers)
-    result = r.text.replace('null', "'null'")
-    return ast.literal_eval(result)['ip']
+    result = json.loads(r.text)['ip']
+    return result
