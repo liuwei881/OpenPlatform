@@ -19,6 +19,8 @@ class ProtalHandler(BaseHandler):
             serverTask = server.filter(PortalServer.Name != "权限不足").all()
         elif username == 'liuzhizheng':
             serverTask = server.filter(and_(PortalServer.Name == "虚拟机管理", PortalServer.Name == "DNS解析")).all()
+        elif username == 'yanshuai':
+            serverTask = server.filter(PortalServer.Name == "虚拟机管理").all()
         else:
             serverTask = server.filter(PortalServer.Name == "权限不足").all()
         self.Result['rows'] = list(map(lambda obj: obj.toDict(), serverTask))

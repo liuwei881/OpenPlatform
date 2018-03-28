@@ -67,7 +67,7 @@ class VmsHandler(BaseHandler):
         objTask.ResourcePool = data['params']['ResourcePool'].get('name', None)
         objTask.CreatePerson = self.get_cookie("username")
         objTask.addressSegment = data['params'].get('addressSegment', None)
-        objTask.Types = data['params'].get('Types', None)
+        objTask.Types = 'sys'
         objTask.HostStatus = 1
         number = int(data['params'].get('Number', None))
         datastore_list = get_datastores_info(
