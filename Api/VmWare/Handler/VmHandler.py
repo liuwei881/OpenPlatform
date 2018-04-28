@@ -88,7 +88,9 @@ class VmsHandler(BaseHandler):
                         '10.100.14': {'network': 'hltnet14', 'subnet': '255.255.254.0'},
                         '10.100.16': {'network': 'hltnet16', 'subnet': '255.255.254.0'},
                         '10.100.18': {'network': 'hltnet18', 'subnet': '255.255.254.0'},
-                        '10.100.20': {'network': 'hltnet20', 'subnet': '255.255.255.0'}
+                        '10.100.20': {'network': 'hltnet20', 'subnet': '255.255.255.0'},
+                        '20.200.16': {'network': 'hltnet16', 'subnet': '255.255.254.0'},
+                        '20.200.136': {'network': 'syqnet136', 'subnet': '255.255.254.0'},
                         }
         if number == 1:
             objTask.DataStore = random.choice(datastore_list)
@@ -106,7 +108,7 @@ class VmsHandler(BaseHandler):
                 id = sorted(id_pool)[0][0]
                 if id < 1000:
                     id = ''.join(['0', str(id)])
-            elif '10.100.130' in objTask.Ip or '10.100.132' in objTask.Ip or '10.100.134' in objTask.Ip or '10.100.136' in objTask.Ip or '10.100.138' in objTask.Ip:
+            elif '10.100.130' in objTask.Ip or '10.100.132' in objTask.Ip or '10.100.134' in objTask.Ip or '10.100.136' in objTask.Ip or '10.100.138' in objTask.Ip or '20.200.136' in objTask.Ip:
                 id_pool = self.db.query(
                     IdPool.IdPool).filter(
                     and_(
